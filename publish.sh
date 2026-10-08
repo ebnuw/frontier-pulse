@@ -31,7 +31,7 @@ cp -R site/. "$TMP/"
   git init -q
   git checkout -q -b gh-pages
   git add -A
-  git commit -q -m "Publish $(date -u +%Y-%m-%dT%H:%MZ)"
+  git -c user.name="Hermes Bot" -c user.email="hermes-bot@users.noreply.github.com" commit -q -m "Publish $(date -u +%Y-%m-%dT%H:%MZ)"
   git push -f "$REMOTE" gh-pages
 )
 echo "published"
