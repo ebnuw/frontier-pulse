@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>__TITLE__</title>
 <meta name="description" content="__DESC__">
+<meta name="theme-color" content="#0a0e15">
 <meta property="og:type" content="website">
 <meta property="og:title" content="__TITLE__">
 <meta property="og:description" content="__DESC__">
@@ -13,93 +14,291 @@
 <meta name="twitter:title" content="__TITLE__">
 <meta name="twitter:description" content="__DESC__">
 <meta name="twitter:image" content="__OG__">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
-:root{--bg:#0b0f17;--panel:#131a26;--line:#222c3d;--fg:#e8edf5;--muted:#8b97ab;--up:#3ddc97;--down:#ff6b6b;--anth:#d98b5f;--oai:#4fc3a1}
+:root{
+  --bg:#0a0e15;--panel:#111823;--panel2:#161f2d;--line:#1f2a3a;--line2:#2b3850;
+  --fg:#e9eef6;--muted:#93a0b5;--up:#3ddc97;--down:#ff7070;--anth:#e0905f;--oai:#4fc3a1;--link:#8aaeff;
+  --s1:4px;--s2:8px;--s3:12px;--s4:16px;--s5:24px;--s6:40px;
+  --r:12px;
+  --font:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
-main{max-width:980px;margin:0 auto;padding:16px}
-h1{font-size:1.6rem;line-height:1.2;margin:.5rem 0}
-h2{font-size:1.2rem;margin:2rem 0 .6rem;border-bottom:1px solid var(--line);padding-bottom:.3rem}
-h3{font-size:1rem;margin:1rem 0 .4rem}
-a{color:#7aa2ff}
-.lead{color:var(--muted);margin:0 0 1rem}
-.cards{display:grid;gap:12px;grid-template-columns:1fr}
-@media(min-width:720px){.cards{grid-template-columns:1fr 1fr}}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
-.card h3{margin:0;font-size:1.05rem}.tick{color:var(--muted);font-weight:400;font-size:.85rem}
-.card.anth{border-top:3px solid var(--anth)}.card.oai{border-top:3px solid var(--oai)}
-.big{font-size:2.4rem;font-weight:700;margin-top:.3rem}
-.sub{color:var(--muted);font-size:.85rem}
-.row2{display:flex;gap:24px;margin:.8rem 0}.row2 b{font-size:1.3rem;display:block}
-small{color:var(--muted)}.row2 small{display:block}
-dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:.5rem 0;font-size:.92rem}
-dt{color:var(--muted)}dd{margin:0;text-align:right}
-.src{font-size:.8rem;color:var(--muted);margin:.6rem 0 0}
+html{-webkit-text-size-adjust:100%}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--bg);color:var(--fg);font:400 16px/1.55 var(--font)}
+.num{font-variant-numeric:tabular-nums;font-feature-settings:"tnum" 1,"cv11" 1}
+main{max-width:1000px;margin:0 auto;padding:0 var(--s4) var(--s5)}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:4px}
+h1{font-size:1.65rem;line-height:1.2;font-weight:700;letter-spacing:-.02em;margin:var(--s2) 0 var(--s3)}
+h2{font-size:1.25rem;font-weight:650;letter-spacing:-.01em;margin:0 0 var(--s3)}
+h3{font-size:1rem;font-weight:600;margin:var(--s4) 0 var(--s2)}
+section{padding-top:var(--s6);scroll-margin-top:60px}
+small{color:var(--muted);font-size:.8rem}
 .up{color:var(--up)}.down{color:var(--down)}
-.chartbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
-.chartbox canvas{width:100%!important;height:280px!important}
-.scroll{overflow-x:auto}
+.sec-note{color:var(--muted);font-size:.92rem;margin:0 0 var(--s4);max-width:68ch}
+
+/* header */
+header{padding-top:var(--s5)}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);color:var(--muted);font-size:.85rem;font-weight:500}
+.upd{text-align:right;line-height:1.35}
+.upd time{display:block;color:var(--fg)}
+.upd .abs{display:block;font-size:.72rem;white-space:nowrap}
+.brand>span:first-child{white-space:nowrap}
+.plain{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4);margin-top:var(--s4)}
+.plain .eyebrow{margin-bottom:var(--s2)}
+.plain p{margin:0;font-size:1.02rem;line-height:1.6}
+.plain b{font-weight:650}
+.eyebrow{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.eyebrow .term{font-size:inherit;font-weight:inherit;letter-spacing:inherit;text-transform:inherit}
+
+/* sticky nav */
+.snav{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);margin:var(--s4) calc(-1*var(--s4)) 0;padding:0 var(--s4)}
+.snav ul{list-style:none;margin:0 auto;padding:0;max-width:1000px;display:flex;gap:var(--s1);overflow-x:auto;scrollbar-width:none}
+.snav ul::-webkit-scrollbar{display:none}
+.snav a{display:flex;align-items:center;min-height:44px;padding:0 var(--s3);color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;white-space:nowrap;border-bottom:2px solid transparent}
+.snav a:hover{color:var(--fg)}
+.snav a.on{color:var(--fg);border-bottom-color:var(--fg)}
+
+/* term + popover */
+.term{all:unset;box-sizing:border-box;cursor:help;display:inline;color:inherit;text-decoration:underline dotted var(--muted);text-underline-offset:3px;text-decoration-thickness:1px;padding:var(--s2) 0;margin:calc(-1*var(--s2)) 0}
+.term:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:3px}
+.term[aria-expanded=true]{text-decoration-color:var(--link);text-decoration-style:solid}
+#tip{position:fixed;z-index:50;max-width:min(320px,calc(100vw - 24px));background:var(--panel2);border:1px solid var(--line2);border-radius:10px;padding:var(--s3);font-size:.88rem;line-height:1.5;color:var(--fg);box-shadow:0 8px 24px rgba(0,0,0,.5);font-weight:400;letter-spacing:0;text-transform:none}
+#tip[hidden]{display:none}
+#tip b{display:block;margin-bottom:var(--s1);font-weight:600}
+#tip a{display:inline-block;margin-top:var(--s2);font-size:.82rem}
+
+/* pre-IPO cards */
+.cards{display:grid;gap:var(--s4);grid-template-columns:1fr}
+@media(min-width:760px){.cards{grid-template-columns:1fr 1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4) var(--s4) var(--s3);--c:var(--fg);min-width:0}
+.card.anth{--c:var(--anth)}.card.oai{--c:var(--oai)}
+.ch{display:flex;align-items:baseline;gap:var(--s2);margin-bottom:var(--s3)}
+.ch h3{margin:0;font-size:1.05rem;color:var(--c)}
+.tick{color:var(--muted);font-size:.8rem}
+.big{font-size:2.9rem;line-height:1.05;font-weight:700;letter-spacing:-.03em;margin:var(--s1) 0 var(--s4)}
+.mult-top{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;font-size:.92rem;margin-bottom:var(--s2)}
+.mult-top b{font-size:1.15rem;font-weight:650}
+.track{position:relative;height:10px;background:var(--bg);border:1px solid var(--line);border-radius:6px}
+.fill{height:100%;background:var(--c);border-radius:5px}
+.tmark{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--fg);transform:translateX(-1px)}
+.track-lbl{display:flex;justify-content:space-between;gap:var(--s3);flex-wrap:wrap;font-size:.8rem;color:var(--muted);margin-top:var(--s2)}
+.stats-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;margin:var(--s4) 0 0;font-size:.9rem;border-top:1px solid var(--line)}
+.stats-grid dt,.stats-grid dd{margin:0;padding:var(--s2) 0;border-bottom:1px solid var(--line);display:flex;align-items:center}
+.stats-grid dt{color:var(--muted)}
+.stats-grid dd{justify-content:flex-end;text-align:right;gap:var(--s1);flex-wrap:wrap;padding-left:var(--s3)}
+.stats-grid dd small{display:inline}
+.src{font-size:.8rem;color:var(--muted);margin:var(--s3) 0 0}
+
+/* charts */
+.chart-head{display:flex;justify-content:space-between;align-items:center;gap:var(--s3);flex-wrap:wrap;margin-bottom:var(--s2)}
+.seg{display:inline-flex;border:1px solid var(--line2);border-radius:10px;overflow:hidden}
+.seg button{all:unset;box-sizing:border-box;cursor:pointer;min-width:56px;min-height:44px;display:flex;align-items:center;justify-content:center;font-size:.88rem;font-weight:500;color:var(--muted);padding:0 var(--s3)}
+.seg button+button{border-left:1px solid var(--line2)}
+.seg button[aria-pressed=true]{background:var(--panel2);color:var(--fg)}
+.seg button:focus-visible{outline:2px solid var(--link);outline-offset:-2px}
+.chartbox{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s3);margin-bottom:var(--s3)}
+.chartbox .cap{font-size:.85rem;font-weight:600;margin:0 0 var(--s2)}
+.chartbox .cv{position:relative;height:260px}
+.nochart{color:var(--muted);font-size:.9rem;padding:var(--s5) 0;text-align:center}
+
+/* tables */
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r);background:var(--panel)}
 table{border-collapse:collapse;width:100%;font-size:.9rem;white-space:nowrap}
-th,td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th,td{padding:10px var(--s3);text-align:right;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
 th:first-child,td:first-child{text-align:left}
-th{color:var(--muted);font-weight:500}
-.stats{display:flex;gap:20px;flex-wrap:wrap;margin:.5rem 0}.stats b{font-size:1.5rem;display:block}.stats small{display:block}
-.explain{color:var(--muted);font-size:.9rem}
-.cta{margin:1.2rem 0}.cta a{display:inline-block;background:#7aa2ff;color:#0b0f17;font-weight:600;padding:10px 16px;border-radius:10px;text-decoration:none}
-.minis{display:grid;gap:10px;grid-template-columns:1fr 1fr;margin-bottom:14px}
-@media(min-width:720px){.minis{grid-template-columns:repeat(4,1fr)}}
-.mini{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:10px 11px;min-width:0}
-.mh{display:flex;align-items:baseline;gap:6px;white-space:nowrap;overflow:hidden}.mh small{overflow:hidden;text-overflow:ellipsis;flex:1}
-.dot{width:8px;height:8px;border-radius:50%;background:var(--line);flex:none;align-self:center}.dot.on{background:var(--up);box-shadow:0 0 6px var(--up)}
-.mp{font-size:1.05rem;font-weight:600;margin:2px 0}.mp span{font-size:.85rem;font-weight:500}
-.spark{width:100%;height:36px;display:block;margin:4px 0}
-.mf{display:flex;flex-direction:column;font-size:.8rem;line-height:1.35}
-footer{margin:2.5rem 0 1rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line);padding-top:1rem}
+th{color:var(--muted);font-weight:500;font-size:.82rem}
+td small{display:block}
+
+/* equity minis */
+.minis{display:grid;gap:var(--s3);grid-template-columns:1fr 1fr;margin:0 0 var(--s4)}
+@media(min-width:760px){.minis{grid-template-columns:repeat(4,1fr)}}
+.mini{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s3);min-width:0}
+.mh{display:flex;align-items:baseline;gap:var(--s2);white-space:nowrap;overflow:hidden}
+.mh b{font-weight:650}.mh small{overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.sess-line{display:flex;align-items:flex-start;gap:6px;font-size:.74rem;color:var(--muted);line-height:1.3;margin:var(--s1) 0}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--line2);flex:none;margin-top:4px}
+.dot.on{background:var(--up)}
+.mp{font-size:1.1rem;font-weight:600;margin:var(--s1) 0}.mp span{font-size:.85rem;font-weight:500}
+.spark{width:100%;height:36px;display:block;margin:var(--s1) 0}
+.spark.up{color:var(--up)}.spark.down{color:var(--down)}
+.mf{display:flex;flex-direction:column;font-size:.78rem;color:var(--muted);line-height:1.5}
+.mf .term{padding:var(--s1) 0;margin:calc(-1*var(--s1)) 0}
+.legend{font-size:.85rem;color:var(--muted);margin:0 0 var(--s3)}
+
+/* weekend */
+.wk-sum{font-size:1.1rem;line-height:1.5;margin:0 0 var(--s4);max-width:62ch}
+.wk-sum b{font-weight:650}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s3);margin:0 0 var(--s2)}
+.stats>div{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s3)}
+.stats b{display:block;font-size:1.4rem;font-weight:650;letter-spacing:-.02em}
+.stats small{display:block;line-height:1.35}
+@media(max-width:520px){.stats{grid-template-columns:1fr}th,td{padding:10px 8px}}
+.pred{color:#9ec0ff}.act{color:#ffd37a}
+.badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.8rem;font-weight:600;border:1px solid var(--line2)}
+.badge.ok{color:var(--up);border-color:#1f6b4b;background:#0f2a21}
+.badge.bad{color:var(--down);border-color:#7a3333;background:#2b1515}
+.badge.flat{color:var(--muted)}
+.key{display:flex;gap:var(--s4);flex-wrap:wrap;font-size:.85rem;color:var(--muted);margin:var(--s2) 0 0}
+.key .pred,.key .act{font-weight:600}
+
+/* how it works + glossary */
+.steps{list-style:none;margin:0 0 var(--s5);padding:0;display:grid;gap:var(--s3);grid-template-columns:1fr}
+@media(min-width:760px){.steps{grid-template-columns:repeat(3,1fr)}}
+.steps li{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:var(--s3) var(--s4);font-size:.92rem}
+.steps .n{display:block;font-size:.72rem;font-weight:600;letter-spacing:.08em;color:var(--muted);text-transform:uppercase;margin-bottom:var(--s1)}
+details.gloss{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);margin-bottom:var(--s2)}
+details.gloss summary{cursor:pointer;min-height:44px;display:flex;align-items:center;padding:0 var(--s4);font-weight:600;list-style:none}
+details.gloss summary::-webkit-details-marker{display:none}
+details.gloss summary::after{content:"+";margin-left:auto;color:var(--muted);font-size:1.2rem}
+details.gloss[open] summary::after{content:"–"}
+details.gloss dl{margin:0;padding:0 var(--s4) var(--s3)}
+details.gloss dt{font-weight:600;font-size:.92rem;margin-top:var(--s3)}
+details.gloss dd{margin:2px 0 0;color:var(--muted);font-size:.9rem;max-width:68ch}
+
+.cta{margin:var(--s5) 0 0}.cta a{display:inline-flex;align-items:center;min-height:44px;background:var(--link);color:#0a0e15;font-weight:600;padding:0 var(--s4);border-radius:10px;text-decoration:none}
+footer{margin:var(--s6) 0 0;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line);padding-top:var(--s4)}
+footer p{margin:0 0 var(--s2)}
+code{font-size:.9em}
+@media(min-width:760px){h1{font-size:2.1rem}.big{font-size:3.2rem}}
 </style>
 </head>
 <body>
 <main>
 <header>
-<div class="lead">__SITE_NAME__</div>
+<div class="brand"><span>__SITE_NAME__</span><span class="upd"><time id="ago" datetime="__UPDATED_ISO__">Updated</time><small class="abs">__UPDATED__</small></span></div>
 <h1>__TAGLINE__</h1>
-<p class="lead">Implied from <a href="__ENTROPY__" rel="noopener">Entropy</a>'s pre-IPO perps on Hyperliquid, where $1 of price = $1B of market cap. __RATIO__</p>
+<div class="plain"><div class="eyebrow">In plain English</div>
+<p>__SUMMARY__ These are traders' bets on {{t:perp|perpetual contracts}}, not official valuations.</p></div>
 </header>
 
-<section id="preipo" class="cards">
+<nav class="snav" aria-label="Sections"><ul>
+<li><a href="#valuations">Valuations</a></li>
+<li><a href="#charts">Charts</a></li>
+<li><a href="#stocks">Stocks</a></li>
+<li><a href="#weekend">Weekend Gap</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ul></nav>
+
+<section id="valuations">
+<h2>What the market says they're worth</h2>
+<p class="sec-note">Implied from {{t:entropy}}'s {{t:preipo_perp|pre-IPO perps}} on {{t:hyperliquid}}, which trade 24/7. Tap any underlined term for a plain-English definition.</p>
+<div class="cards">
 __CARDS__
+</div>
 </section>
 
-<h2>Implied valuation history</h2>
-<div class="chartbox"><canvas id="valChart"></canvas></div>
-<div class="chartbox"><canvas id="ratioChart"></canvas></div>
-<p class="explain">Daily closes since launch. Dashed lines mark each company's last primary-round valuation. The lower chart shows Anthropic's implied valuation divided by OpenAI's.</p>
+<section id="charts">
+<div class="chart-head"><h2>Implied valuation over time</h2>
+<div class="seg" role="group" aria-label="Chart range"><button type="button" data-range="30" aria-pressed="false">30d</button><button type="button" data-range="0" aria-pressed="true">All</button></div></div>
+<p class="sec-note">Daily closes since launch. Dashed lines mark each company's {{t:last_round|last-round}} valuation.</p>
+<div class="chartbox"><p class="cap">Implied valuation</p><div class="cv"><canvas id="valChart" role="img" aria-label="Implied valuation history chart"></canvas></div></div>
+<div class="chartbox"><p class="cap">Anthropic valued at X× OpenAI</p><div class="cv"><canvas id="ratioChart" role="img" aria-label="Anthropic to OpenAI valuation ratio chart"></canvas></div></div>
+</section>
 
-<h2>Equity perps</h2>
-<section class="minis">
+<section id="stocks">
+<h2>US stocks on Entropy</h2>
+<p class="sec-note">Stock {{t:perp|perps}} that trade around the clock, even when the stock exchange is closed ({{t:discovery}}).</p>
+<p class="legend">Each line is a {{t:sparkline}} of the last 7 days.</p>
+<div class="minis">
 __MINICARDS__
-</section>
-<div class="scroll"><table id="eq"><thead><tr><th>Symbol</th><th>Mark</th><th>24h</th><th>Funding APR 24h</th><th>OI</th><th>24h vol</th><th>Session</th></tr></thead>
+</div>
+<div class="scroll"><table id="eq"><thead><tr><th>Symbol</th><th>{{t:mark|Mark}}</th><th>24h</th><th>{{t:funding_apr|Funding APR}}</th><th>{{t:oi|OI}}</th><th>{{t:volume_24h|24h vol}}</th><th>{{t:session|Session}}</th></tr></thead>
 <tbody>
 __EQUITIES__
 </tbody></table></div>
+</section>
 
+<section id="weekend">
 <h2>Weekend Gap</h2>
-<p class="explain">US stocks stop trading Friday 16:00 ET, but Entropy's perps keep trading. Just before Monday's open (09:15–09:30 ET) the perp price is effectively a weekend "prediction". We compare it with the first regular-session print (09:30–09:45 ET close) and with Friday's close. "Captured" is predicted ÷ actual move when both point the same way. Moves under 0.1% count as flat and are not scored for direction.</p>
+<p class="sec-note">US stocks stop trading Friday 16:00 ET, but Entropy's perps keep going. Just before Monday's open, the perp price is effectively a weekend {{t:predicted|prediction}}. We compare it with the {{t:actual|actual move}} to Monday's first regular-session price. Moves under 0.1% count as flat and are not scored. See {{t:weekend_gap|Weekend Gap}}.</p>
 __WEEKEND__
+<p class="key"><span><span class="pred">Predicted</span> = weekend perp move</span><span><span class="act">Actual</span> = move to Monday's open</span></p>
+</section>
 
+<section id="glossary">
+<h2>How it works</h2>
+<ol class="steps">
+<li><span class="n">1 · List</span>{{t:entropy}} lists {{t:perp|perps}} on {{t:hyperliquid}} through {{t:hip3}}.</li>
+<li><span class="n">2 · Read</span>We read the public API every 30 minutes. No accounts, no private data.</li>
+<li><span class="n">3 · Convert</span>We turn price into valuation, and compare weekend vs Monday-open prices.</li>
+</ol>
+<h2>How to read this</h2>
+<p class="sec-note">Short definitions for every underlined term on this page.</p>
+__GLOSSARY__
 __CTA__
+</section>
 
 <footer>
 <p>Updated: <span id="upd">__UPDATED__</span></p>
 <p>Data: Hyperliquid public API (dex <code>io</code>) and <a href="https://docs.entropy.io/asset-directory/pre-ipo-assets" rel="noopener">Entropy docs</a>. Last-round valuations come from the linked sources and may differ from where private shares actually trade.</p>
-<p>Unofficial community dashboard, not affiliated with Entropy. Not financial advice.</p>
+<p>Unofficial community dashboard, not affiliated with Entropy. Not financial advice.__BUILTBY__</p>
 </footer>
 </main>
+<div id="tip" role="tooltip" hidden></div>
 <script id="pagedata" type="application/json">__DATA__</script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
 <script>
 (function(){
 var D=JSON.parse(document.getElementById('pagedata').textContent);
+
+/* ---- glossary popovers: tap, keyboard focus/Enter, hover; Esc closes ---- */
+var tip=document.getElementById('tip'),cur=null,canHover=window.matchMedia('(hover:hover)').matches;
+function place(el){
+  var r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight,vw=document.documentElement.clientWidth;
+  var left=Math.max(8,Math.min(r.left,vw-w-8)),top=r.bottom+6;
+  if(top+h>window.innerHeight-8&&r.top-h-6>8)top=r.top-h-6;
+  tip.style.left=left+'px';tip.style.top=top+'px';
+}
+function show(el){
+  var g=D.glossary[el.dataset.term];if(!g)return;
+  hide();
+  tip.innerHTML='';var b=document.createElement('b');b.textContent=g.term;tip.appendChild(b);
+  tip.appendChild(document.createTextNode(g.def));
+  var a=document.createElement('a');a.href='#g-'+el.dataset.term;a.textContent='In the glossary';
+  a.addEventListener('click',function(){var d=document.getElementById('g-'+el.dataset.term);if(d&&d.parentNode.tagName==='DL')d.parentNode.parentNode.open=true;hide()});
+  tip.appendChild(document.createElement('br'));tip.appendChild(a);
+  tip.hidden=false;place(el);el.setAttribute('aria-expanded','true');el.setAttribute('aria-describedby','tip');cur=el;
+}
+function hide(){if(cur){cur.setAttribute('aria-expanded','false');cur.removeAttribute('aria-describedby');cur=null}tip.hidden=true}
+document.addEventListener('click',function(e){
+  var t=e.target.closest&&e.target.closest('.term');
+  if(t){e.preventDefault();(cur===t&&(e.detail===0||!canHover))?hide():show(t);return}
+  if(!tip.contains(e.target))hide();
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&cur){var c=cur;hide();c.focus()}});
+document.addEventListener('focusin',function(e){var t=e.target.closest&&e.target.closest('.term');if(t){if(t.matches(':focus-visible'))show(t)}else if(!tip.contains(e.target)){hide()}});
+if(canHover){
+  var ht;
+  document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('.term');if(t){clearTimeout(ht);if(cur!==t)show(t)}else if(cur&&tip.contains(e.target)){clearTimeout(ht)}});
+  document.addEventListener('mouseout',function(e){var t=e.target.closest&&e.target.closest('.term');if(t||tip.contains(e.target)){clearTimeout(ht);ht=setTimeout(function(){if(!tip.matches(':hover')&&!(cur&&cur.matches(':hover')))hide()},150)}});
+}
+window.addEventListener('scroll',function(){if(cur)place(cur)},{passive:true});
+window.addEventListener('resize',function(){if(cur)place(cur)});
+
+/* ---- updated N min ago ---- */
+var ago=document.getElementById('ago');
+function tick(){
+  var m=Math.max(0,Math.round((Date.now()/1000-D.updated_ts)/60)),s;
+  if(m<1)s='just now';else if(m<60)s=m+' min ago';else if(m<2880)s=Math.floor(m/60)+' h '+(m%60)+' min ago';else s=Math.floor(m/1440)+' days ago';
+  ago.textContent='Updated '+s;
+}
+tick();setInterval(tick,30000);
+
+/* ---- nav highlight ---- */
+if('IntersectionObserver' in window){
+  var links={};document.querySelectorAll('.snav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+    Object.keys(links).forEach(function(k){links[k].classList.toggle('on',k===e.target.id)})}})},{rootMargin:'-20% 0px -70% 0px'});
+  Object.keys(links).forEach(function(k){var s=document.getElementById(k);if(s)io.observe(s)});
+}
+
+/* ---- market sessions ---- */
 function ymd(p){return p.year+'-'+p.month+'-'+p.day}
 function nyParts(now){
   var f=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short',hour12:false});
@@ -113,27 +312,45 @@ function hkOpen(now){var f=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Hong_
   if(o.weekday==='Sat'||o.weekday==='Sun')return false;var m=(+o.hour%24)*60+ +o.minute;return (m>=570&&m<720)||(m>=780&&m<960)}
 var now=new Date();
 document.querySelectorAll('#eq tbody tr').forEach(function(tr){
-  var open=tr.dataset.mkt==='HK'?hkOpen(now):usOpen(now);
-  tr.querySelector('.sess').textContent=(tr.dataset.mkt==='HK'?'HK ':'US ')+(open?'open':'closed');
-  tr.querySelector('.sess').className='sess '+(open?'up':'');
+  var hk=tr.dataset.mkt==='HK',open=hk?hkOpen(now):usOpen(now),c=tr.querySelector('.sess');
+  c.textContent=(hk?'HK ':'US ')+(open?'open':'closed');c.className='sess '+(open?'up':'');
 });
 document.querySelectorAll('.mini').forEach(function(c){
-  var open=c.dataset.mkt==='HK'?hkOpen(now):usOpen(now);var d=c.querySelector('.dot');
-  if(open)d.className='dot on';d.title=(c.dataset.mkt==='HK'?'HKEX ':'NYSE/Nasdaq ')+(open?'open':'closed: Entropy price = 24/7 trading');
+  var hk=c.dataset.mkt==='HK',open=hk?hkOpen(now):usOpen(now);
+  c.querySelector('.dot').className='dot'+(open?' on':'');
+  c.querySelector('.sess-txt').textContent=open?'Open · '+(hk?'HKEX':'NYSE/Nasdaq')+' session':'Closed · trading 24/7 on Entropy';
 });
-if(!window.Chart)return;
-Chart.defaults.color='#8b97ab';Chart.defaults.borderColor='#222c3d';
-var col={'io:ANTH':'#d98b5f','io:OAI':'#4fc3a1'};
-var ds=[];
-D.ids.forEach(function(id){
-  ds.push({label:D.names[id]+' implied ($B)',data:D.hist.series[id],borderColor:col[id],backgroundColor:col[id],pointRadius:0,borderWidth:2,tension:.15});
-  ds.push({label:D.names[id]+' last round',data:D.hist.dates.map(function(){return D.hist.last_round_b[id]}),borderColor:col[id],borderDash:[6,5],pointRadius:0,borderWidth:1.2});
-});
-new Chart(document.getElementById('valChart'),{type:'line',data:{labels:D.hist.dates,datasets:ds},
+
+/* ---- charts ---- */
+function fmtB(v){if(v==null)return '–';return v>=1000?'$'+(v/1000).toFixed(2)+'T':'$'+Math.round(v)+'B'}
+var boxes=document.querySelectorAll('.chartbox .cv');
+if(!window.Chart){boxes.forEach(function(b){b.innerHTML='<p class="nochart">Chart could not load. The numbers above are unaffected.</p>'});return}
+Chart.defaults.color='#93a0b5';Chart.defaults.borderColor='#1f2a3a';Chart.defaults.font.family='Inter,system-ui,sans-serif';
+var tipStyle={backgroundColor:'#161f2d',borderColor:'#2b3850',borderWidth:1,titleColor:'#e9eef6',bodyColor:'#e9eef6',padding:10,boxPadding:4};
+var col={'io:ANTH':'#e0905f','io:OAI':'#4fc3a1'},H=D.hist,valChart,ratioChart;
+function slice(a,n){return n?a.slice(-n):a}
+function valData(n){
+  var ds=[];
+  D.ids.forEach(function(id){
+    ds.push({label:D.names[id]+' implied',data:slice(H.series[id],n),borderColor:col[id],backgroundColor:col[id],pointRadius:0,pointHoverRadius:4,borderWidth:2,tension:.15});
+    ds.push({label:D.names[id]+' last round',data:slice(H.dates,n).map(function(){return H.last_round_b[id]}),borderColor:col[id],borderDash:[6,5],pointRadius:0,pointHoverRadius:0,borderWidth:1.2});
+  });
+  return {labels:slice(H.dates,n),datasets:ds};
+}
+valChart=new Chart(document.getElementById('valChart'),{type:'line',data:valData(0),
   options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:true,
-  plugins:{legend:{labels:{boxWidth:12}},title:{display:true,text:'Implied valuation ($B)',color:'#e8edf5'}},scales:{x:{ticks:{maxTicksLimit:6}}}}});
-new Chart(document.getElementById('ratioChart'),{type:'line',data:{labels:D.hist.dates,datasets:[{label:'ANTH ÷ OAI',data:D.hist.ratio,borderColor:'#7aa2ff',pointRadius:0,borderWidth:2,tension:.15}]},
-  options:{responsive:true,maintainAspectRatio:false,spanGaps:true,plugins:{legend:{display:false},title:{display:true,text:'Anthropic valued at X× OpenAI',color:'#e8edf5'}},scales:{x:{ticks:{maxTicksLimit:6}}}}});
+  plugins:{legend:{labels:{boxWidth:12,boxHeight:2}},tooltip:Object.assign({callbacks:{label:function(c){return ' '+c.dataset.label+': '+fmtB(c.parsed.y)}}},tipStyle)},
+  scales:{x:{ticks:{maxTicksLimit:6}},y:{ticks:{callback:fmtB}}}}});
+ratioChart=new Chart(document.getElementById('ratioChart'),{type:'line',data:{labels:H.dates,datasets:[{label:'Anthropic ÷ OpenAI',data:H.ratio,borderColor:'#8aaeff',pointRadius:0,pointHoverRadius:4,borderWidth:2,tension:.15}]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:true,
+  plugins:{legend:{display:false},tooltip:Object.assign({callbacks:{label:function(c){return ' '+c.parsed.y.toFixed(2)+'× OpenAI'}}},tipStyle)},
+  scales:{x:{ticks:{maxTicksLimit:6}},y:{ticks:{callback:function(v){return v.toFixed(2)+'×'}}}}}});
+document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){
+  var n=+b.dataset.range;
+  document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+  valChart.data=valData(n);valChart.update();
+  ratioChart.data.labels=slice(H.dates,n);ratioChart.data.datasets[0].data=slice(H.ratio,n);ratioChart.update();
+})});
 })();
 </script>
 </body>

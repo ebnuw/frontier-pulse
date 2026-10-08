@@ -6,6 +6,7 @@ import time
 from datetime import datetime, timezone
 
 from . import cards, hl
+from .glossary import expand, glossary_html, popover_data, term as T
 from .collector import last_snapshot
 from .common import (DATA, NY, NYSE_EARLY_CLOSE, NYSE_HOLIDAYS, ROOT, SITE, WIB, fmt_pct, fmt_usd, funding_apr, funding_apr_24h,
                      hk_session_open, implied_valuation_usd, load_json, pct_change, save_json, site_cfg,
@@ -75,43 +76,78 @@ def spark_svg(vals, w=160, h=36):
             f'<polyline points="{pts}" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>')
 
 
-def minicards_html(rows):
-    out = []
-    for r in rows:
-        cls = "up" if (r["change_24h"] or 0) >= 0 else "down"
-        ch7 = r.get("change_7d")
-        ch7s = f'<span class="{"up" if ch7 >= 0 else "down"}">{fmt_pct(ch7)}</span> 7d' if ch7 is not None else ""
-        out.append(f"""<article class="mini" data-mkt="{r['market']}">
-  <div class="mh"><b>{E(r['ticker'])}</b> <small>{E(r['name'])}</small><span class="dot" title="session"></span></div>
-  <div class="mp">${px(r['mark'])} <span class="{cls}">{fmt_pct(r['change_24h'])}</span></div>
-  {spark_svg(r.get('spark'))}
-  <div class="mf"><small>{ch7s}</small><small>Vol {fmt_usd(r['vol_usd'])} · OI {fmt_usd(r['oi_usd'])}</small></div>
-</article>""")
-    return "\n".join(out)
-
-
 def px(v):
     return f"{v:,.2f}" if v >= 10 else f"{v:,.4f}"
 
 
+def month_year(iso):
+    return datetime.strptime(iso, "%Y-%m-%d").strftime("%b %Y")
+
+
+def updown(v):
+    return "up" if (v or 0) >= 0 else "down"
+
+
+def minicards_html(rows):
+    out = []
+    for r in rows:
+        ch7 = r.get("change_7d")
+        ch7s = f'<span class="{updown(ch7)}">{fmt_pct(ch7)}</span> {T("change_7d", "7d")}' if ch7 is not None else ""
+        out.append(f"""<article class="mini" data-mkt="{r['market']}">
+  <div class="mh"><b>{E(r['ticker'])}</b><small>{E(r['name'])}</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">${px(r['mark'])} <span class="{updown(r['change_24h'])}">{fmt_pct(r['change_24h'])}</span></div>
+  {spark_svg(r.get('spark'))}
+  <div class="mf num"><span>{ch7s}</span><span>{T('volume_24h', 'Vol')} {fmt_usd(r['vol_usd'])}</span><span>{T('oi', 'OI')} {fmt_usd(r['oi_usd'])}</span></div>
+</article>""")
+    return "\n".join(out)
+
+
+def plain_summary(metrics):
+    """2-3 sentences with the live numbers, generated from metrics (no hardcoded figures)."""
+    ms = list(metrics.values())
+    if not ms:
+        return ""
+    first = ms[0]
+    parts = [f"Traders on {T('entropy')} currently price {E(first['name'])} at <b>{fmt_usd(first['valuation_usd'])}</b> — about "
+             f"<b>{first['multiple']:.1f}×</b> its {T('last_round', 'last funding round')} valuation "
+             f"({fmt_usd(first['last_round_usd'])}, {month_year(first['last_round_date'])})."]
+    for m in ms[1:]:
+        parts.append(f"{E(m['name'])}: <b>{fmt_usd(m['valuation_usd'])}</b>, <b>{m['multiple']:.1f}×</b> its last round "
+                     f"({fmt_usd(m['last_round_usd'])}, {month_year(m['last_round_date'])}).")
+    if len(ms) >= 2:
+        parts.append(f"{E(ms[0]['name'])} is valued at <b>{ms[0]['valuation_usd'] / ms[1]['valuation_usd']:.2f}×</b> {E(ms[1]['name'])}.")
+    return " ".join(parts)
+
+
 def card_html(m):
-    chg = m["change_24h"]
-    cls = "up" if (chg or 0) >= 0 else "down"
     cap_pct = m["oi_usd"] / m["oi_cap_usd"]
+    scale = max(m["multiple"], 1.0) * 1.08
+    fill = m["multiple"] / scale * 100
+    mark_at = 1 / scale * 100
+    fr = m["funding_apr"]
+    who = "" if fr is None or fr == 0 else (" · longs pay shorts" if fr > 0 else " · shorts pay longs")
     return f"""<article class="card {m['short'].lower()}">
-  <h3>{E(m['name'])} <span class="tick">io:{E(m['short'])}</span></h3>
-  <div class="big">{fmt_usd(m['valuation_usd'])}</div>
-  <div class="sub">implied valuation · mark {px(m['mark'])}</div>
-  <div class="row2"><div><b>{m['multiple']:.2f}×</b><small>vs last round</small></div>
-  <div><b class="{'up' if m['premium'] >= 0 else 'down'}">{fmt_pct(m['premium'])}</b><small>premium to {fmt_usd(m['last_round_usd'])}</small></div></div>
-  <dl>
-    <dt>24h change</dt><dd class="{cls}">{fmt_pct(chg)}</dd>
-    <dt>Funding APR (24h avg)</dt><dd>{fmt_pct(m['funding_apr'])}</dd>
-    <dt>Open interest</dt><dd>{fmt_usd(m['oi_usd'])} <small>({cap_pct * 100:.0f}% of {fmt_usd(m['oi_cap_usd'])} cap)</small></dd>
-    <dt>24h volume</dt><dd>{fmt_usd(m['vol_24h_usd'])}</dd>
-    <dt>Lower bound</dt><dd>{m['lower']:,} <small>({fmt_pct(m['to_lower'], 0)} = {fmt_usd(m['lower'] * 1e9)})</small></dd>
-    <dt>Upper bound</dt><dd>{m['upper']:,} <small>({fmt_pct(m['to_upper'], 0)} = {fmt_usd(m['upper'] * 1e9)})</small></dd>
-    <dt>No-IPO resolution</dt><dd>{m['resolution_date']} <small>({m['days_to_resolution']:,} days)</small></dd>
+  <div class="ch"><h3>{E(m['name'])}</h3><span class="tick">io:{E(m['short'])}</span></div>
+  <div class="eyebrow">{T('implied_valuation')}</div>
+  <div class="big num">{fmt_usd(m['valuation_usd'])}</div>
+  <div class="mult">
+    <div class="mult-top"><span><b class="num">{m['multiple']:.2f}×</b> {T('multiple', 'vs last round')}</span>
+      <span class="{updown(m['premium'])} num">{fmt_pct(m['premium'])} {T('premium')}</span></div>
+    <div class="track" role="img" aria-label="Last round {fmt_usd(m['last_round_usd'])}, now {fmt_usd(m['valuation_usd'])}, {m['multiple']:.2f} times">
+      <div class="fill" style="width:{fill:.1f}%"></div><div class="tmark" style="left:{mark_at:.1f}%"></div>
+    </div>
+    <div class="track-lbl num"><span>{T('last_round', 'Last round')} {fmt_usd(m['last_round_usd'])}</span><span>Now {fmt_usd(m['valuation_usd'])}</span></div>
+  </div>
+  <dl class="stats-grid">
+    <dt>{T('mark')}</dt><dd class="num">{px(m['mark'])} <small>(oracle {px(m['oracle'])})</small></dd>
+    <dt>{T('change_24h')}</dt><dd class="num {updown(m['change_24h'])}">{fmt_pct(m['change_24h'])}</dd>
+    <dt>{T('funding_apr')}</dt><dd class="num">{fmt_pct(fr)}<small>{who}</small></dd>
+    <dt>{T('oi')}</dt><dd class="num">{fmt_usd(m['oi_usd'])} <small>({cap_pct * 100:.0f}% of {fmt_usd(m['oi_cap_usd'])} {T('oi_cap', 'cap')})</small></dd>
+    <dt>{T('volume_24h')}</dt><dd class="num">{fmt_usd(m['vol_24h_usd'])}</dd>
+    <dt>{T('lower_bound')}</dt><dd class="num">{m['lower']:,} <small>({fmt_pct(m['to_lower'], 0)} = {fmt_usd(m['lower'] * 1e9)})</small></dd>
+    <dt>{T('upper_bound')}</dt><dd class="num">{m['upper']:,} <small>({fmt_pct(m['to_upper'], 0)} = {fmt_usd(m['upper'] * 1e9)})</small></dd>
+    <dt>{T('no_ipo')}</dt><dd class="num">{m['resolution_date']} <small>({m['days_to_resolution']:,} days)</small></dd>
   </dl>
   <p class="src">Last round: {E(m['last_round_label'])}, {m['last_round_date']} · <a href="{E(m['source_url'])}" rel="noopener">source</a></p>
 </article>"""
@@ -120,36 +156,42 @@ def card_html(m):
 def equities_html(rows):
     out = []
     for r in rows:
-        cls = "up" if (r["change_24h"] or 0) >= 0 else "down"
         out.append(f"""<tr data-mkt="{r['market']}"><td><b>{E(r['ticker'])}</b><br><small>{E(r['name'])}</small></td>
-<td>{px(r['mark'])}</td><td class="{cls}">{fmt_pct(r['change_24h'])}</td><td>{fmt_pct(r['funding_apr'])}</td>
-<td>{fmt_usd(r['oi_usd'])}</td><td>{fmt_usd(r['vol_usd'])}</td><td class="sess">—</td></tr>""")
+<td class="num">{px(r['mark'])}</td><td class="num {updown(r['change_24h'])}">{fmt_pct(r['change_24h'])}</td><td class="num">{fmt_pct(r['funding_apr'])}</td>
+<td class="num">{fmt_usd(r['oi_usd'])}</td><td class="num">{fmt_usd(r['vol_usd'])}</td><td class="sess">—</td></tr>""")
     return "\n".join(out)
 
 
 def weekend_html(rep):
     if not rep or not rep["weekends"]:
-        return "<p>No complete weekends yet.</p>", ""
+        return "<p>No complete weekends yet.</p>"
     w = rep["weekends"][-1]
+    o = rep["overall"]
     rows = []
     for r in w["rows"]:
-        hit = "flat" if r["hit"] is None else ("✓" if r["hit"] else "✗")
+        if r["hit"] is None:
+            badge = '<span class="badge flat">– Flat</span>'
+        elif r["hit"]:
+            badge = '<span class="badge ok">✓ Hit</span>'
+        else:
+            badge = '<span class="badge bad">✗ Miss</span>'
         cap = f"{r['captured'] * 100:.0f}%" if r["captured"] is not None else "—"
-        rows.append(f"<tr><td><b>{E(r['symbol'].split(':')[1])}</b></td><td>{fmt_pct(r['predicted'], 2)}</td>"
-                    f"<td>{fmt_pct(r['actual'], 2)}</td><td class=\"{'up' if r['hit'] else 'down' if r['hit'] is False else ''}\">{hit}</td>"
-                    f"<td>{r['abs_err_pp']:.2f}</td><td>{cap}</td></tr>")
-    o = rep["overall"]
-    stats = (f"<div class=\"stats\"><div><b>{o['hit_rate'] * 100:.0f}%</b><small>direction hit rate ({o['hits']}/{o['n_scored']})</small></div>"
-             f"<div><b>{o['mean_abs_err_pp']:.2f} pp</b><small>mean abs error</small></div>"
-             f"<div><b>{len(rep['weekends'])}</b><small>weekends tracked</small></div></div>")
-    sym = "".join(f"<tr><td><b>{E(s.split(':')[1])}</b></td><td>{v['n']}</td><td>{v['hit_rate'] * 100:.0f}%</td><td>{v['mean_abs_err_pp']:.2f}</td></tr>"
+        rows.append(f"<tr><td><b>{E(r['symbol'].split(':')[1])}</b></td>"
+                    f"<td class=\"num pred\">{fmt_pct(r['predicted'], 2)}</td><td class=\"num act\">{fmt_pct(r['actual'], 2)}</td>"
+                    f"<td>{badge}</td><td class=\"num\">{r['abs_err_pp']:.2f}</td><td class=\"num\">{cap}</td></tr>")
+    summary = (f"Over the last <b>{len(rep['weekends'])}</b> weekends, Entropy's weekend price pointed the right way "
+               f"<b>{o['hit_rate'] * 100:.0f}%</b> of the time ({o['hits']} of {o['n_scored']} stock-weekends).")
+    stats = (f"<div class=\"stats\"><div><b class=\"num\">{o['hit_rate'] * 100:.0f}%</b><small>{T('hit_rate')} ({o['hits']}/{o['n_scored']})</small></div>"
+             f"<div><b class=\"num\">{o['mean_abs_err_pp']:.2f} pp</b><small>mean {T('abs_err')}, in {T('pp', 'percentage points')}</small></div>"
+             f"<div><b class=\"num\">{len(rep['weekends'])}</b><small>weekends tracked</small></div></div>")
+    sym = "".join(f"<tr><td><b>{E(s.split(':')[1])}</b></td><td class=\"num\">{v['n']}</td><td class=\"num\">{v['hit_rate'] * 100:.0f}%</td><td class=\"num\">{v['mean_abs_err_pp']:.2f}</td></tr>"
                   for s, v in rep["by_symbol"].items() if v["hit_rate"] is not None)
-    body = f"""{stats}
+    return f"""<p class="wk-sum">{summary}</p>
+{stats}
 <h3>Latest: Fri {w['friday']} → Mon {w['monday']}</h3>
-<div class="scroll"><table><thead><tr><th>Symbol</th><th>Predicted</th><th>Actual</th><th>Dir.</th><th>Abs err (pp)</th><th>Captured</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+<div class="scroll"><table><thead><tr><th>Symbol</th><th>{T('predicted')}</th><th>{T('actual')}</th><th>Direction</th><th>{T('abs_err')} (pp)</th><th>{T('captured')}</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 <h3>All-time by symbol</h3>
 <div class="scroll"><table><thead><tr><th>Symbol</th><th>Weekends</th><th>Hit rate</th><th>Mean abs err (pp)</th></tr></thead><tbody>{sym}</tbody></table></div>"""
-    return body, w["friday"]
 
 
 def build():
@@ -172,18 +214,19 @@ def build():
         save_json(SITE / "data" / "weekend.json", wk)
     cards.valuation_card(SITE / "og.png", metrics)
 
-    wk_body, _ = weekend_html(wk)
     ref = cfg.get("referral_url", "")
     cta = (f'<p class="cta"><a href="{E(ref)}" rel="noopener sponsored">Trade these on Entropy →</a></p>' if ref else "")
+    handle = cfg.get("x_handle", "")
+    built_by = (f' · Built by the community, <a href="https://x.com/{E(handle.lstrip("@"))}" rel="noopener">{E(handle)}</a>'
+                if handle and handle != "@YOUR_HANDLE" else "")
     site_url = cfg.get("site_url", "")
     anth, oai = metrics.get("io:ANTH"), metrics.get("io:OAI")
-    ratio_now = anth["valuation_usd"] / oai["valuation_usd"] if anth and oai else None
     desc = (f"Anthropic implied {fmt_usd(anth['valuation_usd'])} ({anth['multiple']:.2f}× last round), OpenAI implied "
             f"{fmt_usd(oai['valuation_usd'])} ({oai['multiple']:.2f}×) — from Entropy's 24/7 pre-IPO perps.") if anth and oai else cfg["tagline"]
-    holidays = sorted(d.isoformat() for d in NYSE_HOLIDAYS)
-    page_data = {"hist": hist, "holidays": holidays, "early": sorted(d.isoformat() for d in NYSE_EARLY_CLOSE),
+    page_data = {"hist": hist, "holidays": sorted(d.isoformat() for d in NYSE_HOLIDAYS),
+                 "early": sorted(d.isoformat() for d in NYSE_EARLY_CLOSE),
                  "ids": cfg["pre_ipo"], "names": {k: v["short"] for k, v in vcfg["assets"].items()},
-                 "updated_ts": snap["ts"]}
+                 "updated_ts": snap["ts"], "glossary": popover_data()}
     tpl = (ROOT / "fp" / "template.html").read_text()
     repl = {
         "__TITLE__": E(f"{cfg['site_name']} — {cfg['tagline']}"),
@@ -191,16 +234,20 @@ def build():
         "__OG__": E((site_url.rstrip("/") + "/" if site_url else "") + "og.png"),
         "__SITE_NAME__": E(cfg["site_name"]),
         "__TAGLINE__": E(cfg["tagline"]),
+        "__SUMMARY__": plain_summary(metrics),
         "__CARDS__": "\n".join(card_html(m) for m in metrics.values()),
-        "__RATIO__": f"Anthropic is currently valued at <b>{ratio_now:.2f}×</b> OpenAI." if ratio_now else "",
         "__EQUITIES__": equities_html(eq),
         "__MINICARDS__": minicards_html(eq),
-        "__WEEKEND__": wk_body,
+        "__WEEKEND__": weekend_html(wk),
+        "__GLOSSARY__": glossary_html(),
+        "__UPDATED_ISO__": updated.isoformat(),
         "__UPDATED__": f"{updated.strftime('%Y-%m-%d %H:%M')} UTC · {updated.astimezone(WIB).strftime('%Y-%m-%d %H:%M')} WIB",
         "__ENTROPY__": E(cfg["entropy_url"]),
         "__CTA__": cta,
+        "__BUILTBY__": built_by,
         "__DATA__": json.dumps(page_data).replace("</", "<\\/"),
     }
+    tpl = expand(tpl)
     for k, v in repl.items():
         tpl = tpl.replace(k, v)
     (SITE / "index.html").write_text(tpl)

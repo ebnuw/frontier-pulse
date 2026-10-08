@@ -3,3 +3,4 @@
 - site builder + og.png done; renders real numbers
 - posts (daily, weekend) with cards done
 - run.sh, publish.sh (dry-run only tested), README, tests written
+- v0.2 redesign started

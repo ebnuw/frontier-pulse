@@ -1,0 +1,27 @@
+# Frontier Pulse — redesign + plain-language explanations (v0.2)
+
+Repo: /home/ubuntu/work/frontier-pulse (read README.md, fp/template.html, fp/build_site.py, fp/metrics.py, fp/weekend.py first). Site is a static page built by `fp/build_site.py` from `fp/template.html`. Live at https://0xmago77.github.io/frontier-pulse/. Visitors: crypto/X people who trade, many NOT finance experts, many on phones. Site language: English.
+
+Owner's request: "make the website more attractive and explain the difficult terms so visitors can easily understand and read it."
+
+## Constraints
+- Keep all existing data and sections working (pre-IPO cards, valuation + ratio charts, equity mini-cards + table, Weekend Gap, footer). Do not change data math or the collector. Python: `.venv/bin/python`. No new pip deps. No build tooling: plain HTML/CSS/JS, Chart.js stays (pinned CDN). Fonts: you may use Google Fonts (max 2 families) with `display=swap` and a system fallback.
+- Surface = **Monitor/Learn hybrid** dashboard. Primary is Monitor: glanceable numbers first. No marketing hero with 3 feature tiles, no gradients-everywhere, no glassmorphism, no emoji icons, no left accent rails. Keep the dark theme but make it feel designed: deliberate type (e.g. a precise sans + tabular numerals for figures), clear hierarchy, consistent spacing scale, subtle borders, ANTH = warm orange, OAI = teal as now.
+- Mobile-first (≥ 360 px wide). Tap targets ≥ 44 px. No horizontal page overflow; tables may scroll inside their box. Respect prefers-reduced-motion.
+- Accessible: tooltips/popovers must work by tap (mobile) AND keyboard focus AND hover; Esc closes; aria attributes.
+
+## What to build
+1. **"In plain English" summary** at the top under the title: 2–3 short generated sentences with the live numbers, e.g. "Traders on Entropy currently price Anthropic at $2.05T — about 2.1× what investors paid in its last funding round ($965B, May 2026). OpenAI: $1.63T, 1.9× its last round. Anthropic is valued at 1.26× OpenAI." Build it in Python from metrics (no hardcoded numbers).
+2. **Term explanations everywhere a jargon term appears**: wrap it in a small dotted-underline term with a tap/hover popover (one shared JS component, definitions stored once in a Python dict or `config/glossary.json` and rendered into both the popovers and the glossary section). Cover at least: perpetual (perp), pre-IPO perp, implied valuation, last round, multiple (×), premium, mark price, oracle price, funding rate / funding APR (who pays whom when positive), 24h avg funding, open interest (OI), OI cap, 24h volume, lower/upper bound (catastrophic bounds), no-IPO resolution, HIP-3, Hyperliquid, Entropy, market session open/closed, 24/7 price discovery, LULD (limit-up/limit-down), Weekend Gap, predicted move, actual move, direction hit rate, abs error (pp = percentage points), captured share, sparkline, 7d change. Definitions: 1–2 sentences, plain words, an example with numbers where it helps (e.g. "$1 of price = $1B valuation, so 2,050 → $2.05T"). Facts must stay consistent with README/BRIEF.md (Entropy docs). Don't invent facts beyond those.
+3. **"How to read this" / Glossary section** near the bottom (collapsible `<details>` groups: Basics, Pre-IPO, Trading terms, Weekend Gap), plus a 3-step "How it works" strip (Entropy lists perps on Hyperliquid → we read the public API every 30 min → we convert price to valuation / compare weekend vs Monday open). Short.
+4. **Sticky compact section nav** (Valuations · Charts · Stocks · Weekend Gap · Glossary) and an "Updated N min ago" live label (computed in JS from the build timestamp; show the absolute UTC/WIB time too).
+5. **Card polish**: pre-IPO cards lead with the implied valuation, then a simple horizontal "last round → now" progress-style bar visualising the multiple; secondary stats in a tidy grid; each stat label is a glossary term. Equity mini-cards: keep, make consistent with new style; session dot gets a text label ("Open"/"Closed · trading 24/7 on Entropy").
+6. **Weekend Gap**: add one sentence summary on top ("Over the last N weekends, Entropy's weekend price pointed the right way X% of the time"), color predicted/actual, make ✓/✗ readable.
+7. Charts: theme to match; tooltips formatted ($T / $B); range toggle (30d / All) for the valuation chart if simple.
+8. Footer: keep disclaimers; add "Built by the community" line using `x_handle` from config/site.json only if it isn't the placeholder `@YOUR_HANDLE`.
+
+## Verification (must do)
+- `./run.sh` green, `.venv/bin/python -m unittest` green.
+- Screenshot with the headless shell at mobile 390×(full height) and desktop 1280: `B=/home/ubuntu/.cache/ms-playwright/chromium_headless_shell-1243/chrome-headless-shell-linux64/chrome-headless-shell; $B --no-sandbox --hide-scrollbars --window-size=390,6000 --virtual-time-budget=10000 --screenshot=/home/ubuntu/work/frontier-pulse/out/shot-mobile.png file:///home/ubuntu/work/frontier-pulse/site/index.html` (file:// is fine; also desktop 1280×4000). Look at the screenshots (Read tool on the PNG) and fix layout problems you see. Also run it once with `--dump-dom` and grep that no "undefined"/"NaN" appear.
+- Check that every glossary term used in the page has a definition (write a tiny unittest that renders the page and asserts each `data-term` key exists in the glossary).
+- Do not run publish.sh and do not push. Commit to main: "Frontier Pulse v0.2: redesign + glossary". Final message: what changed, screenshot paths, anything uncertain. Never run sub-agents in the background.
