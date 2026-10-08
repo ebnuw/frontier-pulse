@@ -47,7 +47,47 @@ def equity_rows(snap, cfg):
             "market": "HK" if sym in cfg["hk_symbols"] else "US",
         })
     rows.sort(key=lambda r: -r["vol_usd"])
+    for r in rows:
+        s = sparkline(r["symbol"])
+        r["spark"] = s
+        r["change_7d"] = pct_change(s[-1], s[0]) if s and len(s) > 1 else None
     return rows
+
+
+def sparkline(sym, days=7):
+    """Hourly closes for the last `days` days (None on API failure)."""
+    now_ms = int(time.time() * 1000)
+    try:
+        cs = hl.candles(sym, "1h", now_ms - days * 86400 * 1000, now_ms)
+        return [float(c["c"]) for c in cs]
+    except Exception:
+        return None
+
+
+def spark_svg(vals, w=160, h=36):
+    if not vals or len(vals) < 2:
+        return '<svg class="spark" viewBox="0 0 160 36"></svg>'
+    lo, hi = min(vals), max(vals)
+    rng = (hi - lo) or 1
+    pts = " ".join(f"{i * w / (len(vals) - 1):.1f},{h - 2 - (v - lo) / rng * (h - 4):.1f}" for i, v in enumerate(vals))
+    cls = "up" if vals[-1] >= vals[0] else "down"
+    return (f'<svg class="spark {cls}" viewBox="0 0 {w} {h}" preserveAspectRatio="none" aria-hidden="true">'
+            f'<polyline points="{pts}" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>')
+
+
+def minicards_html(rows):
+    out = []
+    for r in rows:
+        cls = "up" if (r["change_24h"] or 0) >= 0 else "down"
+        ch7 = r.get("change_7d")
+        ch7s = f'<span class="{"up" if ch7 >= 0 else "down"}">{fmt_pct(ch7)}</span> 7d' if ch7 is not None else ""
+        out.append(f"""<article class="mini" data-mkt="{r['market']}">
+  <div class="mh"><b>{E(r['ticker'])}</b> <small>{E(r['name'])}</small><span class="dot" title="session"></span></div>
+  <div class="mp">${px(r['mark'])} <span class="{cls}">{fmt_pct(r['change_24h'])}</span></div>
+  {spark_svg(r.get('spark'))}
+  <div class="mf"><small>{ch7s}</small><small>Vol {fmt_usd(r['vol_usd'])} · OI {fmt_usd(r['oi_usd'])}</small></div>
+</article>""")
+    return "\n".join(out)
 
 
 def px(v):
@@ -154,6 +194,7 @@ def build():
         "__CARDS__": "\n".join(card_html(m) for m in metrics.values()),
         "__RATIO__": f"Anthropic is currently valued at <b>{ratio_now:.2f}×</b> OpenAI." if ratio_now else "",
         "__EQUITIES__": equities_html(eq),
+        "__MINICARDS__": minicards_html(eq),
         "__WEEKEND__": wk_body,
         "__UPDATED__": f"{updated.strftime('%Y-%m-%d %H:%M')} UTC · {updated.astimezone(WIB).strftime('%Y-%m-%d %H:%M')} WIB",
         "__ENTROPY__": E(cfg["entropy_url"]),
