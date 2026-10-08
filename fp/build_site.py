@@ -7,7 +7,7 @@ from datetime import datetime, timezone
 
 from . import cards, hl
 from .collector import last_snapshot
-from .common import (DATA, NY, NYSE_EARLY_CLOSE, NYSE_HOLIDAYS, ROOT, SITE, WIB, fmt_pct, fmt_usd, funding_apr,
+from .common import (DATA, NY, NYSE_EARLY_CLOSE, NYSE_HOLIDAYS, ROOT, SITE, WIB, fmt_pct, fmt_usd, funding_apr, funding_apr_24h,
                      hk_session_open, implied_valuation_usd, load_json, pct_change, save_json, site_cfg,
                      us_session_open, valuations_cfg)
 from .metrics import pre_ipo_metrics
@@ -43,7 +43,7 @@ def equity_rows(snap, cfg):
         rows.append({
             "symbol": sym, "ticker": sym.split(":")[1], "name": cfg["names"].get(sym, sym.split(":")[1]),
             "mark": m["mark"], "change_24h": pct_change(m["mark"], m["prev"]),
-            "funding_apr": funding_apr(m["funding"]), "oi_usd": m["oi"] * m["mark"], "vol_usd": m["vol"],
+            "funding_apr": funding_apr_24h(sym, m["funding"]), "oi_usd": m["oi"] * m["mark"], "vol_usd": m["vol"],
             "market": "HK" if sym in cfg["hk_symbols"] else "US",
         })
     rows.sort(key=lambda r: -r["vol_usd"])
@@ -66,7 +66,7 @@ def card_html(m):
   <div><b class="{'up' if m['premium'] >= 0 else 'down'}">{fmt_pct(m['premium'])}</b><small>premium to {fmt_usd(m['last_round_usd'])}</small></div></div>
   <dl>
     <dt>24h change</dt><dd class="{cls}">{fmt_pct(chg)}</dd>
-    <dt>Funding APR</dt><dd>{fmt_pct(m['funding_apr'])}</dd>
+    <dt>Funding APR (24h avg)</dt><dd>{fmt_pct(m['funding_apr'])}</dd>
     <dt>Open interest</dt><dd>{fmt_usd(m['oi_usd'])} <small>({cap_pct * 100:.0f}% of {fmt_usd(m['oi_cap_usd'])} cap)</small></dd>
     <dt>24h volume</dt><dd>{fmt_usd(m['vol_24h_usd'])}</dd>
     <dt>Lower bound</dt><dd>{m['lower']:,} <small>({fmt_pct(m['to_lower'], 0)} = {fmt_usd(m['lower'] * 1e9)})</small></dd>

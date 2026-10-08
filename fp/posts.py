@@ -13,7 +13,7 @@ def daily_text(metrics, handle="@entropyIO"):
     lines = []
     for m in metrics.values():
         lines.append(f"${m['short']}: {fmt_usd(m['valuation_usd'])} implied ({m['multiple']:.2f}x last round of "
-                     f"{fmt_usd(m['last_round_usd'])}), 24h {fmt_pct(m['change_24h'])}, funding {fmt_pct(m['funding_apr'], 0)} APR")
+                     f"{fmt_usd(m['last_round_usd'])}), 24h {fmt_pct(m['change_24h'])}, funding {fmt_pct(m['funding_apr'], 0)} APR (24h avg)")
     head = "What the market says they're worth, 24/7 (Entropy pre-IPO perps):"
     text = head + "\n" + "\n".join(lines) + "\n" + handle
     if len(text) > MAX_LEN:  # drop funding detail first, then the header

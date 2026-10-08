@@ -2,7 +2,7 @@
 from datetime import date, datetime
 
 from .collector import last_snapshot
-from .common import funding_apr, implied_valuation_usd, pct_change, site_cfg, valuations_cfg
+from .common import funding_apr, funding_apr_24h, implied_valuation_usd, pct_change, site_cfg, valuations_cfg
 
 
 def pre_ipo_metrics(snap=None, today=None):
@@ -30,7 +30,8 @@ def pre_ipo_metrics(snap=None, today=None):
             "premium": val / last_round - 1,
             "change_24h": pct_change(mark, m["prev"]),
             "funding_hourly": m["funding"],
-            "funding_apr": funding_apr(m["funding"]),
+            "funding_apr": funding_apr_24h(sym, m["funding"]),
+            "funding_apr_live": funding_apr(m["funding"]),
             "oi_usd": m["oi"] * mark,
             "oi_cap_usd": a["oi_cap_usd"],
             "vol_24h_usd": m["vol"],

@@ -51,6 +51,24 @@ def funding_apr(hourly_rate):
     return float(hourly_rate) * 24 * 365
 
 
+_F24 = {}
+
+
+def funding_apr_24h(coin, fallback_hourly):
+    """APR from the mean of the last 24 settled hourly fundings; falls back to the live rate."""
+    if coin not in _F24:
+        try:
+            import time
+            from . import hl
+            rows = hl.funding_history(coin, int((time.time() - 86400) * 1000))
+            rates = [float(r["fundingRate"]) for r in rows][-24:]
+            _F24[coin] = sum(rates) / len(rates) if rates else None
+        except Exception:
+            _F24[coin] = None
+    h = _F24[coin]
+    return funding_apr(h if h is not None else fallback_hourly)
+
+
 def implied_valuation_usd(price, usd_per_point=1e9):
     """Pre-IPO perps: $1 of price = $1B market cap."""
     return float(price) * usd_per_point
