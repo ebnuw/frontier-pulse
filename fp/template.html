@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>__TITLE__</title>
+<meta name="description" content="__DESC__">
+<meta property="og:type" content="website">
+<meta property="og:title" content="__TITLE__">
+<meta property="og:description" content="__DESC__">
+<meta property="og:image" content="__OG__">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="__TITLE__">
+<meta name="twitter:description" content="__DESC__">
+<meta name="twitter:image" content="__OG__">
+<style>
+:root{--bg:#0b0f17;--panel:#131a26;--line:#222c3d;--fg:#e8edf5;--muted:#8b97ab;--up:#3ddc97;--down:#ff6b6b;--anth:#d98b5f;--oai:#4fc3a1}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+main{max-width:980px;margin:0 auto;padding:16px}
+h1{font-size:1.6rem;line-height:1.2;margin:.5rem 0}
+h2{font-size:1.2rem;margin:2rem 0 .6rem;border-bottom:1px solid var(--line);padding-bottom:.3rem}
+h3{font-size:1rem;margin:1rem 0 .4rem}
+a{color:#7aa2ff}
+.lead{color:var(--muted);margin:0 0 1rem}
+.cards{display:grid;gap:12px;grid-template-columns:1fr}
+@media(min-width:720px){.cards{grid-template-columns:1fr 1fr}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:16px}
+.card h3{margin:0;font-size:1.05rem}.tick{color:var(--muted);font-weight:400;font-size:.85rem}
+.card.anth{border-top:3px solid var(--anth)}.card.oai{border-top:3px solid var(--oai)}
+.big{font-size:2.4rem;font-weight:700;margin-top:.3rem}
+.sub{color:var(--muted);font-size:.85rem}
+.row2{display:flex;gap:24px;margin:.8rem 0}.row2 b{font-size:1.3rem;display:block}
+small{color:var(--muted)}.row2 small{display:block}
+dl{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin:.5rem 0;font-size:.92rem}
+dt{color:var(--muted)}dd{margin:0;text-align:right}
+.src{font-size:.8rem;color:var(--muted);margin:.6rem 0 0}
+.up{color:var(--up)}.down{color:var(--down)}
+.chartbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:12px}
+.chartbox canvas{width:100%!important;height:280px!important}
+.scroll{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.9rem;white-space:nowrap}
+th,td{padding:7px 10px;text-align:right;border-bottom:1px solid var(--line)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:500}
+.stats{display:flex;gap:20px;flex-wrap:wrap;margin:.5rem 0}.stats b{font-size:1.5rem;display:block}.stats small{display:block}
+.explain{color:var(--muted);font-size:.9rem}
+.cta{margin:1.2rem 0}.cta a{display:inline-block;background:#7aa2ff;color:#0b0f17;font-weight:600;padding:10px 16px;border-radius:10px;text-decoration:none}
+footer{margin:2.5rem 0 1rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--line);padding-top:1rem}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="lead">__SITE_NAME__</div>
+<h1>__TAGLINE__</h1>
+<p class="lead">Implied from <a href="__ENTROPY__" rel="noopener">Entropy</a>'s pre-IPO perps on Hyperliquid, where $1 of price = $1B of market cap. __RATIO__</p>
+</header>
+
+<section id="preipo" class="cards">
+__CARDS__
+</section>
+
+<h2>Implied valuation history</h2>
+<div class="chartbox"><canvas id="valChart"></canvas></div>
+<div class="chartbox"><canvas id="ratioChart"></canvas></div>
+<p class="explain">Daily closes since launch. Dashed lines mark each company's last primary-round valuation. The lower chart shows Anthropic's implied valuation divided by OpenAI's.</p>
+
+<h2>Equity perps</h2>
+<div class="scroll"><table id="eq"><thead><tr><th>Symbol</th><th>Mark</th><th>24h</th><th>Funding APR</th><th>OI</th><th>24h vol</th><th>Session</th></tr></thead>
+<tbody>
+__EQUITIES__
+</tbody></table></div>
+
+<h2>Weekend Gap</h2>
+<p class="explain">US stocks stop trading Friday 16:00 ET, but Entropy's perps keep trading. Just before Monday's open (09:15–09:30 ET) the perp price is effectively a weekend "prediction". We compare it with the first regular-session print (09:30–09:45 ET close) and with Friday's close. "Captured" is predicted ÷ actual move when both point the same way. Moves under 0.1% count as flat and are not scored for direction.</p>
+__WEEKEND__
+
+__CTA__
+
+<footer>
+<p>Updated: <span id="upd">__UPDATED__</span></p>
+<p>Data: Hyperliquid public API (dex <code>io</code>) and <a href="https://docs.entropy.io/asset-directory/pre-ipo-assets" rel="noopener">Entropy docs</a>. Last-round valuations come from the linked sources and may differ from where private shares actually trade.</p>
+<p>Unofficial community dashboard, not affiliated with Entropy. Not financial advice.</p>
+</footer>
+</main>
+<script id="pagedata" type="application/json">__DATA__</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+(function(){
+var D=JSON.parse(document.getElementById('pagedata').textContent);
+function ymd(p){return p.year+'-'+p.month+'-'+p.day}
+function nyParts(now){
+  var f=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short',hour12:false});
+  var o={};f.formatToParts(now).forEach(function(p){o[p.type]=p.value});
+  return {date:ymd(o),wd:o.weekday,min:(+o.hour%24)*60+ +o.minute};
+}
+function usOpen(now){var n=nyParts(now);if(n.wd==='Sat'||n.wd==='Sun'||D.holidays.indexOf(n.date)>=0)return false;
+  var close=D.early.indexOf(n.date)>=0?780:960;return n.min>=570&&n.min<close}
+function hkOpen(now){var f=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Hong_Kong',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+  var o={};f.formatToParts(now).forEach(function(p){o[p.type]=p.value});
+  if(o.weekday==='Sat'||o.weekday==='Sun')return false;var m=(+o.hour%24)*60+ +o.minute;return (m>=570&&m<720)||(m>=780&&m<960)}
+var now=new Date();
+document.querySelectorAll('#eq tbody tr').forEach(function(tr){
+  var open=tr.dataset.mkt==='HK'?hkOpen(now):usOpen(now);
+  tr.querySelector('.sess').textContent=(tr.dataset.mkt==='HK'?'HK ':'US ')+(open?'open':'closed');
+  tr.querySelector('.sess').className='sess '+(open?'up':'');
+});
+if(!window.Chart)return;
+Chart.defaults.color='#8b97ab';Chart.defaults.borderColor='#222c3d';
+var col={'io:ANTH':'#d98b5f','io:OAI':'#4fc3a1'};
+var ds=[];
+D.ids.forEach(function(id){
+  ds.push({label:D.names[id]+' implied ($B)',data:D.hist.series[id],borderColor:col[id],backgroundColor:col[id],pointRadius:0,borderWidth:2,tension:.15});
+  ds.push({label:D.names[id]+' last round',data:D.hist.dates.map(function(){return D.hist.last_round_b[id]}),borderColor:col[id],borderDash:[6,5],pointRadius:0,borderWidth:1.2});
+});
+new Chart(document.getElementById('valChart'),{type:'line',data:{labels:D.hist.dates,datasets:ds},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:true,
+  plugins:{legend:{labels:{boxWidth:12}},title:{display:true,text:'Implied valuation ($B)',color:'#e8edf5'}},scales:{x:{ticks:{maxTicksLimit:6}}}}});
+new Chart(document.getElementById('ratioChart'),{type:'line',data:{labels:D.hist.dates,datasets:[{label:'ANTH ÷ OAI',data:D.hist.ratio,borderColor:'#7aa2ff',pointRadius:0,borderWidth:2,tension:.15}]},
+  options:{responsive:true,maintainAspectRatio:false,spanGaps:true,plugins:{legend:{display:false},title:{display:true,text:'Anthropic valued at X× OpenAI',color:'#e8edf5'}},scales:{x:{ticks:{maxTicksLimit:6}}}}});
+})();
+</script>
+</body>
+</html>

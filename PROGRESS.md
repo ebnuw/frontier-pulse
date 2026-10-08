@@ -1,0 +1,5 @@
+- hl client, config, collector done; snapshot written from live API
+- weekend report done: 7 weekends, 28 rows, data/weekend.json
+- site builder + og.png done; renders real numbers
+- posts (daily, weekend) with cards done
+- run.sh, publish.sh (dry-run only tested), README, tests written

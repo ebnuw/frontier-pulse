@@ -1,0 +1,27 @@
+{
+  "site_name": "Frontier Pulse",
+  "tagline": "What the market says Anthropic and OpenAI are worth — live, 24/7",
+  "dex": "io",
+  "entropy_url": "https://entropy.io",
+  "entropy_handle": "@entropyIO",
+  "x_handle": "@YOUR_HANDLE",
+  "site_url": "",
+  "referral_url": "",
+  "pre_ipo": ["io:ANTH", "io:OAI"],
+  "hk_symbols": ["io:TCNT"],
+  "weekend_exclude": ["io:TCNT", "io:ANTH", "io:OAI", "io:SBE", "io:PRL"],
+  "weekend_extra_exclude_note": "Pre-IPO perps and non-US names are excluded; all other io equity markets are included dynamically.",
+  "names": {
+    "io:ANTH": "Anthropic (pre-IPO)",
+    "io:OAI": "OpenAI (pre-IPO)",
+    "io:SNDK": "SanDisk",
+    "io:IONQ": "IonQ",
+    "io:NBIS": "Nebius",
+    "io:EWY": "iShares MSCI South Korea ETF",
+    "io:GPRO": "GoPro",
+    "io:SBE": "SBE",
+    "io:TCNT": "Tencent",
+    "io:DRAM": "DRAM",
+    "io:PRL": "PRL"
+  }
+}

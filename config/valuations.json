@@ -1,0 +1,36 @@
+{
+  "_note": "Reference (last primary-round) valuations used for the pre-IPO perps. Edit freely; price $1 = $1B market cap.",
+  "usd_per_price_point": 1000000000,
+  "assets": {
+    "io:ANTH": {
+      "name": "Anthropic",
+      "short": "ANTH",
+      "last_round_usd": 965000000000,
+      "last_round_label": "Series H post-money",
+      "last_round_date": "2026-05-28",
+      "source_url": "https://www.anthropic.com/news/series-h",
+      "earlier_rounds": [
+        {"label": "Series G post-money", "date": "2026-02-12", "usd": 380000000000}
+      ],
+      "lower_bound": 300,
+      "upper_bound": 4200,
+      "oi_cap_usd": 50000000,
+      "resolution_date": "2028-08-18",
+      "spec_url": "https://docs.entropy.io/asset-directory/pre-ipo-assets"
+    },
+    "io:OAI": {
+      "name": "OpenAI",
+      "short": "OAI",
+      "last_round_usd": 852000000000,
+      "last_round_label": "Post-money (round closed 2026-03-31; reaffirmed by ~$7B employee tender 2026-08-10)",
+      "last_round_date": "2026-03-31",
+      "source_url": "https://www.cnbc.com/2026/08/10/openai-wraps-7-billion-share-sale-ahead-of-potential-ipo-.html",
+      "earlier_rounds": [],
+      "lower_bound": 200,
+      "upper_bound": 3000,
+      "oi_cap_usd": 12000000,
+      "resolution_date": "2028-09-02",
+      "spec_url": "https://docs.entropy.io/asset-directory/pre-ipo-assets"
+    }
+  }
+}

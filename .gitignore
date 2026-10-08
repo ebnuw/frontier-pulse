@@ -1,0 +1,9 @@
+.venv/
+data/
+out/
+site/
+__pycache__/
+*.pyc
+.claude-run.*
+.launch.*
+scratch_probe.py
