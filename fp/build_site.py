@@ -149,7 +149,7 @@ def card_html(m):
     <dt>{T('upper_bound')}</dt><dd class="num">{m['upper']:,} <small>({fmt_pct(m['to_upper'], 0)} = {fmt_usd(m['upper'] * 1e9)})</small></dd>
     <dt>{T('no_ipo')}</dt><dd class="num">{m['resolution_date']} <small>({m['days_to_resolution']:,} days)</small></dd>
   </dl>
-  <p class="src">Last round: {E(m['last_round_label'])}, {m['last_round_date']} · <a href="{E(m['source_url'])}" rel="noopener">source</a></p>
+  <p class="src">Last round: {m['last_round_date']} · {E(m['last_round_label'])} · <a href="{E(m['source_url'])}" rel="noopener">source</a></p>
 </article>"""
 
 
@@ -182,7 +182,7 @@ def weekend_html(rep):
     summary = (f"Over the last <b>{len(rep['weekends'])}</b> weekends, Entropy's weekend price pointed the right way "
                f"<b>{o['hit_rate'] * 100:.0f}%</b> of the time ({o['hits']} of {o['n_scored']} stock-weekends).")
     stats = (f"<div class=\"stats\"><div><b class=\"num\">{o['hit_rate'] * 100:.0f}%</b><small>{T('hit_rate')} ({o['hits']}/{o['n_scored']})</small></div>"
-             f"<div><b class=\"num\">{o['mean_abs_err_pp']:.2f} pp</b><small>mean {T('abs_err')}, in {T('pp', 'percentage points')}</small></div>"
+             f"<div><b class=\"num\">{o['mean_abs_err_pp']:.2f} pp</b><small>mean {T('abs_err', 'abs error')}, in {T('pp', 'percentage points')}</small></div>"
              f"<div><b class=\"num\">{len(rep['weekends'])}</b><small>weekends tracked</small></div></div>")
     sym = "".join(f"<tr><td><b>{E(s.split(':')[1])}</b></td><td class=\"num\">{v['n']}</td><td class=\"num\">{v['hit_rate'] * 100:.0f}%</td><td class=\"num\">{v['mean_abs_err_pp']:.2f}</td></tr>"
                   for s, v in rep["by_symbol"].items() if v["hit_rate"] is not None)
