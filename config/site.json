@@ -34,5 +34,6 @@
     "io:TCNT": "Tencent",
     "io:DRAM": "DRAM",
     "io:PRL": "PRL"
-  }
+  },
+  "custom_domain": ""
 }

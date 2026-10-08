@@ -28,6 +28,8 @@ cp -R site/. "$TMP/"
 (
   cd "$TMP"
   touch .nojekyll
+  CD=$(python3 -c "import json;print(json.load(open(\"/home/ubuntu/work/frontier-pulse/config/site.json\")).get(\"custom_domain\",\"\"))")
+  [ -n "$CD" ] && echo "$CD" > CNAME
   git init -q
   git checkout -q -b gh-pages
   git add -A
