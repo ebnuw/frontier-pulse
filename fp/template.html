@@ -88,6 +88,21 @@ header .rule{border:0;border-top:1px solid var(--ink);margin:2px 0 0}
 .headlines .meta{display:block;margin-top:3px;font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.02em}
 @media(min-width:760px){.headlines{column-count:2;column-gap:32px;column-rule:1px solid var(--line)}.headlines li{border-bottom:1px solid var(--line)}}
 
+/* funding: stat row + weekly bars */
+.fblock{border-top:2px solid var(--ink);padding:14px 0 18px;margin-bottom:8px}
+.fblock h3{margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.fblock .tick{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--muted);letter-spacing:.04em}
+.fstats{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 14px;border-bottom:1px solid var(--line)}
+.fstats div{padding:0 12px 10px 0}
+.fstats div+div{border-left:1px solid var(--line);padding-left:12px}
+.fstats dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.fstats dd{margin:0;font-family:var(--mono);font-size:1.15rem;font-weight:600}
+.fstats dd small{font-size:.7rem;font-weight:500;color:var(--muted)}
+.fbars{width:100%;height:auto;display:block;max-width:560px}
+.fbars .zero{stroke:var(--ink);stroke-width:1}
+.fbars .bv{font-family:var(--mono);font-size:11px;fill:var(--ink);text-anchor:middle}
+.fbars .bl{font-family:var(--mono);font-size:10px;fill:var(--muted);text-anchor:middle}
+
 /* valuation cards: ruled broadsheet panels */
 .cards{display:grid;gap:0;grid-template-columns:1fr;border-top:2px solid var(--ink)}
 @media(min-width:760px){.cards{grid-template-columns:1fr 1fr;border-top-width:3px}.card+.card{border-left:1px solid var(--line2)}}
@@ -214,6 +229,11 @@ code{font-size:.9em;font-family:var(--mono)}
   th{font-size:.64rem;letter-spacing:.05em}
   .wk-latest th:nth-child(n+5),.wk-latest td:nth-child(n+5){display:none}
   .badge{padding:1px 5px}
+  .fstats dd{font-size:.98rem}
+  .fstats div{padding-right:8px}
+  .fstats div+div{padding-left:8px}
+  .fbars .bv{font-size:13px}
+  .fbars .bl{font-size:12px}
 }
 </style>
 </head>
@@ -232,6 +252,7 @@ code{font-size:.9em;font-family:var(--mono)}
 <li><a href="#headlines">Headlines</a></li>
 <li><a href="#valuations">Valuations</a></li>
 <li><a href="#charts">Charts</a></li>
+<li><a href="#funding">Funding</a></li>
 <li><a href="#stocks">Stocks</a></li>
 <li><a href="#weekend">Weekend Gap</a></li>
 <li><a href="#glossary">Glossary</a></li>
@@ -257,6 +278,12 @@ __CARDS__
 <p class="sec-note">Daily closes since launch. Dashed lines mark each company's {{t:last_round|last-round}} valuation.</p>
 <div class="chartbox"><p class="cap">Implied valuation</p><div class="cv"><canvas id="valChart" role="img" aria-label="Implied valuation history chart"></canvas></div></div>
 <div class="chartbox"><p class="cap">Anthropic valued at X× OpenAI</p><div class="cv"><canvas id="ratioChart" role="img" aria-label="Anthropic to OpenAI valuation ratio chart"></canvas></div></div>
+</section>
+
+<section id="funding">
+<h2>Funding: who pays whom</h2>
+<p class="sec-note">Every hour, one side of a {{t:perp}} pays the other. When {{t:funding|funding}} is positive, longs pay shorts, which usually means more people want to be long than short.</p>
+__FUNDING__
 </section>
 
 <section id="stocks">

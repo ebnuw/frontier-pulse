@@ -5,7 +5,7 @@ import shutil
 import time
 from datetime import datetime, timezone
 
-from . import cards, hl, news as fpnews
+from . import cards, funding as fpfunding, hl, news as fpnews
 from .glossary import expand, glossary_html, popover_data, term as T
 from .collector import last_snapshot
 from .common import (DATA, NY, NYSE_EARLY_CLOSE, NYSE_HOLIDAYS, ROOT, SITE, WIB, fmt_pct, fmt_usd, funding_apr, funding_apr_24h,
@@ -214,6 +214,52 @@ def news_html(payload):
     return f'<ol class="headlines">{"".join(rows)}</ol>'
 
 
+def funding_bars(weeks, color, w=420, h=130):
+    """Weekly funding APR as bars; zero line, labels on every bar."""
+    vals = [wk["apr"] * 100 for wk in weeks]
+    top = max(max(vals), 5)
+    bot = min(min(vals), 0)
+    pad_t, pad_b = 18, 22
+    span = (top - bot) or 1
+    y0 = pad_t + top / span * (h - pad_t - pad_b)
+    bw = w / len(vals)
+    parts = [f'<line x1="0" x2="{w}" y1="{y0:.1f}" y2="{y0:.1f}" class="zero"/>']
+    for i, (v, wk) in enumerate(zip(vals, weeks)):
+        x = i * bw + bw * 0.18
+        bh = abs(v) / span * (h - pad_t - pad_b)
+        y = y0 - bh if v >= 0 else y0
+        partial = wk["hours"] < 168
+        parts.append(f'<rect x="{x:.1f}" y="{y:.1f}" width="{bw * 0.64:.1f}" height="{max(bh, 1):.1f}" '
+                     f'fill="{color}"{" opacity=\".45\"" if partial else ""}/>')
+        ly = (y - 5) if v >= 0 else (y + bh + 13)
+        parts.append(f'<text x="{x + bw * 0.32:.1f}" y="{ly:.1f}" class="bv">{v:.0f}%</text>')
+        parts.append(f'<text x="{x + bw * 0.32:.1f}" y="{h - 5}" class="bl">W{wk["n"]}{"*" if partial else ""}</text>')
+    return (f'<svg class="fbars" viewBox="0 0 {w} {h}" role="img" '
+            f'aria-label="Weekly funding APR">{"".join(parts)}</svg>')
+
+
+def funding_html(payload, vcfg):
+    assets = payload.get("assets", {})
+    if not assets:
+        return '<p class="nochart">Funding history unavailable right now.</p>'
+    colors = {"io:ANTH": "#b4552d", "io:OAI": "#1f6f5c"}
+    blocks = []
+    for sym, s in assets.items():
+        name = vcfg["assets"].get(sym, {}).get("name", sym)
+        blocks.append(f"""<div class="fblock">
+<h3>{E(name)} <span class="tick">{E(sym)}</span></h3>
+<dl class="fstats">
+<div><dt>Longs paid</dt><dd class="num">{s['pos_share'] * 100:.0f}%<small> of hours</small></dd></div>
+<div><dt>Since {E(s['since'])}</dt><dd class="num">{fmt_pct(s['apr_all'])}<small> APR</small></dd></div>
+<div><dt>Last 7 days</dt><dd class="num">{fmt_pct(s['apr_7d'])}<small> APR</small></dd></div>
+</dl>
+{funding_bars(s['weeks'], colors.get(sym, '#191610'))}
+</div>""")
+    return "".join(blocks) + ('<p class="legend">Bars: average funding APR per week since listing '
+                              '(W1 = first 7 days). * = week still in progress. '
+                              'Positive = longs pay shorts.</p>')
+
+
 def build():
     cfg, vcfg = site_cfg(), valuations_cfg()
     snap = last_snapshot()
@@ -266,6 +312,7 @@ def build():
         "__MINICARDS__": minicards_html(eq),
         "__WEEKEND__": weekend_html(wk),
         "__HEADLINES__": news_html(news_payload),
+        "__FUNDING__": funding_html(fpfunding.load(), vcfg),
         "__GLOSSARY__": glossary_html(),
         "__UPDATED_ISO__": updated.isoformat(),
         "__UPDATED__": f"{updated.strftime('%Y-%m-%d %H:%M')} UTC · {updated.astimezone(WIB).strftime('%Y-%m-%d %H:%M')} WIB",

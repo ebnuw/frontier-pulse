@@ -8,6 +8,7 @@ case "$KIND" in ""|daily|weekend) ;; *) echo "usage: ./run.sh [daily|weekend]" >
 
 $PY -m fp.collector
 $PY -m fp.news
+$PY -m fp.funding
 $PY -m fp.weekend
 $PY -m fp.build_site
 if [ -n "$KIND" ]; then
