@@ -5,7 +5,7 @@ import shutil
 import time
 from datetime import datetime, timezone
 
-from . import cards, hl
+from . import cards, hl, news as fpnews
 from .glossary import expand, glossary_html, popover_data, term as T
 from .collector import last_snapshot
 from .common import (DATA, NY, NYSE_EARLY_CLOSE, NYSE_HOLIDAYS, ROOT, SITE, WIB, fmt_pct, fmt_usd, funding_apr, funding_apr_24h,
@@ -194,6 +194,22 @@ def weekend_html(rep):
 <div class="scroll"><table><thead><tr><th>Symbol</th><th>Weekends</th><th>Hit rate</th><th>Mean abs err (pp)</th></tr></thead><tbody>{sym}</tbody></table></div>"""
 
 
+def news_html(payload):
+    """Front page: the day's headlines about market entities."""
+    items = payload.get("items", [])
+    if not items:
+        return ""
+    now = time.time()
+    rows = []
+    for it in items[:6]:
+        age_h = (now - it["ts"]) / 3600
+        when = f"{int(age_h)}h ago" if age_h < 24 else f"{int(age_h / 24)}d ago"
+        rows.append(
+            f'<li><a href="{E(it["url"])}" rel="noopener">{E(it["title"])}</a>'
+            f'<span class="meta">{E(it["source"])} · {when} · {E(it["name"])}</span></li>')
+    return f'<ol class="headlines">{"".join(rows)}</ol>'
+
+
 def build():
     cfg, vcfg = site_cfg(), valuations_cfg()
     snap = last_snapshot()
@@ -202,6 +218,7 @@ def build():
     SITE.mkdir(exist_ok=True)
     (SITE / "data").mkdir(exist_ok=True)
     metrics = pre_ipo_metrics(snap)
+    news_payload = fpnews.load()
     hist = history(vcfg, cfg)
     eq = equity_rows(snap, cfg)
     wk = load_json(DATA / "weekend.json")
@@ -239,6 +256,7 @@ def build():
         "__EQUITIES__": equities_html(eq),
         "__MINICARDS__": minicards_html(eq),
         "__WEEKEND__": weekend_html(wk),
+        "__HEADLINES__": news_html(news_payload),
         "__GLOSSARY__": glossary_html(),
         "__UPDATED_ISO__": updated.isoformat(),
         "__UPDATED__": f"{updated.strftime('%Y-%m-%d %H:%M')} UTC · {updated.astimezone(WIB).strftime('%Y-%m-%d %H:%M')} WIB",

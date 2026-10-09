@@ -6,9 +6,12 @@ import matplotlib.pyplot as plt
 
 from .common import fmt_pct, fmt_usd
 
-BG, FG, MUTED = "#0b0f17", "#e8edf5", "#8b97ab"
-COLORS = {"io:ANTH": "#d98b5f", "io:OAI": "#4fc3a1"}
-UP, DOWN = "#3ddc97", "#ff6b6b"
+plt.rcParams["font.family"] = "serif"
+
+BG, FG, MUTED = "#faf7f1", "#191610", "#6f675a"
+COLORS = {"io:ANTH": "#b4552d", "io:OAI": "#1f6f5c"}
+UP, DOWN = "#1c7a4e", "#b02e2e"
+RULE = "#b9b09c"
 
 
 def _fig(w, h):
@@ -19,13 +22,14 @@ def _fig(w, h):
 def valuation_card(path, metrics, size=(1200, 630), title="Implied valuation vs last funding round", footer="frontierpulse · unofficial · data: Hyperliquid / Entropy"):
     w, h = size
     fig = _fig(w, h)
-    fig.text(0.05, 0.9, title, color=FG, fontsize=28, fontweight="bold", va="center")
-    fig.text(0.05, 0.835, "Entropy pre-IPO perps · live, 24/7", color=MUTED, fontsize=16, va="center")
+    fig.text(0.05, 0.92, title, color=FG, fontsize=30, fontweight="bold", va="center")
+    fig.text(0.05, 0.855, "Entropy pre-IPO perps · live, 24/7", color=MUTED, fontsize=16, va="center", style="italic")
+    fig.lines.append(plt.Line2D([0.05, 0.95], [0.905, 0.905], color=FG, lw=1.4, transform=fig.transFigure, figure=fig))
     ax = fig.add_axes([0.06, 0.2, 0.55, 0.58], facecolor=BG)
     items = list(metrics.values())
     xs = range(len(items))
     width = 0.34
-    ax.bar([x - width / 2 for x in xs], [i["last_round_usd"] / 1e12 for i in items], width, color="#3a4458", label="Last round")
+    ax.bar([x - width / 2 for x in xs], [i["last_round_usd"] / 1e12 for i in items], width, color="#d9d2c2", label="Last round")
     ax.bar([x + width / 2 for x in xs], [i["valuation_usd"] / 1e12 for i in items], width,
            color=[COLORS.get(i["symbol"], "#7aa2ff") for i in items], label="Implied now")
     for x, i in zip(xs, items):
@@ -38,7 +42,7 @@ def valuation_card(path, metrics, size=(1200, 630), title="Implied valuation vs 
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     for s in ("left", "bottom"):
-        ax.spines[s].set_color("#2a3345")
+        ax.spines[s].set_color("#b9b09c")
     ax.legend(frameon=False, labelcolor=MUTED, loc="upper left", fontsize=12)
     y = 0.68
     for i in items:
@@ -62,16 +66,16 @@ def weekend_card(path, rows, summary, monday, size=(1200, 675)):
     n = len(rows)
     xs = list(range(n))
     bw = 0.38
-    ax.bar([x - bw / 2 for x in xs], [r["predicted"] * 100 for r in rows], bw, color="#7aa2ff", label="Predicted (24/7 perp)")
-    ax.bar([x + bw / 2 for x in xs], [r["actual"] * 100 for r in rows], bw, color="#d98b5f", label="Actual open")
-    ax.axhline(0, color="#2a3345", lw=1)
+    ax.bar([x - bw / 2 for x in xs], [r["predicted"] * 100 for r in rows], bw, color="#205378", label="Predicted (24/7 perp)")
+    ax.bar([x + bw / 2 for x in xs], [r["actual"] * 100 for r in rows], bw, color="#b4552d", label="Actual open")
+    ax.axhline(0, color="#b9b09c", lw=1)
     ax.set_xticks(xs, [r["symbol"].split(":")[1] for r in rows], color=FG, fontsize=14)
     ax.tick_params(axis="y", colors=MUTED, labelsize=11)
     ax.set_ylabel("%", color=MUTED)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     for s in ("left", "bottom"):
-        ax.spines[s].set_color("#2a3345")
+        ax.spines[s].set_color("#b9b09c")
     ax.legend(frameon=False, labelcolor=MUTED, fontsize=12, loc="best")
     hr = summary.get("hit_rate")
     fig.text(0.05, 0.06, f"Direction hit rate this weekend: {summary['hits']}/{summary['n_scored']}"
