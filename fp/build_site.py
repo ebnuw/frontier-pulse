@@ -214,12 +214,17 @@ def news_html(payload):
     return f'<ol class="headlines">{"".join(rows)}</ol>'
 
 
+def month_day(iso):
+    return datetime.strptime(iso, "%Y-%m-%d").strftime("%b %-d")
+
+
 def funding_bars(weeks, color, w=420, h=130):
     """Weekly funding APR as bars; zero line, labels on every bar."""
     vals = [wk["apr"] * 100 for wk in weeks]
     top = max(max(vals), 5)
     bot = min(min(vals), 0)
-    pad_t, pad_b = 18, 22
+    pad_t = 18
+    pad_b = 36 if bot < 0 else 22  # room for a value label under negative bars
     span = (top - bot) or 1
     y0 = pad_t + top / span * (h - pad_t - pad_b)
     bw = w / len(vals)
@@ -250,12 +255,12 @@ def funding_html(payload, vcfg):
 <h3>{E(name)} <span class="tick">{E(sym)}</span></h3>
 <dl class="fstats">
 <div><dt>Longs paid</dt><dd class="num">{s['pos_share'] * 100:.0f}%<small> of hours</small></dd></div>
-<div><dt>Since {E(s['since'])}</dt><dd class="num">{fmt_pct(s['apr_all'])}<small> APR</small></dd></div>
+<div><dt>Since {E(month_day(s['since']))}</dt><dd class="num">{fmt_pct(s['apr_all'])}<small> APR</small></dd></div>
 <div><dt>Last 7 days</dt><dd class="num">{fmt_pct(s['apr_7d'])}<small> APR</small></dd></div>
 </dl>
 {funding_bars(s['weeks'], colors.get(sym, '#191610'))}
 </div>""")
-    return "".join(blocks) + ('<p class="legend">Bars: average funding APR per week since listing '
+    return '<div class="fgrid">' + "".join(blocks) + '</div>' + ('<p class="legend">Bars: average funding APR per week since listing '
                               '(W1 = first 7 days). * = week still in progress. '
                               'Positive = longs pay shorts.</p>')
 

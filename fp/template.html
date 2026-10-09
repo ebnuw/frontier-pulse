@@ -98,7 +98,8 @@ header .rule{border:0;border-top:1px solid var(--ink);margin:2px 0 0}
 .fstats dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 .fstats dd{margin:0;font-family:var(--mono);font-size:1.15rem;font-weight:600}
 .fstats dd small{font-size:.7rem;font-weight:500;color:var(--muted)}
-.fbars{width:100%;height:auto;display:block;max-width:560px}
+.fbars{width:100%;height:auto;display:block}
+@media(min-width:760px){.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}}
 .fbars .zero{stroke:var(--ink);stroke-width:1}
 .fbars .bv{font-family:var(--mono);font-size:11px;fill:var(--ink);text-anchor:middle}
 .fbars .bl{font-family:var(--mono);font-size:10px;fill:var(--muted);text-anchor:middle}
