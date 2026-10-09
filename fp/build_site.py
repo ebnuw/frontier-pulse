@@ -204,9 +204,10 @@ def news_html(payload):
     for it in items[:6]:
         age_h = (now - it["ts"]) / 3600
         when = f"{int(age_h)}h ago" if age_h < 24 else f"{int(age_h / 24)}d ago"
+        tag = f" · {E(it['name'])}" if it["name"].lower() not in it["source"].lower() else ""
         rows.append(
             f'<li><a href="{E(it["url"])}" rel="noopener">{E(it["title"])}</a>'
-            f'<span class="meta">{E(it["source"])} · {when} · {E(it["name"])}</span></li>')
+            f'<span class="meta">{E(it["source"])} · {when}{tag}</span></li>')
     return f'<ol class="headlines">{"".join(rows)}</ol>'
 
 
