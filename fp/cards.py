@@ -22,9 +22,9 @@ def _fig(w, h):
 def valuation_card(path, metrics, size=(1200, 630), title="Implied valuation vs last funding round", footer="frontierpulse · unofficial · data: Hyperliquid / Entropy"):
     w, h = size
     fig = _fig(w, h)
-    fig.text(0.05, 0.92, title, color=FG, fontsize=30, fontweight="bold", va="center")
-    fig.text(0.05, 0.855, "Entropy pre-IPO perps · live, 24/7", color=MUTED, fontsize=16, va="center", style="italic")
-    fig.lines.append(plt.Line2D([0.05, 0.95], [0.905, 0.905], color=FG, lw=1.4, transform=fig.transFigure, figure=fig))
+    fig.text(0.05, 0.94, title, color=FG, fontsize=30, fontweight="bold", va="center")
+    fig.text(0.05, 0.825, "Entropy pre-IPO perps · live, 24/7", color=MUTED, fontsize=16, va="center", style="italic")
+    fig.lines.append(plt.Line2D([0.05, 0.95], [0.882, 0.882], color=FG, lw=1.4, transform=fig.transFigure, figure=fig))
     ax = fig.add_axes([0.06, 0.2, 0.55, 0.58], facecolor=BG)
     items = list(metrics.values())
     xs = range(len(items))
