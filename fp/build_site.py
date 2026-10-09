@@ -71,7 +71,8 @@ def spark_svg(vals, w=160, h=36):
     lo, hi = min(vals), max(vals)
     rng = (hi - lo) or 1
     pts = " ".join(f"{i * w / (len(vals) - 1):.1f},{h - 2 - (v - lo) / rng * (h - 4):.1f}" for i, v in enumerate(vals))
-    cls = "up" if vals[-1] >= vals[0] else "down"
+    ch = (vals[-1] - vals[0]) / vals[0] if vals[0] else 0
+    cls = "flat" if round(ch * 100, 1) == 0 else ("up" if ch > 0 else "down")
     return (f'<svg class="spark {cls}" viewBox="0 0 {w} {h}" preserveAspectRatio="none" aria-hidden="true">'
             f'<polyline points="{pts}" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>')
 
@@ -85,7 +86,9 @@ def month_year(iso):
 
 
 def updown(v):
-    return "up" if (v or 0) >= 0 else "down"
+    if v is None or round(v * 100, 1) == 0:
+        return "flat"
+    return "up" if v > 0 else "down"
 
 
 def minicards_html(rows):
@@ -189,7 +192,7 @@ def weekend_html(rep):
     return f"""<p class="wk-sum">{summary}</p>
 {stats}
 <h3>Latest: Fri {w['friday']} → Mon {w['monday']}</h3>
-<div class="scroll"><table><thead><tr><th>Symbol</th><th>{T('predicted')}</th><th>{T('actual')}</th><th>Direction</th><th>{T('abs_err')} (pp)</th><th>{T('captured')}</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
+<div class="scroll"><table class="wk-latest"><thead><tr><th>Symbol</th><th>{T('predicted')}</th><th>{T('actual')}</th><th>Direction</th><th>{T('abs_err')} (pp)</th><th>{T('captured')}</th></tr></thead><tbody>{''.join(rows)}</tbody></table></div>
 <h3>All-time by symbol</h3>
 <div class="scroll"><table><thead><tr><th>Symbol</th><th>Weekends</th><th>Hit rate</th><th>Mean abs err (pp)</th></tr></thead><tbody>{sym}</tbody></table></div>"""
 

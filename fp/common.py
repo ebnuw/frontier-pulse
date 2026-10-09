@@ -132,7 +132,10 @@ def fmt_usd(v, digits=2):
 def fmt_pct(v, digits=1, sign=True):
     if v is None:
         return "—"
-    return f"{v * 100:+.{digits}f}%" if sign else f"{v * 100:.{digits}f}%"
+    x = round(v * 100, digits)
+    if x == 0:
+        x = 0.0  # avoid "-0.0%" from tiny negatives
+    return f"{x:+.{digits}f}%" if sign else f"{x:.{digits}f}%"
 
 
 def now_utc():
