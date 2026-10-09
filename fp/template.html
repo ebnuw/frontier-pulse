@@ -22,7 +22,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
 <style>
 :root{
-  --paper:#faf7f1;--paper2:#f3eee3;--ink:#191610;--muted:#6f675a;
+  --paper:#faf7f1;--paper2:#f3eee3;--ink:#191610;--muted:#5d5648;
   --line:#d9d2c2;--line2:#b9b09c;--hair:#c8c0ac;
   --up:#1c7a4e;--down:#b02e2e;--anth:#b4552d;--oai:#1f6f5c;--link:#205378;
   --serif:"Newsreader",Georgia,"Times New Roman",serif;
@@ -169,9 +169,11 @@ td b{font-weight:600}
 .key .pred,.key .act{font-weight:600}
 
 /* how it works: editorial numbered text, no tiles */
-.steps{list-style:none;margin:0 0 36px;padding:0;counter-reset:step}
-.steps li{counter-increment:step;display:grid;grid-template-columns:44px 1fr;gap:0 8px;padding:10px 0;border-bottom:1px solid var(--line);font-size:1.02rem}
-.steps li::before{content:counter(step,decimal-leading-zero);font-family:var(--mono);font-size:.85rem;font-weight:600;color:var(--muted);grid-column:1;padding-top:3px}
+.steps{list-style:none;margin:0 0 36px;padding:0;counter-reset:step;border-top:2px solid var(--ink)}
+.steps li{counter-increment:step;display:grid;grid-template-columns:52px 1fr;gap:0 10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:1.02rem}
+.steps li::before{content:counter(step,decimal-leading-zero);font-family:var(--mono);font-size:.85rem;font-weight:600;color:var(--muted);padding-top:5px}
+.steps .stxt{min-width:0}
+.steps .stxt .term{padding:8px 0;margin:-8px 0}
 .steps .n{display:none}
 details.gloss{border-bottom:1px solid var(--line);margin-bottom:0}
 details.gloss summary{cursor:pointer;min-height:46px;display:flex;align-items:center;padding:0 2px;font-weight:550;list-style:none}
@@ -187,6 +189,17 @@ footer{margin:48px 0 0;color:var(--muted);font-size:.8rem;border-top:2px solid v
 footer p{margin:0 0 8px;max-width:none}
 code{font-size:.9em;font-family:var(--mono)}
 @media(min-width:760px){h1{font-size:2.6rem}.big{font-size:3.1rem}}
+@media(max-width:520px){
+  body{font-size:16px}
+  h1{font-size:1.65rem}
+  h2{font-size:1.25rem}
+  .big{font-size:2.3rem}
+  .plain p{font-size:1.02rem}
+  .headlines a{font-size:.98rem}
+  .steps li{grid-template-columns:38px 1fr;gap:0 8px}
+  .minis{grid-template-columns:1fr 1fr}
+  section{padding-top:32px}
+}
 </style>
 </head>
 <body>
@@ -254,9 +267,9 @@ __WEEKEND__
 <section id="glossary">
 <h2>How it works</h2>
 <ol class="steps">
-<li><span class="n">1 · List</span>{{t:entropy}} lists {{t:perp|perps}} on {{t:hyperliquid}} through {{t:hip3}}.</li>
-<li><span class="n">2 · Read</span>We read the public API every 30 minutes. No accounts, no private data.</li>
-<li><span class="n">3 · Convert</span>We turn price into valuation, and compare weekend vs Monday-open prices.</li>
+<li><span class="n">1 · List</span><div class="stxt">{{t:entropy}} lists {{t:perp|perps}} on {{t:hyperliquid}} through {{t:hip3}}.</div></li>
+<li><span class="n">2 · Read</span><div class="stxt">We read the public API every 30 minutes. No accounts, no private data.</div></li>
+<li><span class="n">3 · Convert</span><div class="stxt">We turn price into valuation, and compare weekend vs Monday-open prices.</div></li>
 </ol>
 <h2>How to read this</h2>
 <p class="sec-note">Short definitions for every underlined term on this page.</p>
