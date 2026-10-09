@@ -3,7 +3,7 @@
 # Usage: ./publish.sh [--dry-run]   (dry run builds + scans, never pushes)
 set -euo pipefail
 cd "$(dirname "$0")"
-REMOTE="git@github-frontierpulse:0xmago77/frontier-pulse.git"
+REMOTE="git@github-fp-ebnuw:ebnuw/frontier-pulse.git"
 DRY=0
 [ "${1:-}" = "--dry-run" ] && DRY=1
 
