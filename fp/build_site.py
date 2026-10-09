@@ -238,6 +238,10 @@ def build():
     built_by = (f' · Built by the community, <a href="https://x.com/{E(handle.lstrip("@"))}" rel="noopener">{E(handle)}</a>'
                 if handle and handle != "@YOUR_HANDLE" else "")
     site_url = cfg.get("site_url", "")
+    SITE.mkdir(exist_ok=True)
+    fav = ROOT / "fp" / "assets" / "favicon.svg"
+    if fav.exists():
+        shutil.copy(fav, SITE / "favicon.svg")
     anth, oai = metrics.get("io:ANTH"), metrics.get("io:OAI")
     desc = (f"Anthropic implied {fmt_usd(anth['valuation_usd'])} ({anth['multiple']:.2f}× last round), OpenAI implied "
             f"{fmt_usd(oai['valuation_usd'])} ({oai['multiple']:.2f}×) — from Entropy's 24/7 pre-IPO perps.") if anth and oai else cfg["tagline"]
@@ -250,6 +254,7 @@ def build():
         "__TITLE__": E(f"{cfg['site_name']} — {cfg['tagline']}"),
         "__DESC__": E(desc),
         "__OG__": E((site_url.rstrip("/") + "/" if site_url else "") + "og.png"),
+        "__CANONICAL__": E(site_url),
         "__SITE_NAME__": E(cfg["site_name"]),
         "__TAGLINE__": E(cfg["tagline"]),
         "__SUMMARY__": plain_summary(metrics),
