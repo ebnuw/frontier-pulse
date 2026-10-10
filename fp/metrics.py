@@ -28,6 +28,7 @@ def pre_ipo_metrics(snap=None, today=None):
             "source_url": a["source_url"],
             "multiple": val / last_round,
             "premium": val / last_round - 1,
+            "prev_multiple": implied_valuation_usd(m["prev"], vcfg["usd_per_price_point"]) / last_round if m["prev"] else None,
             "change_24h": pct_change(mark, m["prev"]),
             "funding_hourly": m["funding"],
             "funding_apr": funding_apr_24h(sym, m["funding"]),

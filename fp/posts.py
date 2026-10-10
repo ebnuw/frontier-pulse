@@ -52,10 +52,21 @@ def write(kind, text, make_card):
 
 
 def daily():
-    metrics = pre_ipo_metrics()
-    text = daily_text(metrics, site_cfg()["entropy_handle"])
-    return write("daily", text, lambda p: cards.valuation_card(
+    from .collector import last_snapshot
+    from .findings import compose, today_finding
+    snap = last_snapshot()
+    metrics = pre_ipo_metrics(snap)
+    handle = site_cfg()["entropy_handle"]
+    f = today_finding(metrics, snap)
+    text = compose(f, metrics, handle) if f else daily_text(metrics, handle)
+    if len(text) > MAX_LEN:
+        text = daily_text(metrics, handle)
+    md, png = write("daily", text, lambda p: cards.valuation_card(
         p, metrics, size=(1200, 675), title="What the market says they're worth"))
+    if f:
+        with md.open("a") as fh:
+            fh.write(f"type: {f['type']}\nid: {f['id']}\n")
+    return md, png
 
 
 def weekend():
