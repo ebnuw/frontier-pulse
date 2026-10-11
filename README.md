@@ -1,3 +1,5 @@
+<img src="docs/banner.svg" alt="Frontier Pulse" width="100%">
+
 # Frontier Pulse
 
 Free, public analytics site and X-post generator for [Entropy](https://entropy.io), a Hyperliquid HIP-3 perp deployer (dex `io`) that lists US equities 24/7 and **pre-IPO perps** (`io:ANTH` Anthropic, `io:OAI` OpenAI).
