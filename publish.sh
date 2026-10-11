@@ -3,7 +3,7 @@
 # Usage: ./publish.sh [--dry-run]   (dry run builds + scans, never pushes)
 set -euo pipefail
 cd "$(dirname "$0")"
-REMOTE="git@github-fp-ebnuw:ebnuw/frontier-pulse.git"
+REMOTE="git@github-fp-itsolaph:itsolaph/frontier-pulse.git"
 DRY=0
 [ "${1:-}" = "--dry-run" ] && DRY=1
 
@@ -33,7 +33,7 @@ cp -R site/. "$TMP/"
   git init -q
   git checkout -q -b gh-pages
   git add -A
-  git -c user.name="olaph" -c user.email="80240086+ebnuw@users.noreply.github.com" commit -q -m "Publish $(date -u +%Y-%m-%dT%H:%MZ)"
+  git -c user.name="olaph" -c user.email="80240086+itsolaph@users.noreply.github.com" commit -q -m "Publish $(date -u +%Y-%m-%dT%H:%MZ)"
   git push -f "$REMOTE" gh-pages
 )
 echo "published"
