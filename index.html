@@ -1,0 +1,603 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Frontier Pulse — What the market says Anthropic and OpenAI are worth — live, 24/7</title>
+<meta name="description" content="Anthropic implied $1.89T (1.96× last round), OpenAI implied $1.49T (1.74×) — from Entropy&#x27;s 24/7 pre-IPO perps.">
+<meta name="theme-color" content="#faf7f1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Frontier Pulse — What the market says Anthropic and OpenAI are worth — live, 24/7">
+<meta property="og:description" content="Anthropic implied $1.89T (1.96× last round), OpenAI implied $1.49T (1.74×) — from Entropy&#x27;s 24/7 pre-IPO perps.">
+<meta property="og:image" content="https://itsolaph.github.io/frontier-pulse/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Frontier Pulse — What the market says Anthropic and OpenAI are worth — live, 24/7">
+<meta name="twitter:description" content="Anthropic implied $1.89T (1.96× last round), OpenAI implied $1.49T (1.74×) — from Entropy&#x27;s 24/7 pre-IPO perps.">
+<meta name="twitter:image" content="https://itsolaph.github.io/frontier-pulse/og.png">
+<link rel="canonical" href="https://itsolaph.github.io/frontier-pulse/">
+<meta property="og:url" content="https://itsolaph.github.io/frontier-pulse/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#faf7f1;--paper2:#f3eee3;--ink:#191610;--muted:#5d5648;
+  --line:#d9d2c2;--line2:#b9b09c;--hair:#c8c0ac;
+  --up:#1c7a4e;--down:#b02e2e;--anth:#b4552d;--oai:#1f6f5c;--link:#205378;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --mono:"IBM Plex Mono","SFMono-Regular",Consolas,monospace;
+  --r:2px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+body{margin:0;background:var(--paper);color:var(--ink);font:400 17px/1.55 var(--serif)}
+.num{font-family:var(--mono);font-size:.92em;font-variant-numeric:tabular-nums}
+main{max-width:1000px;margin:0 auto;padding:0 20px 48px}
+a{color:var(--link)}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:2px}
+h1{font-family:var(--serif);font-size:2rem;line-height:1.12;font-weight:600;letter-spacing:-.015em;margin:14px 0 14px}
+h2{font-family:var(--serif);font-size:1.45rem;font-weight:600;letter-spacing:-.01em;margin:0 0 10px;line-height:1.2}
+h3{font-family:var(--serif);font-size:1.1rem;font-weight:600;margin:20px 0 8px}
+section{padding-top:44px;scroll-margin-top:64px}
+small{color:var(--muted);font-size:.8rem}
+.up{color:var(--up)}.down{color:var(--down)}.flat{color:var(--muted)}
+.sec-note{color:var(--muted);font-size:1rem;font-style:italic;margin:0 0 20px;max-width:68ch}
+
+/* masthead */
+header{padding-top:26px}
+.brand{display:flex;justify-content:space-between;align-items:baseline;gap:12px;border-bottom:1px solid var(--ink);padding-bottom:8px}
+.brand>span:first-child{font-family:var(--mono);font-size:.78rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--ink);white-space:nowrap}
+.upd{text-align:right;line-height:1.35;font-family:var(--mono);font-size:.72rem;color:var(--muted)}
+.upd time{display:block;color:var(--ink);font-size:.78rem}
+.upd .abs{display:block;white-space:nowrap}
+header .rule{border:0;border-top:1px solid var(--ink);margin:2px 0 0}
+.plain{border-top:3px solid var(--ink);border-bottom:1px solid var(--line2);padding:14px 2px 16px;margin-top:18px}
+.plain .eyebrow{margin-bottom:6px}
+.plain p{margin:0;font-size:1.12rem;line-height:1.6}
+.plain b{font-weight:650}
+.eyebrow{font-family:var(--mono);font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow .term{font-size:inherit;font-weight:inherit;letter-spacing:inherit;text-transform:inherit}
+
+/* section nav: newspaper section bar */
+.snav{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line2);margin:26px -20px 0;padding:0 20px}
+.snav::after{content:"";position:absolute;right:0;top:1px;bottom:1px;width:36px;background:linear-gradient(90deg,transparent,var(--paper));pointer-events:none}
+.snav ul{list-style:none;margin:0 auto;padding:0;max-width:1000px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+.snav ul::-webkit-scrollbar{display:none}
+.snav a{display:flex;align-items:center;min-height:46px;padding:0 14px;color:var(--muted);text-decoration:none;font-family:var(--mono);font-size:.76rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;border-bottom:2px solid transparent}
+.snav a:hover{color:var(--ink)}
+.snav a.on{color:var(--ink);border-bottom-color:var(--ink)}
+
+/* term + popover */
+.term{all:unset;box-sizing:border-box;cursor:help;display:inline;color:inherit;text-decoration:underline dotted var(--line2);text-underline-offset:3px;text-decoration-thickness:1px;padding:8px 0;margin:-8px 0}
+.term:focus-visible{outline:2px solid var(--link);outline-offset:2px;border-radius:2px}
+.term[aria-expanded=true]{text-decoration-color:var(--link);text-decoration-style:solid}
+#tip{position:fixed;z-index:50;max-width:min(320px,calc(100vw - 24px));background:var(--paper2);border:1px solid var(--line2);border-radius:var(--r);padding:12px;font-size:.92rem;line-height:1.5;color:var(--ink);box-shadow:3px 3px 0 rgba(25,22,16,.08);font-family:var(--serif);font-weight:400;letter-spacing:0;text-transform:none}
+#tip[hidden]{display:none}
+#tip b{display:block;margin-bottom:4px;font-family:var(--mono);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+#tip a{display:inline-block;margin-top:8px;font-family:var(--mono);font-size:.78rem}
+
+/* headlines: newspaper front-column */
+.headlines{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.headlines li{padding:12px 2px 12px 0;border-bottom:1px solid var(--line);break-inside:avoid}
+.headlines li::before{counter-increment:none}
+.headlines a{color:var(--ink);text-decoration:none;font-size:1.06rem;line-height:1.4;display:block}
+.headlines a:hover{text-decoration:underline;text-underline-offset:3px}
+.headlines a:visited{color:var(--ink)}
+.headlines .meta{display:block;margin-top:3px;font-family:var(--mono);font-size:.7rem;color:var(--muted);letter-spacing:.02em}
+@media(min-width:760px){.headlines{column-count:2;column-gap:32px;column-rule:1px solid var(--line)}.headlines li{border-bottom:1px solid var(--line)}}
+
+/* funding: stat row + weekly bars */
+.fblock{border-top:2px solid var(--ink);padding:14px 0 18px;margin-bottom:8px}
+.fblock h3{margin:0 0 10px;display:flex;align-items:baseline;gap:10px}
+.fblock .tick{font-family:var(--mono);font-size:.72rem;font-weight:500;color:var(--muted);letter-spacing:.04em}
+.fstats{display:grid;grid-template-columns:repeat(3,1fr);margin:0 0 14px;border-bottom:1px solid var(--line)}
+.fstats div{padding:0 12px 10px 0}
+.fstats div+div{border-left:1px solid var(--line);padding-left:12px}
+.fstats dt{font-family:var(--mono);font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.fstats dd{margin:0;font-family:var(--mono);font-size:1.15rem;font-weight:600}
+.fstats dd small{font-size:.7rem;font-weight:500;color:var(--muted)}
+.fbars{width:100%;height:auto;display:block}
+@media(min-width:760px){.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:0 32px}}
+.fbars .zero{stroke:var(--ink);stroke-width:1}
+.fbars .bv{font-family:var(--mono);font-size:11px;fill:var(--ink);text-anchor:middle}
+.fbars .bl{font-family:var(--mono);font-size:10px;fill:var(--muted);text-anchor:middle}
+
+/* valuation cards: ruled broadsheet panels */
+.cards{display:grid;gap:0;grid-template-columns:1fr;border-top:2px solid var(--ink)}
+@media(min-width:760px){.cards{grid-template-columns:1fr 1fr;border-top-width:3px}.card+.card{border-left:1px solid var(--line2)}}
+.card{border-bottom:1px solid var(--line2);--c:var(--ink);min-width:0;padding:18px 20px 14px}
+.card+.card{border-top:1px solid var(--line2)}
+@media(min-width:760px){.card+.card{border-top:0}}
+.card.anth{--c:var(--anth)}.card.oai{--c:var(--oai)}
+.ch{display:flex;align-items:baseline;gap:10px;margin-bottom:10px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.ch h3{margin:0;font-size:1.2rem;font-weight:650;color:var(--c)}
+.tick{color:var(--muted);font-family:var(--mono);font-size:.74rem}
+.big{font-family:var(--serif);font-size:2.7rem;line-height:1.02;font-weight:600;letter-spacing:-.02em;margin:4px 0 14px}
+.mult-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-size:.92rem;margin-bottom:8px}
+.mult-top b{font-family:var(--mono);font-size:1.02rem;font-weight:600}
+.track{position:relative;height:8px;background:var(--paper2);border:1px solid var(--line2)}
+.fill{height:100%;background:var(--c)}
+.tmark{position:absolute;top:-4px;bottom:-4px;width:2px;background:var(--ink);transform:translateX(-1px)}
+.track-lbl{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:7px}
+.stats-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;margin:14px 0 0;font-family:var(--mono);font-size:.82rem;border-top:1px solid var(--line)}
+.stats-grid dt,.stats-grid dd{margin:0;padding:7px 0;border-bottom:1px solid var(--line);display:flex;align-items:center}
+.stats-grid dt{color:var(--muted);font-size:.74rem;letter-spacing:.04em;text-transform:uppercase}
+.stats-grid dd{justify-content:flex-end;text-align:right;gap:4px;flex-wrap:wrap;padding-left:12px}
+.stats-grid dd small{display:inline;font-size:.72rem}
+.src{font-size:.78rem;color:var(--muted);margin:12px 0 0;font-style:italic}
+.src a{padding:10px 0}
+
+/* charts */
+.chart-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.seg{display:inline-flex;border:1px solid var(--line2)}
+.seg button{all:unset;box-sizing:border-box;cursor:pointer;min-width:56px;min-height:44px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.8rem;font-weight:500;color:var(--muted);padding:0 14px}
+.seg button+button{border-left:1px solid var(--line2)}
+.seg button[aria-pressed=true]{background:var(--paper2);color:var(--ink)}
+.seg button:focus-visible{outline:2px solid var(--link);outline-offset:-2px}
+.chartbox{border-top:1px solid var(--line2);padding:14px 2px;margin-bottom:20px}
+.chartbox .cap{font-family:var(--mono);font-size:.74rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin:0 0 10px;color:var(--ink)}
+.chartbox .cv{position:relative;height:260px}
+.nochart{color:var(--muted);font-size:.9rem;padding:40px 0;text-align:center}
+
+/* tables */
+.scroll{overflow-x:auto;border-bottom:1px solid var(--line2);
+  /* scroll shadows: an edge darkens only while more columns hide behind it */
+  background:linear-gradient(90deg,var(--paper) 30%,rgba(250,247,241,0)) left/28px 100% no-repeat local,
+             linear-gradient(270deg,var(--paper) 30%,rgba(250,247,241,0)) right/28px 100% no-repeat local,
+             linear-gradient(90deg,rgba(25,22,16,.14),rgba(25,22,16,0)) left/12px 100% no-repeat scroll,
+             linear-gradient(270deg,rgba(25,22,16,.14),rgba(25,22,16,0)) right/12px 100% no-repeat scroll}
+table{border-collapse:collapse;width:100%;font-family:var(--mono);font-size:.84rem;white-space:nowrap}
+th,td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:1px solid var(--line2)}
+th:first-child,td:first-child{text-align:left}
+th{color:var(--muted);font-weight:500;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--ink)}
+td small{display:block}
+td b{font-weight:600}
+
+/* equity minis: open ledger rows, not cards */
+.minis{display:grid;gap:0;grid-template-columns:1fr 1fr;margin:0 0 20px;border-top:1px solid var(--ink)}
+@media(min-width:760px){.minis{grid-template-columns:repeat(4,1fr)}}
+.mini{border-bottom:1px solid var(--line);min-width:0;padding:12px 14px 10px}
+.mini:nth-child(even){border-left:1px solid var(--line)}
+@media(min-width:760px){.mini+.mini{border-left:1px solid var(--line)}}
+.mh{display:flex;align-items:baseline;gap:8px;white-space:nowrap;overflow:hidden}
+.mh b{font-family:var(--mono);font-weight:600;font-size:.95rem}.mh small{overflow:hidden;text-overflow:ellipsis;flex:1;min-width:0}
+.sess-line{display:flex;align-items:flex-start;gap:6px;font-family:var(--mono);font-size:.68rem;color:var(--muted);line-height:1.3;margin:4px 0}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--line2);flex:none;margin-top:4px}
+.dot.on{background:var(--up)}
+.mp{font-family:var(--mono);font-size:1.05rem;font-weight:600;margin:4px 0}.mp span{font-size:.82rem;font-weight:500}
+.spark{width:100%;height:36px;display:block;margin:4px 0}
+.spark.up{color:var(--up)}.spark.down{color:var(--down)}.spark.flat{color:var(--muted)}
+.mf{display:flex;flex-direction:column;font-family:var(--mono);font-size:.72rem;color:var(--muted);line-height:1.55}
+.mf .term{padding:4px 0;margin:-4px 0}
+.legend{font-size:.85rem;color:var(--muted);font-style:italic;margin:0 0 12px}
+
+/* weekend */
+.wk-sum{font-size:1.15rem;line-height:1.5;margin:0 0 18px;max-width:62ch}
+.wk-sum b{font-weight:650}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:0 0 14px;border-top:2px solid var(--ink)}
+.stats>div{border-bottom:1px solid var(--line2);padding:12px 14px}
+.stats>div+div{border-left:1px solid var(--line)}
+@media(max-width:520px){.stats{grid-template-columns:1fr}.stats>div+div{border-left:0}th,td{padding:10px 8px}}
+.stats b{display:block;font-family:var(--serif);font-size:1.6rem;font-weight:600;letter-spacing:-.02em}
+.stats small{display:block;line-height:1.35;font-family:var(--mono);font-size:.7rem;margin-top:2px}
+.pred{color:var(--link)}.act{color:var(--anth)}
+.badge{display:inline-block;padding:1px 8px;font-family:var(--mono);font-size:.74rem;font-weight:600;border:1px solid var(--line2);border-radius:2px}
+.badge.ok{color:var(--up);border-color:var(--up)}
+.badge.bad{color:var(--down);border-color:var(--down)}
+.badge.flat{color:var(--muted)}
+.key{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:.78rem;color:var(--muted);margin:8px 0 0}
+.key .pred,.key .act{font-weight:600}
+
+/* how it works: editorial numbered text, no tiles */
+.steps{list-style:none;margin:0 0 36px;padding:0;counter-reset:step;border-top:2px solid var(--ink)}
+.steps li{counter-increment:step;display:grid;grid-template-columns:52px 1fr;gap:0 10px;padding:12px 0;border-bottom:1px solid var(--line);font-size:1.02rem}
+.steps li::before{content:counter(step,decimal-leading-zero);font-family:var(--mono);font-size:.85rem;font-weight:600;color:var(--muted);padding-top:5px}
+.steps .stxt{min-width:0}
+.steps .stxt .term{padding:8px 0;margin:-8px 0}
+.steps .n{display:none}
+details.gloss{border-bottom:1px solid var(--line);margin-bottom:0}
+details.gloss summary{cursor:pointer;min-height:46px;display:flex;align-items:center;padding:0 2px;font-weight:550;list-style:none}
+details.gloss summary::-webkit-details-marker{display:none}
+details.gloss summary::after{content:"+";margin-left:auto;color:var(--muted);font-family:var(--mono);font-size:1.1rem}
+details.gloss[open] summary::after{content:"–"}
+details.gloss dl{margin:0;padding:0 2px 14px}
+details.gloss dt{font-weight:600;font-size:.95rem;margin-top:4px}
+details.gloss dd{margin:2px 0 0;color:var(--muted);font-size:.95rem;max-width:68ch}
+
+.cta{margin:36px 0 0}.cta a{display:inline-flex;align-items:center;min-height:44px;background:var(--ink);color:var(--paper);font-family:var(--mono);font-weight:600;font-size:.85rem;letter-spacing:.04em;padding:0 20px;border-radius:2px;text-decoration:none}
+footer{margin:48px 0 0;color:var(--muted);font-size:.8rem;border-top:2px solid var(--ink);padding-top:14px}
+footer p{margin:0 0 8px;max-width:none}
+code{font-size:.9em;font-family:var(--mono)}
+@media(min-width:760px){h1{font-size:2.6rem}.big{font-size:3.1rem}}
+@media(max-width:520px){
+  body{font-size:16px}
+  h1{font-size:1.65rem}
+  h2{font-size:1.25rem}
+  .big{font-size:2.3rem}
+  .plain p{font-size:1.02rem}
+  .headlines a{font-size:.98rem}
+  .steps li{grid-template-columns:38px 1fr;gap:0 8px}
+  .minis{grid-template-columns:1fr 1fr}
+  section{padding-top:32px}
+  .brand{flex-direction:column;gap:2px;align-items:flex-start}
+  .upd{text-align:left}
+  .upd .abs{white-space:normal}
+  .snav a{padding:0 10px;letter-spacing:.05em}
+  table{font-size:.78rem}
+  th,td{padding:9px 7px}
+  th{font-size:.64rem;letter-spacing:.05em}
+  .wk-latest th:nth-child(n+5),.wk-latest td:nth-child(n+5){display:none}
+  .badge{padding:1px 5px}
+  .fstats dd{font-size:.98rem}
+  .fstats div{padding-right:8px}
+  .fstats div+div{padding-left:8px}
+  .fbars .bv{font-size:13px}
+  .fbars .bl{font-size:12px}
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div class="brand"><span>Frontier Pulse</span><span class="upd"><time id="ago" datetime="2026-10-17T16:30:01+00:00">Updated</time><small class="abs">2026-10-17 16:30 UTC · 2026-10-17 23:30 WIB</small></span></div>
+<hr class="rule">
+<h1>What the market says Anthropic and OpenAI are worth — live, 24/7</h1>
+<div class="plain"><div class="eyebrow">In plain English</div>
+<p>Traders on <button type="button" class="term" data-term="entropy" aria-expanded="false">Entropy</button> currently price Anthropic at <b>$1.89T</b> — about <b>2.0×</b> its <button type="button" class="term" data-term="last_round" aria-expanded="false">last funding round</button> valuation ($965B, May 2026). OpenAI: <b>$1.49T</b>, <b>1.7×</b> its last round ($852B, Mar 2026). Anthropic is valued at <b>1.27×</b> OpenAI. These are traders' bets on <button type="button" class="term" data-term="perp" aria-expanded="false">perpetual contracts</button>, not official valuations.</p>
+</div>
+</header>
+
+<nav class="snav" aria-label="Sections"><ul>
+<li><a href="#headlines">Headlines</a></li>
+<li><a href="#valuations">Valuations</a></li>
+<li><a href="#charts">Charts</a></li>
+<li><a href="#funding">Funding</a></li>
+<li><a href="#stocks">Stocks</a></li>
+<li><a href="#weekend">Weekend Gap</a></li>
+<li><a href="#glossary">Glossary</a></li>
+</ul></nav>
+
+<section id="headlines">
+<h2>Today's headlines</h2>
+<p class="sec-note">News about the companies traded on <button type="button" class="term" data-term="entropy" aria-expanded="false">Entropy</button> — what's moving the markets above.</p>
+<ol class="headlines"><li><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxNNzQ0SDI3d0kxMkg3cmhGVlY2azI3RzF3aUs2aWtUWEloT0NoYlhtNlh3cGdDeEwxTjNxekRwT0owUWc0cWVTZTktbzFueG02LXB6VjRBaVdCUlJUYVdEcXhFd2lqOW9tcENHRTU0a3RwUWt6SXdXWU4wdndFbWVuSVBFQUE5MnM1cVFxWDBSLTBhR201Ymt0SjFkZGJVQjZNeHpwUDZMbkY1OGJtamdOZ004SzRPWnB0NXhfSw?oc=5" rel="noopener">Here&#x27;s what we know about the man who allegedly bugged an OpenAI conference room in San Francisco</a><span class="meta">Los Angeles Times · 3h ago · OpenAI</span></li><li><a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxQRW4tSGppV2U0ZWtvaXBsQmlyaDVVLVFCSmJNMWdmMHpod0FWd25kUXRNQzFvZXJPTmhoQUNvMlFrQzI3NjBQVG9McWFPRHdUODhMbVItOGg4S0N3ZmJ4R2psZVd1aWFZM2M0aEY4R3VaYnFZWUxhOFZiRXAxTnc5UG9hMm1ERGpKbURkX3BWYzQ5UWl3THBFTDhWUWR0SVhUSWJsekpMZjM4OUZRQl9BVmY2djVKRENDSldCSUpOWmdvbHVK?oc=5" rel="noopener">Investors temper Anthropic IPO valuation expectations over revenue growth slowdown, sources say</a><span class="meta">Reuters · 6h ago · Anthropic</span></li><li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxOYlk3cFJkWnNMMHloVFZSQ2pIelpHUWxJbndOeWdiUVcxdXBncjcxdmU3cEUtczJBSV82MUc0LTFRdkJ4NmZpZmZUMUdmU1NJc3hMSlRUSU43RW5VN1pjVzJqSm83OWZiakt4TTQ0bHgwR0hYVkJUaTB1QUlnRUxFQzB1YngzOVoxS0pOYkFzUHpHQVFvcHN1SjFVONIBoAFBVV95cUxOSmg3TE42d3BRemlRWXU4al9ZU0p5eEtCeE4yNzNiaE1oTDB5MHZBMDVDNTUxUjl0dzdma2VWcDkyTUNMRnJoNlJobXNLU0t6NUdXbXNkMWdUa2NDUk4xZ2loSjY2TURtTXkxMTNtd3ptU1VUemYyVG93QWt1ZkNvdEp1aDQ4UVY5RDRwUXRSRGZsdmNJalpyeHVBRkxpbW1v?oc=5" rel="noopener">OpenAI CEO Sam Altman&#x27;s home struck by gunfire, days after Molotov cocktail attack: Police - ABC News - Breaking News, Latest News and Videos</a><span class="meta">ABC News - Breaking News, Latest News and Videos · 10h ago · OpenAI</span></li><li><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxOTkU3S24zUXVBZEFrZEhJdEk2UU1OZ29BZHJXS0xyOFBRY2ZRdXdITjIyaVo3X256cXJmVHZUVUY1MGRhTnZZdERoUG5OMEI3UDFFVjFGR1ZTUVEyOTI3VEpyQmFnODgwUXFCQzlNTkQtQmlxTGI5RnhUVGF1cEVocHpzcnJ2VUs0WmhXWmdCY1cxRDljN1JwV21R?oc=5" rel="noopener">1 Obvious Metric That Makes Nvidia a Top Stock to Buy Now</a><span class="meta">Yahoo Finance · 17h ago · Nvidia</span></li><li><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE0ydWVrbHdHeGNraEdTSHQ5eExwZ2lLRUU1U1BoVFJUTWNLenpWTXJOMHNnWnhaa0thQXlRbk1KdEliVVVGUEJXZWwtcWtUZE9Ielo2X05DaHJKSmJpd05rRl9vMWdQQUE4ZnVRRFBLQ3hlcm9FNG12bg?oc=5" rel="noopener">Anthropic quietly pitches its own AI safety bill to lawmakers</a><span class="meta">Politico · 18h ago · Anthropic</span></li><li><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxOUlVYN3JyLXhSRWZheGhuRXJkMHVUZlladnZDUEZha3lzZlJ5cXZyQ2R3aGxDZFlHUXgxc0VSQkJkeThQelUtMzk5R09aWHJmVGtXVm5yeTdsV3NZT0cxMzZVMERLc0R2QmY5MS1VLUJ1dWw2WExxQUNIRXVCWFRjZE1uSks2QlQ1RHZEc3ZHWQ?oc=5" rel="noopener">Replit is no longer working with Anthropic, CEO says</a><span class="meta">TechCrunch · 19h ago · Anthropic</span></li></ol>
+</section>
+
+<section id="valuations">
+<h2>What the market says they're worth</h2>
+<p class="sec-note">Implied from <button type="button" class="term" data-term="entropy" aria-expanded="false">Entropy</button>'s <button type="button" class="term" data-term="preipo_perp" aria-expanded="false">pre-IPO perps</button> on <button type="button" class="term" data-term="hyperliquid" aria-expanded="false">Hyperliquid</button>, which trade 24/7. Tap any underlined term for a plain-English definition.</p>
+<div class="cards">
+<article class="card anth">
+  <div class="ch"><h3>Anthropic</h3><span class="tick">io:ANTH</span></div>
+  <div class="eyebrow"><button type="button" class="term" data-term="implied_valuation" aria-expanded="false">Implied valuation</button></div>
+  <div class="big num">$1.89T</div>
+  <div class="mult">
+    <div class="mult-top"><span><b class="num">1.96×</b> <button type="button" class="term" data-term="multiple" aria-expanded="false">vs last round</button></span>
+      <span class="up num">+95.6% <button type="button" class="term" data-term="premium" aria-expanded="false">Premium</button></span></div>
+    <div class="track" role="img" aria-label="Last round $965B, now $1.89T, 1.96 times">
+      <div class="fill" style="width:92.6%"></div><div class="tmark" style="left:47.3%"></div>
+    </div>
+    <div class="track-lbl num"><span><button type="button" class="term" data-term="last_round" aria-expanded="false">Last round</button> $965B</span><span>Now $1.89T</span></div>
+  </div>
+  <dl class="stats-grid">
+    <dt><button type="button" class="term" data-term="mark" aria-expanded="false">Mark price</button></dt><dd class="num">1,887.40 <small>(oracle 1,885.60)</small></dd>
+    <dt><button type="button" class="term" data-term="change_24h" aria-expanded="false">24h change</button></dt><dd class="num down">-1.8%</dd>
+    <dt><button type="button" class="term" data-term="funding_apr" aria-expanded="false">Funding APR (24h avg)</button></dt><dd class="num">+12.3%<small> · longs pay shorts</small></dd>
+    <dt><button type="button" class="term" data-term="oi" aria-expanded="false">Open interest (OI)</button></dt><dd class="num">$40.31M <small>(81% of $50.00M <button type="button" class="term" data-term="oi_cap" aria-expanded="false">cap</button>)</small></dd>
+    <dt><button type="button" class="term" data-term="volume_24h" aria-expanded="false">24h volume</button></dt><dd class="num">$7.29M</dd>
+    <dt><button type="button" class="term" data-term="lower_bound" aria-expanded="false">Lower bound</button></dt><dd class="num">300 <small>(-84% = $300B)</small></dd>
+    <dt><button type="button" class="term" data-term="upper_bound" aria-expanded="false">Upper bound</button></dt><dd class="num">4,200 <small>(+123% = $4.20T)</small></dd>
+    <dt><button type="button" class="term" data-term="no_ipo" aria-expanded="false">No-IPO resolution</button></dt><dd class="num">2028-08-18 <small>(671 days)</small></dd>
+  </dl>
+  <p class="src">Last round: 2026-05-28 · Series H post-money · <a href="https://www.anthropic.com/news/series-h" rel="noopener">source</a></p>
+</article>
+<article class="card oai">
+  <div class="ch"><h3>OpenAI</h3><span class="tick">io:OAI</span></div>
+  <div class="eyebrow"><button type="button" class="term" data-term="implied_valuation" aria-expanded="false">Implied valuation</button></div>
+  <div class="big num">$1.49T</div>
+  <div class="mult">
+    <div class="mult-top"><span><b class="num">1.74×</b> <button type="button" class="term" data-term="multiple" aria-expanded="false">vs last round</button></span>
+      <span class="up num">+74.5% <button type="button" class="term" data-term="premium" aria-expanded="false">Premium</button></span></div>
+    <div class="track" role="img" aria-label="Last round $852B, now $1.49T, 1.74 times">
+      <div class="fill" style="width:92.6%"></div><div class="tmark" style="left:53.1%"></div>
+    </div>
+    <div class="track-lbl num"><span><button type="button" class="term" data-term="last_round" aria-expanded="false">Last round</button> $852B</span><span>Now $1.49T</span></div>
+  </div>
+  <dl class="stats-grid">
+    <dt><button type="button" class="term" data-term="mark" aria-expanded="false">Mark price</button></dt><dd class="num">1,486.40 <small>(oracle 1,485.30)</small></dd>
+    <dt><button type="button" class="term" data-term="change_24h" aria-expanded="false">24h change</button></dt><dd class="num down">-3.2%</dd>
+    <dt><button type="button" class="term" data-term="funding_apr" aria-expanded="false">Funding APR (24h avg)</button></dt><dd class="num">+7.1%<small> · longs pay shorts</small></dd>
+    <dt><button type="button" class="term" data-term="oi" aria-expanded="false">Open interest (OI)</button></dt><dd class="num">$6.93M <small>(58% of $12.00M <button type="button" class="term" data-term="oi_cap" aria-expanded="false">cap</button>)</small></dd>
+    <dt><button type="button" class="term" data-term="volume_24h" aria-expanded="false">24h volume</button></dt><dd class="num">$3.25M</dd>
+    <dt><button type="button" class="term" data-term="lower_bound" aria-expanded="false">Lower bound</button></dt><dd class="num">200 <small>(-87% = $200B)</small></dd>
+    <dt><button type="button" class="term" data-term="upper_bound" aria-expanded="false">Upper bound</button></dt><dd class="num">3,000 <small>(+102% = $3.00T)</small></dd>
+    <dt><button type="button" class="term" data-term="no_ipo" aria-expanded="false">No-IPO resolution</button></dt><dd class="num">2028-09-02 <small>(686 days)</small></dd>
+  </dl>
+  <p class="src">Last round: 2026-03-31 · $122B round post-money, reaffirmed by a ~$7B employee tender in Aug 2026 · <a href="https://www.cnbc.com/2026/08/10/openai-wraps-7-billion-share-sale-ahead-of-potential-ipo-.html" rel="noopener">source</a></p>
+</article>
+</div>
+</section>
+
+<section id="charts">
+<div class="chart-head"><h2>Implied valuation over time</h2>
+<div class="seg" role="group" aria-label="Chart range"><button type="button" data-range="30" aria-pressed="false">30d</button><button type="button" data-range="0" aria-pressed="true">All</button></div></div>
+<p class="sec-note">Daily closes since launch. Dashed lines mark each company's <button type="button" class="term" data-term="last_round" aria-expanded="false">last-round</button> valuation.</p>
+<div class="chartbox"><p class="cap">Implied valuation</p><div class="cv"><canvas id="valChart" role="img" aria-label="Implied valuation history chart"></canvas></div></div>
+<div class="chartbox"><p class="cap">Anthropic valued at X× OpenAI</p><div class="cv"><canvas id="ratioChart" role="img" aria-label="Anthropic to OpenAI valuation ratio chart"></canvas></div></div>
+</section>
+
+<section id="funding">
+<h2>Funding: who pays whom</h2>
+<p class="sec-note">Every hour, one side of a <button type="button" class="term" data-term="perp" aria-expanded="false">Perpetual (perp)</button> pays the other. When <button type="button" class="term" data-term="funding" aria-expanded="false">funding</button> is positive, longs pay shorts, which usually means more people want to be long than short.</p>
+<div class="fgrid"><div class="fblock">
+<h3>Anthropic <span class="tick">io:ANTH</span></h3>
+<dl class="fstats">
+<div><dt>Longs paid</dt><dd class="num">96%<small> of hours</small></dd></div>
+<div><dt>Since Aug 19</dt><dd class="num">+9.9%<small> APR</small></dd></div>
+<div><dt>Last 7 days</dt><dd class="num">+9.6%<small> APR</small></dd></div>
+</dl>
+<svg class="fbars" viewBox="0 0 420 130" role="img" aria-label="Weekly funding APR"><line x1="0" x2="420" y1="85.8" y2="85.8" class="zero"/><rect x="8.4" y="85.8" width="29.9" height="8.2" fill="#b4552d"/><text x="23.3" y="107.0" class="bv">-3%</text><text x="23.3" y="125" class="bl">W1</text><rect x="55.1" y="85.7" width="29.9" height="1.0" fill="#b4552d"/><text x="70.0" y="80.7" class="bv">0%</text><text x="70.0" y="125" class="bl">W2</text><rect x="101.7" y="78.1" width="29.9" height="7.6" fill="#b4552d"/><text x="116.7" y="73.1" class="bv">2%</text><text x="116.7" y="125" class="bl">W3</text><rect x="148.4" y="18.0" width="29.9" height="67.8" fill="#b4552d"/><text x="163.3" y="13.0" class="bv">22%</text><text x="163.3" y="125" class="bl">W4</text><rect x="195.1" y="31.8" width="29.9" height="54.0" fill="#b4552d"/><text x="210.0" y="26.8" class="bv">17%</text><text x="210.0" y="125" class="bl">W5</text><rect x="241.7" y="38.1" width="29.9" height="47.6" fill="#b4552d"/><text x="256.7" y="33.1" class="bv">15%</text><text x="256.7" y="125" class="bl">W6</text><rect x="288.4" y="40.9" width="29.9" height="44.9" fill="#b4552d"/><text x="303.3" y="35.9" class="bv">14%</text><text x="303.3" y="125" class="bl">W7</text><rect x="335.1" y="51.3" width="29.9" height="34.5" fill="#b4552d"/><text x="350.0" y="46.3" class="bv">11%</text><text x="350.0" y="125" class="bl">W8</text><rect x="381.7" y="55.9" width="29.9" height="29.9" fill="#b4552d" opacity=".45"/><text x="396.7" y="50.9" class="bv">10%</text><text x="396.7" y="125" class="bl">W9*</text></svg>
+</div><div class="fblock">
+<h3>OpenAI <span class="tick">io:OAI</span></h3>
+<dl class="fstats">
+<div><dt>Longs paid</dt><dd class="num">99%<small> of hours</small></dd></div>
+<div><dt>Since Sep 2</dt><dd class="num">+19.8%<small> APR</small></dd></div>
+<div><dt>Last 7 days</dt><dd class="num">+11.3%<small> APR</small></dd></div>
+</dl>
+<svg class="fbars" viewBox="0 0 420 130" role="img" aria-label="Weekly funding APR"><line x1="0" x2="420" y1="108.0" y2="108.0" class="zero"/><rect x="10.8" y="95.0" width="38.4" height="13.0" fill="#1f6f5c"/><text x="30.0" y="90.0" class="bv">6%</text><text x="30.0" y="125" class="bl">W1</text><rect x="70.8" y="18.0" width="38.4" height="90.0" fill="#1f6f5c"/><text x="90.0" y="13.0" class="bv">45%</text><text x="90.0" y="125" class="bl">W2</text><rect x="130.8" y="54.0" width="38.4" height="54.0" fill="#1f6f5c"/><text x="150.0" y="49.0" class="bv">27%</text><text x="150.0" y="125" class="bl">W3</text><rect x="190.8" y="72.3" width="38.4" height="35.7" fill="#1f6f5c"/><text x="210.0" y="67.3" class="bv">18%</text><text x="210.0" y="125" class="bl">W4</text><rect x="250.8" y="84.5" width="38.4" height="23.5" fill="#1f6f5c"/><text x="270.0" y="79.5" class="bv">12%</text><text x="270.0" y="125" class="bl">W5</text><rect x="310.8" y="75.6" width="38.4" height="32.4" fill="#1f6f5c"/><text x="330.0" y="70.6" class="bv">16%</text><text x="330.0" y="125" class="bl">W6</text><rect x="370.8" y="89.4" width="38.4" height="18.6" fill="#1f6f5c" opacity=".45"/><text x="390.0" y="84.4" class="bv">9%</text><text x="390.0" y="125" class="bl">W7*</text></svg>
+</div></div><p class="legend">Bars: average funding APR per week since listing (W1 = first 7 days). * = week still in progress. Positive = longs pay shorts.</p>
+</section>
+
+<section id="stocks">
+<h2>US stocks on Entropy</h2>
+<p class="sec-note">Stock <button type="button" class="term" data-term="perp" aria-expanded="false">perps</button> that trade around the clock, even when the stock exchange is closed. This is called <button type="button" class="term" data-term="discovery" aria-expanded="false">24/7 price discovery</button>.</p>
+<p class="legend">Each line is a <button type="button" class="term" data-term="sparkline" aria-expanded="false">sparkline</button> of the last 7 days.</p>
+<div class="minis">
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>SNDK</b><small>SanDisk</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$1,296.20 <span class="down">-2.7%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,4.2 1.0,4.2 1.9,4.0 2.9,3.9 3.8,4.0 4.8,3.8 5.7,3.7 6.7,3.9 7.6,4.0 8.6,4.0 9.5,3.9 10.5,4.6 11.4,4.5 12.4,4.9 13.3,4.6 14.3,4.8 15.2,4.5 16.2,4.4 17.1,4.4 18.1,3.9 19.0,3.3 20.0,3.3 21.0,3.1 21.9,2.7 22.9,2.1 23.8,2.0 24.8,2.3 25.7,2.3 26.7,2.2 27.6,2.3 28.6,2.7 29.5,2.6 30.5,4.7 31.4,4.9 32.4,5.0 33.3,5.3 34.3,4.9 35.2,6.0 36.2,7.3 37.1,7.1 38.1,8.5 39.0,7.7 40.0,7.4 41.0,8.1 41.9,8.1 42.9,15.4 43.8,15.4 44.8,14.2 45.7,15.0 46.7,15.1 47.6,15.4 48.6,14.5 49.5,14.8 50.5,15.4 51.4,16.0 52.4,17.7 53.3,19.5 54.3,20.0 55.2,19.7 56.2,19.0 57.1,19.7 58.1,19.4 59.0,19.9 60.0,19.9 61.0,18.6 61.9,19.5 62.9,20.3 63.8,21.4 64.8,21.2 65.7,20.4 66.7,19.6 67.6,18.9 68.6,18.0 69.5,18.5 70.5,18.6 71.4,15.0 72.4,15.4 73.3,14.9 74.3,14.0 75.2,14.9 76.2,14.3 77.1,14.7 78.1,14.9 79.0,16.1 80.0,16.7 81.0,18.7 81.9,18.6 82.9,18.1 83.8,18.7 84.8,18.5 85.7,18.6 86.7,18.7 87.6,20.7 88.6,19.7 89.5,19.6 90.5,20.3 91.4,20.8 92.4,21.9 93.3,21.8 94.3,22.7 95.2,24.5 96.2,24.6 97.1,26.6 98.1,27.4 99.0,26.6 100.0,27.9 101.0,27.2 101.9,28.8 102.9,27.9 103.8,29.6 104.8,29.6 105.7,29.3 106.7,28.0 107.6,28.7 108.6,29.7 109.5,29.7 110.5,31.0 111.4,32.9 112.4,27.5 113.3,26.1 114.3,28.1 115.2,27.7 116.2,27.7 117.1,23.5 118.1,25.2 119.0,24.4 120.0,24.6 121.0,25.8 121.9,25.3 122.9,25.7 123.8,25.2 124.8,24.7 125.7,23.4 126.7,24.4 127.6,24.9 128.6,25.1 129.5,25.5 130.5,25.6 131.4,26.5 132.4,26.5 133.3,27.6 134.3,29.9 135.2,28.3 136.2,29.7 137.1,30.0 138.1,30.1 139.0,31.5 140.0,33.0 141.0,33.0 141.9,33.7 142.9,34.0 143.8,33.7 144.8,33.0 145.7,33.3 146.7,33.0 147.6,33.0 148.6,33.0 149.5,33.0 150.5,33.0 151.4,33.0 152.4,32.8 153.3,32.9 154.3,32.8 155.2,33.1 156.2,33.2 157.1,33.0 158.1,33.0 159.0,33.5 160.0,33.2" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-18.6%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $21.92M</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $8.19M</span></div>
+</article>
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>NBIS</b><small>Nebius</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$166.67 <span class="down">-2.0%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,3.2 1.0,3.2 1.9,3.1 2.9,3.1 3.8,3.0 4.8,2.8 5.7,3.1 6.7,3.1 7.6,3.3 8.6,3.1 9.5,3.1 10.5,3.8 11.4,3.6 12.4,3.7 13.3,3.7 14.3,4.0 15.2,3.9 16.2,3.7 17.1,3.8 18.1,3.4 19.0,3.2 20.0,3.2 21.0,3.3 21.9,2.6 22.9,2.6 23.8,2.8 24.8,3.1 25.7,3.1 26.7,2.9 27.6,3.1 28.6,2.7 29.5,2.0 30.5,2.9 31.4,2.8 32.4,2.7 33.3,2.8 34.3,2.7 35.2,3.4 36.2,4.3 37.1,3.5 38.1,5.6 39.0,5.9 40.0,5.8 41.0,7.5 41.9,7.1 42.9,9.1 43.8,9.9 44.8,9.6 45.7,11.0 46.7,11.3 47.6,11.2 48.6,9.9 49.5,9.8 50.5,10.3 51.4,10.4 52.4,11.4 53.3,13.5 54.3,13.7 55.2,13.2 56.2,12.3 57.1,12.8 58.1,12.2 59.0,12.5 60.0,12.7 61.0,11.6 61.9,12.0 62.9,12.6 63.8,13.4 64.8,14.1 65.7,15.8 66.7,14.4 67.6,13.5 68.6,12.1 69.5,12.0 70.5,11.7 71.4,11.5 72.4,11.1 73.3,10.3 74.3,10.0 75.2,10.4 76.2,10.0 77.1,9.9 78.1,9.7 79.0,9.7 80.0,10.1 81.0,12.0 81.9,11.6 82.9,11.6 83.8,12.7 84.8,13.0 85.7,13.7 86.7,14.6 87.6,18.2 88.6,22.7 89.5,20.3 90.5,21.5 91.4,22.1 92.4,23.8 93.3,23.4 94.3,22.6 95.2,22.4 96.2,23.4 97.1,26.2 98.1,26.5 99.0,25.1 100.0,25.5 101.0,25.2 101.9,25.8 102.9,24.6 103.8,25.7 104.8,25.7 105.7,25.9 106.7,25.9 107.6,26.6 108.6,26.3 109.5,25.5 110.5,27.0 111.4,33.3 112.4,29.3 113.3,27.5 114.3,26.5 115.2,25.1 116.2,23.8 117.1,21.5 118.1,21.5 119.0,20.5 120.0,21.4 121.0,22.3 121.9,22.1 122.9,22.5 123.8,22.3 124.8,20.9 125.7,19.7 126.7,20.8 127.6,21.9 128.6,22.1 129.5,22.7 130.5,22.9 131.4,23.4 132.4,23.7 133.3,24.5 134.3,27.5 135.2,28.5 136.2,30.4 137.1,31.5 138.1,32.7 139.0,34.0 140.0,33.4 141.0,31.9 141.9,33.2 142.9,33.7 143.8,33.5 144.8,32.7 145.7,32.3 146.7,32.2 147.6,32.4 148.6,32.4 149.5,32.5 150.5,32.3 151.4,32.4 152.4,32.4 153.3,32.4 154.3,32.0 155.2,32.4 156.2,32.9 157.1,32.8 158.1,32.7 159.0,33.2 160.0,32.6" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-25.1%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $4.92M</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $6.81M</span></div>
+</article>
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>PRL</b><small>PRL</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$1.8214 <span class="up">+0.7%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,9.1 2.3,5.3 4.5,6.5 6.8,11.4 9.0,12.9 11.3,16.0 13.5,10.4 15.8,10.4 18.0,16.7 20.3,20.7 22.5,23.2 24.8,26.5 27.0,28.2 29.3,32.8 31.5,32.8 33.8,32.7 36.1,27.5 38.3,31.2 40.6,25.3 42.8,10.8 45.1,16.2 47.3,14.9 49.6,6.2 51.8,11.6 54.1,13.3 56.3,12.5 58.6,13.1 60.8,14.2 63.1,2.0 65.4,8.1 67.6,11.0 69.9,12.1 72.1,14.9 74.4,16.1 76.6,16.2 78.9,17.5 81.1,17.8 83.4,18.6 85.6,20.0 87.9,16.7 90.1,17.8 92.4,18.6 94.6,19.3 96.9,22.3 99.2,23.3 101.4,22.8 103.7,23.8 105.9,26.4 108.2,27.2 110.4,27.9 112.7,31.3 114.9,30.5 117.2,30.4 119.4,28.5 121.7,29.6 123.9,31.5 126.2,32.0 128.5,33.7 130.7,34.0 133.0,33.6 135.2,30.5 137.5,29.9 139.7,28.2 142.0,30.0 144.2,31.2 146.5,31.3 148.7,31.1 151.0,32.1 153.2,32.8 155.5,32.8 157.7,29.0 160.0,20.2" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-7.0%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $2.14M</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $3.30M</span></div>
+</article>
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>DRAM</b><small>DRAM</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$46.27 <span class="down">-2.6%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,3.2 1.0,3.1 1.9,3.0 2.9,2.9 3.8,2.9 4.8,2.9 5.7,2.9 6.7,2.9 7.6,3.0 8.6,2.9 9.5,3.0 10.5,3.5 11.4,3.4 12.4,3.5 13.3,3.4 14.3,3.5 15.2,3.3 16.2,3.4 17.1,3.3 18.1,3.2 19.0,3.1 20.0,3.1 21.0,2.8 21.9,2.5 22.9,2.0 23.8,2.1 24.8,2.3 25.7,2.3 26.7,2.4 27.6,2.6 28.6,2.5 29.5,2.8 30.5,4.1 31.4,3.6 32.4,3.9 33.3,4.8 34.3,4.1 35.2,5.6 36.2,6.2 37.1,6.0 38.1,7.5 39.0,7.4 40.0,7.2 41.0,8.0 41.9,8.0 42.9,10.5 43.8,10.9 44.8,10.0 45.7,10.9 46.7,10.9 47.6,11.1 48.6,10.9 49.5,10.9 50.5,11.5 51.4,11.7 52.4,12.9 53.3,15.7 54.3,17.1 55.2,17.8 56.2,17.3 57.1,18.0 58.1,17.9 59.0,17.9 60.0,17.5 61.0,16.1 61.9,16.6 62.9,17.6 63.8,18.4 64.8,19.1 65.7,18.2 66.7,18.1 67.6,17.4 68.6,17.0 69.5,17.2 70.5,17.1 71.4,15.9 72.4,15.5 73.3,15.0 74.3,14.6 75.2,16.3 76.2,15.5 77.1,15.7 78.1,15.4 79.0,16.1 80.0,16.3 81.0,19.1 81.9,18.6 82.9,18.2 83.8,18.8 84.8,18.6 85.7,18.9 86.7,18.4 87.6,20.4 88.6,20.0 89.5,19.5 90.5,21.2 91.4,21.0 92.4,22.5 93.3,22.5 94.3,23.2 95.2,24.0 96.2,24.3 97.1,26.0 98.1,28.3 99.0,29.4 100.0,31.0 101.0,30.5 101.9,31.3 102.9,30.2 103.8,32.0 104.8,31.2 105.7,31.3 106.7,30.7 107.6,31.4 108.6,32.5 109.5,31.9 110.5,32.0 111.4,32.4 112.4,27.7 113.3,26.9 114.3,27.8 115.2,27.3 116.2,27.5 117.1,25.3 118.1,25.9 119.0,25.5 120.0,25.9 121.0,27.0 121.9,27.4 122.9,27.6 123.8,26.9 124.8,25.7 125.7,24.8 126.7,26.1 127.6,26.8 128.6,27.0 129.5,27.1 130.5,27.3 131.4,27.5 132.4,27.8 133.3,28.0 134.3,30.4 135.2,29.2 136.2,30.2 137.1,30.6 138.1,31.2 139.0,32.4 140.0,33.1 141.0,33.0 141.9,33.5 142.9,34.0 143.8,33.5 144.8,33.0 145.7,33.1 146.7,32.7 147.6,32.8 148.6,32.5 149.5,32.6 150.5,32.4 151.4,32.5 152.4,32.6 153.3,32.6 154.3,32.5 155.2,32.6 156.2,33.1 157.1,33.2 158.1,32.9 159.0,33.8 160.0,33.7" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-19.6%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $1.08M</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $1.19M</span></div>
+</article>
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>EWY</b><small>iShares MSCI South Korea ETF</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$150.01 <span class="down">-2.0%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,2.6 1.0,2.6 1.9,2.5 2.9,2.4 3.8,2.4 4.8,2.5 5.7,2.4 6.7,2.5 7.6,2.6 8.6,2.7 9.5,2.5 10.5,2.9 11.4,2.8 12.4,2.8 13.3,2.8 14.3,2.8 15.2,3.0 16.2,2.8 17.1,2.9 18.1,2.8 19.0,2.7 20.0,2.7 21.0,2.6 21.9,2.1 22.9,2.0 23.8,2.1 24.8,2.3 25.7,2.3 26.7,2.3 27.6,2.5 28.6,2.1 29.5,2.8 30.5,4.3 31.4,3.5 32.4,4.7 33.3,5.3 34.3,4.3 35.2,6.0 36.2,6.5 37.1,5.7 38.1,6.6 39.0,7.1 40.0,6.9 41.0,7.7 41.9,7.8 42.9,9.2 43.8,10.9 44.8,10.2 45.7,10.8 46.7,10.8 47.6,10.9 48.6,10.9 49.5,10.9 50.5,11.2 51.4,11.3 52.4,12.6 53.3,16.6 54.3,18.8 55.2,19.8 56.2,19.5 57.1,19.6 58.1,18.7 59.0,17.4 60.0,17.5 61.0,16.2 61.9,17.0 62.9,17.6 63.8,17.6 64.8,18.3 65.7,17.1 66.7,16.9 67.6,16.3 68.6,15.9 69.5,16.3 70.5,15.8 71.4,14.7 72.4,14.9 73.3,14.5 74.3,14.2 75.2,16.3 76.2,15.1 77.1,15.0 78.1,14.8 79.0,15.2 80.0,15.2 81.0,18.4 81.9,17.5 82.9,17.4 83.8,17.4 84.8,17.1 85.7,17.6 86.7,17.1 87.6,19.7 88.6,19.9 89.5,19.3 90.5,20.9 91.4,20.1 92.4,21.3 93.3,21.3 94.3,22.0 95.2,22.5 96.2,22.9 97.1,24.5 98.1,26.8 99.0,30.6 100.0,32.6 101.0,32.3 101.9,32.7 102.9,31.1 103.8,34.0 104.8,32.0 105.7,31.6 106.7,31.4 107.6,31.9 108.6,33.0 109.5,32.1 110.5,32.0 111.4,32.2 112.4,28.0 113.3,27.0 114.3,27.7 115.2,26.8 116.2,27.3 117.1,25.8 118.1,25.9 119.0,26.1 120.0,26.6 121.0,27.9 121.9,27.7 122.9,27.7 123.8,26.6 124.8,25.3 125.7,24.6 126.7,26.0 127.6,26.5 128.6,26.7 129.5,26.9 130.5,26.8 131.4,26.8 132.4,27.1 133.3,27.1 134.3,29.2 135.2,27.6 136.2,29.3 137.1,29.4 138.1,30.3 139.0,31.7 140.0,32.3 141.0,32.5 141.9,33.2 142.9,33.3 143.8,32.7 144.8,32.5 145.7,32.5 146.7,32.1 147.6,32.4 148.6,32.2 149.5,31.9 150.5,31.9 151.4,32.0 152.4,31.7 153.3,31.6 154.3,31.5 155.2,31.9 156.2,32.4 157.1,32.3 158.1,32.2 159.0,32.9 160.0,32.7" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-15.8%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $400.6K</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $318.9K</span></div>
+</article>
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>IONQ</b><small>IonQ</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$31.04 <span class="down">-3.0%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,2.8 1.0,2.9 1.9,2.9 2.9,2.9 3.8,2.8 4.8,2.9 5.7,2.8 6.7,3.2 7.6,3.2 8.6,2.9 9.5,2.8 10.5,3.0 11.4,2.9 12.4,2.7 13.3,2.7 14.3,2.6 15.2,2.5 16.2,2.5 17.1,2.6 18.1,2.6 19.0,2.6 20.0,3.1 21.0,2.6 21.9,2.8 22.9,2.6 23.8,2.6 24.8,2.6 25.7,2.7 26.7,2.6 27.6,2.6 28.6,2.0 29.5,2.3 30.5,2.3 31.4,2.3 32.4,2.0 33.3,2.4 34.3,2.3 35.2,2.5 36.2,3.1 37.1,2.7 38.1,4.3 39.0,3.9 40.0,3.8 41.0,5.9 41.9,6.4 42.9,12.1 43.8,15.1 44.8,13.9 45.7,15.4 46.7,14.9 47.6,15.0 48.6,14.8 49.5,13.9 50.5,13.8 51.4,13.2 52.4,14.6 53.3,16.0 54.3,15.7 55.2,16.0 56.2,14.7 57.1,15.1 58.1,14.6 59.0,15.0 60.0,14.8 61.0,13.8 61.9,13.8 62.9,14.6 63.8,15.6 64.8,15.6 65.7,17.9 66.7,19.5 67.6,20.0 68.6,19.3 69.5,20.4 70.5,19.2 71.4,19.8 72.4,19.0 73.3,19.1 74.3,18.6 75.2,18.8 76.2,17.7 77.1,18.0 78.1,17.7 79.0,17.8 80.0,17.7 81.0,18.4 81.9,18.5 82.9,18.6 83.8,18.6 84.8,19.4 85.7,19.5 86.7,20.1 87.6,26.4 88.6,26.4 89.5,28.4 90.5,29.5 91.4,29.4 92.4,30.5 93.3,31.5 94.3,30.3 95.2,30.1 96.2,29.8 97.1,30.6 98.1,31.8 99.0,30.8 100.0,31.0 101.0,31.2 101.9,31.5 102.9,31.4 103.8,31.5 104.8,31.8 105.7,31.7 106.7,31.9 107.6,32.6 108.6,32.8 109.5,32.2 110.5,32.3 111.4,34.0 112.4,27.7 113.3,25.3 114.3,25.0 115.2,24.4 116.2,24.6 117.1,21.1 118.1,22.6 119.0,21.6 120.0,22.1 121.0,22.2 121.9,22.1 122.9,21.9 123.8,21.6 124.8,21.4 125.7,21.4 126.7,20.8 127.6,21.6 128.6,21.8 129.5,21.9 130.5,22.1 131.4,22.4 132.4,23.6 133.3,24.6 134.3,25.6 135.2,26.5 136.2,28.4 137.1,28.7 138.1,29.9 139.0,30.5 140.0,31.0 141.0,29.5 141.9,29.9 142.9,30.7 143.8,30.2 144.8,30.4 145.7,29.8 146.7,30.0 147.6,30.0 148.6,30.4 149.5,30.3 150.5,30.2 151.4,30.4 152.4,30.2 153.3,30.4 154.3,30.3 155.2,30.1 156.2,30.6 157.1,30.5 158.1,30.6 159.0,31.2 160.0,31.7" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-22.4%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $107.6K</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $135.1K</span></div>
+</article>
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>GPRO</b><small>GoPro</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$1.0321 <span class="down">-8.1%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,2.5 1.0,3.9 1.9,2.6 2.9,2.6 3.8,2.6 4.8,2.6 5.7,2.0 6.7,4.0 7.6,4.0 8.6,4.5 9.5,4.5 10.5,4.5 11.4,3.6 12.4,3.6 13.3,3.8 14.3,5.1 15.2,5.1 16.2,6.9 17.1,6.9 18.1,4.9 19.0,3.8 20.0,5.4 21.0,5.4 21.9,5.5 22.9,4.2 23.8,4.2 24.8,4.2 25.7,4.2 26.7,5.3 27.6,5.3 28.6,5.3 29.5,5.3 30.5,3.9 31.4,3.0 32.4,2.8 33.3,3.1 34.3,3.1 35.2,3.0 36.2,3.0 37.1,4.2 38.1,4.2 39.0,4.2 40.0,5.1 41.0,5.4 41.9,6.3 42.9,7.0 43.8,9.0 44.8,6.0 45.7,8.7 46.7,7.8 47.6,8.6 48.6,4.8 49.5,5.9 50.5,6.8 51.4,5.9 52.4,7.0 53.3,6.9 54.3,7.8 55.2,7.8 56.2,8.6 57.1,7.6 58.1,7.0 59.0,8.8 60.0,8.5 61.0,7.1 61.9,6.9 62.9,7.0 63.8,6.2 64.8,5.7 65.7,6.0 66.7,6.7 67.6,5.6 68.6,7.9 69.5,8.2 70.5,7.8 71.4,7.2 72.4,7.8 73.3,7.4 74.3,7.4 75.2,7.4 76.2,7.4 77.1,7.3 78.1,7.7 79.0,7.7 80.0,7.8 81.0,8.1 81.9,8.3 82.9,8.4 83.8,8.5 84.8,9.7 85.7,9.3 86.7,9.4 87.6,12.1 88.6,11.1 89.5,8.8 90.5,8.8 91.4,11.4 92.4,11.4 93.3,10.9 94.3,10.8 95.2,12.9 96.2,11.4 97.1,12.7 98.1,14.0 99.0,15.0 100.0,21.5 101.0,21.5 101.9,21.8 102.9,21.5 103.8,22.3 104.8,25.6 105.7,27.5 106.7,25.8 107.6,24.3 108.6,20.8 109.5,19.3 110.5,16.5 111.4,11.0 112.4,10.0 113.3,10.4 114.3,10.9 115.2,13.3 116.2,11.8 117.1,10.7 118.1,13.0 119.0,12.2 120.0,12.2 121.0,11.0 121.9,12.5 122.9,10.5 123.8,10.5 124.8,10.4 125.7,9.4 126.7,9.6 127.6,11.4 128.6,10.9 129.5,11.5 130.5,11.1 131.4,11.2 132.4,11.6 133.3,11.3 134.3,14.1 135.2,12.8 136.2,16.2 137.1,22.1 138.1,22.0 139.0,25.6 140.0,30.6 141.0,28.9 141.9,31.2 142.9,31.2 143.8,34.0 144.8,33.9 145.7,32.1 146.7,33.5 147.6,33.0 148.6,32.2 149.5,32.3 150.5,32.3 151.4,32.6 152.4,32.3 153.3,32.7 154.3,32.6 155.2,32.8 156.2,33.4 157.1,32.2 158.1,32.5 159.0,33.6 160.0,33.4" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-13.8%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $51.3K</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $268.5K</span></div>
+</article>
+<article class="mini" data-mkt="HK">
+  <div class="mh"><b>TCNT</b><small>Tencent</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$53.21 <span class="flat">+0.0%</span></div>
+  <svg class="spark down" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,2.7 1.0,4.5 1.9,4.5 2.9,4.5 3.8,5.0 4.8,3.5 5.7,5.3 6.7,2.0 7.7,4.1 8.6,7.0 9.6,6.9 10.5,6.5 11.5,7.4 12.5,7.3 13.4,6.7 14.4,8.4 15.3,6.5 16.3,6.5 17.2,9.1 18.2,9.1 19.2,14.0 20.1,11.0 21.1,9.4 22.0,11.3 23.0,11.0 24.0,11.0 24.9,10.8 25.9,10.3 26.8,8.8 27.8,8.8 28.7,9.4 29.7,7.0 30.7,8.3 31.6,11.4 32.6,10.6 33.5,12.5 34.5,12.2 35.4,12.3 36.4,12.8 37.4,13.9 38.3,14.9 39.3,14.3 40.2,14.5 41.2,15.5 42.2,15.4 43.1,16.3 44.1,20.2 45.0,20.1 46.0,20.8 46.9,19.9 47.9,18.9 48.9,18.8 49.8,18.5 50.8,18.6 51.7,18.1 52.7,19.9 53.7,23.2 54.6,22.2 55.6,23.3 56.5,21.7 57.5,21.5 58.4,18.1 59.4,20.7 60.4,20.7 61.3,17.4 62.3,16.8 63.2,17.3 64.2,18.9 65.1,18.9 66.1,20.1 67.1,18.7 68.0,18.8 69.0,18.8 69.9,18.3 70.9,17.6 71.9,16.8 72.8,16.8 73.8,16.8 74.7,16.8 75.7,16.9 76.6,17.6 77.6,26.8 78.6,17.9 79.5,17.9 80.5,17.1 81.4,13.6 82.4,15.2 83.4,15.5 84.3,20.8 85.3,21.0 86.2,21.0 87.2,21.0 88.1,23.9 89.1,24.0 90.1,25.8 91.0,28.4 92.0,31.6 92.9,30.4 93.9,30.8 94.9,31.5 95.8,31.5 96.8,31.5 97.7,31.9 98.7,32.9 99.6,34.0 100.6,31.0 101.6,25.8 102.5,27.6 103.5,28.4 104.4,25.3 105.4,28.9 106.3,31.3 107.3,30.2 108.3,30.5 109.2,31.6 110.2,31.6 111.1,31.6 112.1,29.0 113.1,31.3 114.0,28.6 115.0,28.6 115.9,28.1 116.9,28.1 117.8,28.3 118.8,27.7 119.8,26.6 120.7,26.7 121.7,26.7 122.6,26.2 123.6,17.1 124.6,18.7 125.5,21.4 126.5,19.4 127.4,24.1 128.4,30.8 129.3,30.5 130.3,30.5 131.3,30.1 132.2,30.1 133.2,29.1 134.1,29.1 135.1,30.2 136.0,29.1 137.0,30.7 138.0,31.7 138.9,31.1 139.9,31.8 140.8,30.7 141.8,31.2 142.8,31.3 143.7,31.4 144.7,29.9 145.6,31.3 146.6,30.8 147.5,29.7 148.5,29.0 149.5,29.3 150.4,28.3 151.4,29.2 152.3,29.3 153.3,29.5 154.3,28.6 155.2,27.8 156.2,29.0 157.1,28.7 158.1,28.8 159.0,29.5 160.0,30.1" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="down">-3.3%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $46.5K</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $132.4K</span></div>
+</article>
+<article class="mini" data-mkt="US">
+  <div class="mh"><b>XIAOMI</b><small>XIAOMI</small></div>
+  <div class="sess-line"><span class="dot" aria-hidden="true"></span><span class="sess-txt">Trading 24/7 on Entropy</span></div>
+  <div class="mp num">$3.3914 <span class="up">+0.4%</span></div>
+  <svg class="spark up" viewBox="0 0 160 36" preserveAspectRatio="none" aria-hidden="true"><polyline points="0.0,26.2 1.2,29.1 2.4,27.9 3.6,29.1 4.8,31.4 6.0,30.6 7.2,30.6 8.4,29.7 9.6,30.0 10.7,29.9 11.9,30.4 13.1,31.1 14.3,31.3 15.5,31.5 16.7,31.4 17.9,31.1 19.1,31.5 20.3,31.4 21.5,31.3 22.7,31.3 23.9,31.5 25.1,31.4 26.3,32.1 27.5,30.4 28.7,34.0 29.9,30.3 31.0,30.3 32.2,25.6 33.4,26.2 34.6,25.7 35.8,25.7 37.0,26.8 38.2,27.0 39.4,27.6 40.6,27.5 41.8,27.0 43.0,27.1 44.2,27.6 45.4,27.1 46.6,27.1 47.8,26.9 49.0,26.9 50.1,26.7 51.3,26.3 52.5,26.2 53.7,26.3 54.9,26.3 56.1,20.7 57.3,13.7 58.5,12.1 59.7,12.5 60.9,10.9 62.1,11.8 63.3,13.4 64.5,14.3 65.7,14.7 66.9,14.7 68.1,14.9 69.3,14.8 70.4,15.1 71.6,15.4 72.8,15.6 74.0,15.9 75.2,15.7 76.4,16.4 77.6,15.0 78.8,16.0 80.0,16.1 81.2,17.3 82.4,17.1 83.6,20.0 84.8,8.5 86.0,6.5 87.2,5.9 88.4,6.9 89.6,6.6 90.7,6.3 91.9,4.8 93.1,6.9 94.3,6.6 95.5,7.0 96.7,6.1 97.9,6.2 99.1,6.3 100.3,5.3 101.5,4.8 102.7,5.1 103.9,5.0 105.1,5.0 106.3,4.7 107.5,4.9 108.7,4.8 109.9,4.5 111.0,4.7 112.2,4.5 113.4,6.0 114.6,2.0 115.8,6.6 117.0,6.0 118.2,8.3 119.4,9.4 120.6,8.7 121.8,9.1 123.0,9.1 124.2,9.6 125.4,9.8 126.6,10.0 127.8,10.8 129.0,10.6 130.1,11.2 131.3,11.1 132.5,11.2 133.7,11.5 134.9,11.9 136.1,11.7 137.3,11.2 138.5,11.0 139.7,11.0 140.9,10.6 142.1,10.4 143.3,10.6 144.5,10.8 145.7,10.6 146.9,9.9 148.1,9.7 149.3,9.9 150.4,10.0 151.6,10.3 152.8,10.2 154.0,9.9 155.2,9.9 156.4,10.2 157.6,9.8 158.8,10.0 160.0,10.0" fill="none" stroke="currentColor" stroke-width="1.6" vector-effect="non-scaling-stroke"/></svg>
+  <div class="mf num"><span><span class="up">+6.7%</span> <button type="button" class="term" data-term="change_7d" aria-expanded="false">7d</button></span><span><button type="button" class="term" data-term="volume_24h" aria-expanded="false">Vol</button> $37.6K</span><span><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button> $100.8K</span></div>
+</article>
+</div>
+<div class="scroll"><table id="eq"><thead><tr><th>Symbol</th><th><button type="button" class="term" data-term="mark" aria-expanded="false">Mark</button></th><th>24h</th><th><button type="button" class="term" data-term="funding_apr" aria-expanded="false">Funding APR</button></th><th><button type="button" class="term" data-term="oi" aria-expanded="false">OI</button></th><th><button type="button" class="term" data-term="volume_24h" aria-expanded="false">24h vol</button></th><th><button type="button" class="term" data-term="session" aria-expanded="false">Session</button></th></tr></thead>
+<tbody>
+<tr data-mkt="US"><td><b>SNDK</b><br><small>SanDisk</small></td>
+<td class="num">1,296.20</td><td class="num down">-2.7%</td><td class="num">+3.4%</td>
+<td class="num">$8.19M</td><td class="num">$21.92M</td><td class="sess">—</td></tr>
+<tr data-mkt="US"><td><b>NBIS</b><br><small>Nebius</small></td>
+<td class="num">166.67</td><td class="num down">-2.0%</td><td class="num">+5.8%</td>
+<td class="num">$6.81M</td><td class="num">$4.92M</td><td class="sess">—</td></tr>
+<tr data-mkt="US"><td><b>PRL</b><br><small>PRL</small></td>
+<td class="num">1.8214</td><td class="num up">+0.7%</td><td class="num">+164.5%</td>
+<td class="num">$3.30M</td><td class="num">$2.14M</td><td class="sess">—</td></tr>
+<tr data-mkt="US"><td><b>DRAM</b><br><small>DRAM</small></td>
+<td class="num">46.27</td><td class="num down">-2.6%</td><td class="num">+5.7%</td>
+<td class="num">$1.19M</td><td class="num">$1.08M</td><td class="sess">—</td></tr>
+<tr data-mkt="US"><td><b>EWY</b><br><small>iShares MSCI South Korea ETF</small></td>
+<td class="num">150.01</td><td class="num down">-2.0%</td><td class="num">+4.4%</td>
+<td class="num">$318.9K</td><td class="num">$400.6K</td><td class="sess">—</td></tr>
+<tr data-mkt="US"><td><b>IONQ</b><br><small>IonQ</small></td>
+<td class="num">31.04</td><td class="num down">-3.0%</td><td class="num">+4.1%</td>
+<td class="num">$135.1K</td><td class="num">$107.6K</td><td class="sess">—</td></tr>
+<tr data-mkt="US"><td><b>GPRO</b><br><small>GoPro</small></td>
+<td class="num">1.0321</td><td class="num down">-8.1%</td><td class="num">+90.1%</td>
+<td class="num">$268.5K</td><td class="num">$51.3K</td><td class="sess">—</td></tr>
+<tr data-mkt="HK"><td><b>TCNT</b><br><small>Tencent</small></td>
+<td class="num">53.21</td><td class="num flat">+0.0%</td><td class="num">+1.9%</td>
+<td class="num">$132.4K</td><td class="num">$46.5K</td><td class="sess">—</td></tr>
+<tr data-mkt="US"><td><b>XIAOMI</b><br><small>XIAOMI</small></td>
+<td class="num">3.3914</td><td class="num up">+0.4%</td><td class="num">-2.7%</td>
+<td class="num">$100.8K</td><td class="num">$37.6K</td><td class="sess">—</td></tr>
+</tbody></table></div>
+</section>
+
+<section id="weekend">
+<h2>Weekend Gap</h2>
+<p class="sec-note">US stocks stop trading Friday 16:00 ET, but Entropy's perps keep going. Just before Monday's open, the perp price is effectively a weekend <button type="button" class="term" data-term="predicted" aria-expanded="false">prediction</button>. We compare it with the <button type="button" class="term" data-term="actual" aria-expanded="false">actual move</button> to Monday's first regular-session price. Moves under 0.1% count as flat and are not scored. See <button type="button" class="term" data-term="weekend_gap" aria-expanded="false">Weekend Gap</button>.</p>
+<p class="wk-sum">Over the last <b>7</b> weekends, Entropy's weekend price pointed the right way <b>81%</b> of the time (26 of 32 stock-weekends).</p>
+<div class="stats"><div><b class="num">81%</b><small><button type="button" class="term" data-term="hit_rate" aria-expanded="false">Direction hit rate</button> (26/32)</small></div><div><b class="num">1.48 pp</b><small>mean <button type="button" class="term" data-term="abs_err" aria-expanded="false">abs error</button>, in <button type="button" class="term" data-term="pp" aria-expanded="false">percentage points</button></small></div><div><b class="num">7</b><small>weekends tracked</small></div></div>
+<h3>Latest: Fri 2026-10-09 → Mon 2026-10-12</h3>
+<div class="scroll"><table class="wk-latest"><thead><tr><th>Symbol</th><th><button type="button" class="term" data-term="predicted" aria-expanded="false">Predicted move</button></th><th><button type="button" class="term" data-term="actual" aria-expanded="false">Actual move</button></th><th>Direction</th><th><button type="button" class="term" data-term="abs_err" aria-expanded="false">Abs error</button> (pp)</th><th><button type="button" class="term" data-term="captured" aria-expanded="false">Captured share</button></th></tr></thead><tbody><tr><td><b>DRAM</b></td><td class="num pred">-2.48%</td><td class="num act">-3.65%</td><td><span class="badge ok">✓ Hit</span></td><td class="num">1.17</td><td class="num">68%</td></tr><tr><td><b>EWY</b></td><td class="num pred">-2.32%</td><td class="num act">-2.93%</td><td><span class="badge ok">✓ Hit</span></td><td class="num">0.61</td><td class="num">79%</td></tr><tr><td><b>GPRO</b></td><td class="num pred">-0.75%</td><td class="num act">-0.87%</td><td><span class="badge ok">✓ Hit</span></td><td class="num">0.12</td><td class="num">86%</td></tr><tr><td><b>IONQ</b></td><td class="num pred">-2.49%</td><td class="num act">-4.94%</td><td><span class="badge ok">✓ Hit</span></td><td class="num">2.46</td><td class="num">50%</td></tr><tr><td><b>NBIS</b></td><td class="num pred">-1.78%</td><td class="num act">-3.61%</td><td><span class="badge ok">✓ Hit</span></td><td class="num">1.83</td><td class="num">49%</td></tr><tr><td><b>SNDK</b></td><td class="num pred">-2.64%</td><td class="num act">-5.89%</td><td><span class="badge ok">✓ Hit</span></td><td class="num">3.25</td><td class="num">45%</td></tr></tbody></table></div>
+<h3>All-time by symbol</h3>
+<div class="scroll"><table><thead><tr><th>Symbol</th><th>Weekends</th><th>Hit rate</th><th>Mean abs err (pp)</th></tr></thead><tbody><tr><td><b>DRAM</b></td><td class="num">4</td><td class="num">100%</td><td class="num">0.75</td></tr><tr><td><b>EWY</b></td><td class="num">4</td><td class="num">100%</td><td class="num">0.28</td></tr><tr><td><b>GPRO</b></td><td class="num">6</td><td class="num">67%</td><td class="num">1.64</td></tr><tr><td><b>IONQ</b></td><td class="num">5</td><td class="num">60%</td><td class="num">2.91</td></tr><tr><td><b>NBIS</b></td><td class="num">7</td><td class="num">71%</td><td class="num">1.46</td></tr><tr><td><b>SNDK</b></td><td class="num">7</td><td class="num">100%</td><td class="num">1.46</td></tr></tbody></table></div>
+<p class="key"><span><span class="pred">Predicted</span> = weekend perp move</span><span><span class="act">Actual</span> = move to Monday's open</span></p>
+</section>
+
+<section id="glossary">
+<h2>How it works</h2>
+<ol class="steps">
+<li><span class="n">1 · List</span><div class="stxt"><button type="button" class="term" data-term="entropy" aria-expanded="false">Entropy</button> lists <button type="button" class="term" data-term="perp" aria-expanded="false">perps</button> on <button type="button" class="term" data-term="hyperliquid" aria-expanded="false">Hyperliquid</button> through <button type="button" class="term" data-term="hip3" aria-expanded="false">HIP-3</button>.</div></li>
+<li><span class="n">2 · Read</span><div class="stxt">We read the public API every 30 minutes. No accounts, no private data.</div></li>
+<li><span class="n">3 · Convert</span><div class="stxt">We turn price into valuation, and compare weekend vs Monday-open prices.</div></li>
+</ol>
+<h2>How to read this</h2>
+<p class="sec-note">Short definitions for every underlined term on this page.</p>
+<details class="gloss" open><summary>Basics</summary><dl><dt id="g-hyperliquid">Hyperliquid</dt><dd>The blockchain exchange where these markets trade. All data on this page comes from its public API.</dd><dt id="g-hip3">HIP-3</dt><dd>Hyperliquid&#x27;s system that lets outside teams (called deployers) list their own perpetual markets on Hyperliquid. Entropy is one such deployer.</dd><dt id="g-entropy">Entropy</dt><dd>A HIP-3 deployer on Hyperliquid (dex name io) that lists US stocks 24/7 and pre-IPO markets for Anthropic and OpenAI. This site is an unofficial community project, not run by Entropy.</dd><dt id="g-perp">Perpetual (perp)</dt><dd>A futures-style contract with no expiry date. You bet on a price going up (long) or down (short) without owning the asset. Traders can use leverage, which makes prices move faster.</dd><dt id="g-sparkline">Sparkline</dt><dd>The tiny line chart on each stock card. It shows the price over the last 7 days, with no axes, just the shape.</dd><dt id="g-change_24h">24h change</dt><dd>How much the price moved compared with 24 hours ago, in percent.</dd><dt id="g-change_7d">7d change</dt><dd>How much the price moved over the last 7 days, in percent. Matches the sparkline next to it.</dd></dl></details>
+<details class="gloss"><summary>Pre-IPO</summary><dl><dt id="g-preipo_perp">Pre-IPO perp</dt><dd>A perp on a company that is not listed on a stock exchange yet. Its price is set by traders, which gives a live read on what the market thinks the company is worth.</dd><dt id="g-implied_valuation">Implied valuation</dt><dd>The company value the perp price points to. On Entropy&#x27;s pre-IPO perps, $1 of price = $1B of company value, so a price of 2,050 means $2.05T. It is a market signal, not an official valuation.</dd><dt id="g-last_round">Last round</dt><dd>The company&#x27;s most recent funding round with outside investors, and the valuation set in it (post-money, meaning including the new money). Source links are on each card.</dd><dt id="g-multiple">Multiple (×)</dt><dd>Implied valuation divided by the last-round valuation. 2× means traders price the company at twice its last round. Below 1× means less.</dd><dt id="g-premium">Premium</dt><dd>The same comparison as a percentage: multiple minus 1. A 2.1× multiple is a +110% premium to the last round.</dd><dt id="g-lower_bound">Lower bound</dt><dd>The bottom of the price range Entropy&#x27;s docs set for the market (the L value). The card shows what valuation it equals and how far the price is from it. See Entropy&#x27;s docs for what happens at a bound.</dd><dt id="g-upper_bound">Upper bound</dt><dd>The top of the price range Entropy&#x27;s docs set for the market (the U value). The card shows what valuation it equals and how far the price is from it. See Entropy&#x27;s docs for what happens at a bound.</dd><dt id="g-no_ipo">No-IPO resolution</dt><dd>The date in Entropy&#x27;s docs by which the market is resolved if the company has not gone public. Shown with the days remaining.</dd></dl></details>
+<details class="gloss"><summary>Trading terms</summary><dl><dt id="g-mark">Mark price</dt><dd>The reference price the exchange uses for a perp, for example to value open positions. It can differ a little from the last trade.</dd><dt id="g-oracle">Oracle price</dt><dd>An outside reference price fed to the exchange. For US stocks it follows the public stock price while the market is open.</dd><dt id="g-funding">Funding rate</dt><dd>A small payment between traders that keeps a perp&#x27;s price close to the real price. When the rate is positive, longs pay shorts. When negative, shorts pay longs. It settles every hour.</dd><dt id="g-funding_apr">Funding APR (24h avg)</dt><dd>The funding rate scaled to a yearly figure (hourly rate × 24 × 365, not compounded). Here it is averaged over the last 24 hours. +10% means longs pay shorts about 10% a year of their position size at that rate.</dd><dt id="g-oi">Open interest (OI)</dt><dd>The total dollar size of all positions that are still open. It shows how much money is riding on the market right now.</dd><dt id="g-oi_cap">OI cap</dt><dd>The maximum open interest Entropy allows on a market. When OI nears the cap, new positions can be limited.</dd><dt id="g-volume_24h">24h volume</dt><dd>The total dollar value traded in the last 24 hours.</dd><dt id="g-session">Market session</dt><dd>The hours when the underlying stock market is open (US: 09:30 to 16:00 ET on trading days). A green dot means open. When closed, the Entropy perp keeps trading.</dd><dt id="g-discovery">24/7 price discovery</dt><dd>Entropy&#x27;s stock perps trade all week, including nights and weekends, so the perp price shows where traders think the stock is heading while the stock exchange is shut.</dd><dt id="g-luld">LULD (limit-up/limit-down)</dt><dd>A cap on how far the mark price can move from the last regular-session close while the stock market is shut. It is set by the market&#x27;s maximum leverage (1 divided by max leverage), so a 10× market can show at most ±10%.</dd></dl></details>
+<details class="gloss"><summary>Weekend Gap</summary><dl><dt id="g-weekend_gap">Weekend Gap</dt><dd>The price change between Friday&#x27;s close and Monday&#x27;s open, when US stocks cannot trade. We check whether the Entropy perp priced that gap correctly before the open.</dd><dt id="g-predicted">Predicted move</dt><dd>The perp&#x27;s move from Friday&#x27;s close to just before Monday&#x27;s open (09:15 to 09:30 ET). It is the weekend price discovery.</dd><dt id="g-actual">Actual move</dt><dd>The move from Friday&#x27;s close to the first regular-session price on Monday (09:30 to 09:45 ET).</dd><dt id="g-hit_rate">Direction hit rate</dt><dd>Share of weekends where the predicted and actual moves pointed the same way (both up or both down). Moves under 0.1% count as flat and are not scored.</dd><dt id="g-abs_err">Abs error</dt><dd>How far off the prediction was, ignoring direction: |predicted − actual| in percentage points. If predicted is +2.0% and actual is +3.5%, the error is 1.5 pp.</dd><dt id="g-pp">pp (percentage points)</dt><dd>The plain difference between two percentages. Going from 2% to 3.5% is 1.5 pp (not 75%).</dd><dt id="g-captured">Captured share</dt><dd>Predicted move divided by actual move, when both pointed the same way. 100% means the perp priced the whole move in advance. 50% means half.</dd></dl></details>
+
+</section>
+
+<footer>
+<p>Updated: <span id="upd">2026-10-17 16:30 UTC · 2026-10-17 23:30 WIB</span></p>
+<p>Data: Hyperliquid public API (dex <code>io</code>) and <a href="https://docs.entropy.io/asset-directory/pre-ipo-assets" rel="noopener">Entropy docs</a>. Last-round valuations come from the linked sources and may differ from where private shares actually trade.</p>
+<p>Unofficial community dashboard, not affiliated with Entropy. Not financial advice. · Built by the community, <a href="https://x.com/olaph_lol" rel="noopener">@olaph_lol</a></p>
+</footer>
+</main>
+<div id="tip" role="tooltip" hidden></div>
+<script id="pagedata" type="application/json">{"hist": {"dates": ["2026-08-19", "2026-08-20", "2026-08-21", "2026-08-22", "2026-08-23", "2026-08-24", "2026-08-25", "2026-08-26", "2026-08-27", "2026-08-28", "2026-08-29", "2026-08-30", "2026-08-31", "2026-09-01", "2026-09-02", "2026-09-03", "2026-09-04", "2026-09-05", "2026-09-06", "2026-09-07", "2026-09-08", "2026-09-09", "2026-09-10", "2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17", "2026-09-18", "2026-09-19", "2026-09-20", "2026-09-21", "2026-09-22", "2026-09-23", "2026-09-24", "2026-09-25", "2026-09-26", "2026-09-27", "2026-09-28", "2026-09-29", "2026-09-30", "2026-10-01", "2026-10-02", "2026-10-03", "2026-10-04", "2026-10-05", "2026-10-06", "2026-10-07", "2026-10-08", "2026-10-09", "2026-10-10", "2026-10-11", "2026-10-12", "2026-10-13", "2026-10-14", "2026-10-15", "2026-10-16", "2026-10-17"], "series": {"io:ANTH": [1801.5, 1829.1, 1880.6, 1894.0, 1911.5, 1963.0, 2006.7, 1987.1, 1952.1, 1945.3, 1913.4, 1877.0, 1939.5, 1966.5, 1967.6, 1962.3, 1949.5, 1979.6, 1983.3, 2023.3, 2191.2, 2279.5, 2153.7, 2178.3, 2103.6, 2142.5, 2204.9, 2184.4, 2170.6, 2155.6, 2170.1, 2154.8, 2143.7, 2166.1, 2189.5, 2164.5, 2092.6, 2092.4, 2066.4, 2116.0, 2077.2, 2037.4, 2083.4, 2087.5, 2075.8, 2076.7, 2083.7, 2088.6, 2138.4, 2115.4, 2066.1, 2071.1, 2090.6, 2082.5, 2057.9, 2031.4, 1940.9, 1857.7, 1924.6, 1889.9], "io:OAI": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1360.1, 1455.5, 1469.0, 1494.2, 1485.4, 1516.8, 1619.9, 1644.8, 1629.1, 1681.6, 1565.2, 1493.9, 1569.8, 1534.0, 1569.6, 1572.6, 1580.5, 1617.5, 1616.0, 1678.0, 1701.1, 1650.4, 1628.1, 1632.4, 1637.9, 1658.2, 1623.2, 1680.8, 1636.8, 1589.7, 1616.2, 1631.7, 1640.2, 1646.3, 1694.0, 1730.9, 1674.2, 1690.3, 1713.7, 1696.5, 1681.3, 1655.1, 1624.8, 1529.5, 1529.8, 1487.6]}, "last_round_b": {"io:ANTH": 965.0, "io:OAI": 852.0}, "ratio": [null, null, null, null, null, null, null, null, null, null, null, null, null, null, 1.447, 1.348, 1.327, 1.325, 1.335, 1.334, 1.353, 1.386, 1.322, 1.295, 1.344, 1.434, 1.405, 1.424, 1.383, 1.371, 1.373, 1.332, 1.327, 1.291, 1.287, 1.312, 1.285, 1.282, 1.262, 1.276, 1.28, 1.212, 1.273, 1.313, 1.284, 1.273, 1.27, 1.269, 1.262, 1.222, 1.234, 1.225, 1.22, 1.228, 1.224, 1.227, 1.195, 1.215, 1.258, 1.27]}, "holidays": ["2026-01-01", "2026-01-19", "2026-02-16", "2026-04-03", "2026-05-25", "2026-06-19", "2026-07-03", "2026-09-07", "2026-11-26", "2026-12-25", "2027-01-01", "2027-01-18", "2027-02-15", "2027-03-26", "2027-05-31", "2027-06-18", "2027-07-05", "2027-09-06", "2027-11-25", "2027-12-24"], "early": ["2026-11-27", "2026-12-24", "2027-11-26"], "ids": ["io:ANTH", "io:OAI"], "names": {"io:ANTH": "ANTH", "io:OAI": "OAI"}, "updated_ts": 1792254601, "glossary": {"hyperliquid": {"term": "Hyperliquid", "def": "The blockchain exchange where these markets trade. All data on this page comes from its public API."}, "hip3": {"term": "HIP-3", "def": "Hyperliquid's system that lets outside teams (called deployers) list their own perpetual markets on Hyperliquid. Entropy is one such deployer."}, "entropy": {"term": "Entropy", "def": "A HIP-3 deployer on Hyperliquid (dex name io) that lists US stocks 24/7 and pre-IPO markets for Anthropic and OpenAI. This site is an unofficial community project, not run by Entropy."}, "perp": {"term": "Perpetual (perp)", "def": "A futures-style contract with no expiry date. You bet on a price going up (long) or down (short) without owning the asset. Traders can use leverage, which makes prices move faster."}, "sparkline": {"term": "Sparkline", "def": "The tiny line chart on each stock card. It shows the price over the last 7 days, with no axes, just the shape."}, "change_24h": {"term": "24h change", "def": "How much the price moved compared with 24 hours ago, in percent."}, "change_7d": {"term": "7d change", "def": "How much the price moved over the last 7 days, in percent. Matches the sparkline next to it."}, "preipo_perp": {"term": "Pre-IPO perp", "def": "A perp on a company that is not listed on a stock exchange yet. Its price is set by traders, which gives a live read on what the market thinks the company is worth."}, "implied_valuation": {"term": "Implied valuation", "def": "The company value the perp price points to. On Entropy's pre-IPO perps, $1 of price = $1B of company value, so a price of 2,050 means $2.05T. It is a market signal, not an official valuation."}, "last_round": {"term": "Last round", "def": "The company's most recent funding round with outside investors, and the valuation set in it (post-money, meaning including the new money). Source links are on each card."}, "multiple": {"term": "Multiple (\u00d7)", "def": "Implied valuation divided by the last-round valuation. 2\u00d7 means traders price the company at twice its last round. Below 1\u00d7 means less."}, "premium": {"term": "Premium", "def": "The same comparison as a percentage: multiple minus 1. A 2.1\u00d7 multiple is a +110% premium to the last round."}, "lower_bound": {"term": "Lower bound", "def": "The bottom of the price range Entropy's docs set for the market (the L value). The card shows what valuation it equals and how far the price is from it. See Entropy's docs for what happens at a bound."}, "upper_bound": {"term": "Upper bound", "def": "The top of the price range Entropy's docs set for the market (the U value). The card shows what valuation it equals and how far the price is from it. See Entropy's docs for what happens at a bound."}, "no_ipo": {"term": "No-IPO resolution", "def": "The date in Entropy's docs by which the market is resolved if the company has not gone public. Shown with the days remaining."}, "mark": {"term": "Mark price", "def": "The reference price the exchange uses for a perp, for example to value open positions. It can differ a little from the last trade."}, "oracle": {"term": "Oracle price", "def": "An outside reference price fed to the exchange. For US stocks it follows the public stock price while the market is open."}, "funding": {"term": "Funding rate", "def": "A small payment between traders that keeps a perp's price close to the real price. When the rate is positive, longs pay shorts. When negative, shorts pay longs. It settles every hour."}, "funding_apr": {"term": "Funding APR (24h avg)", "def": "The funding rate scaled to a yearly figure (hourly rate \u00d7 24 \u00d7 365, not compounded). Here it is averaged over the last 24 hours. +10% means longs pay shorts about 10% a year of their position size at that rate."}, "oi": {"term": "Open interest (OI)", "def": "The total dollar size of all positions that are still open. It shows how much money is riding on the market right now."}, "oi_cap": {"term": "OI cap", "def": "The maximum open interest Entropy allows on a market. When OI nears the cap, new positions can be limited."}, "volume_24h": {"term": "24h volume", "def": "The total dollar value traded in the last 24 hours."}, "session": {"term": "Market session", "def": "The hours when the underlying stock market is open (US: 09:30 to 16:00 ET on trading days). A green dot means open. When closed, the Entropy perp keeps trading."}, "discovery": {"term": "24/7 price discovery", "def": "Entropy's stock perps trade all week, including nights and weekends, so the perp price shows where traders think the stock is heading while the stock exchange is shut."}, "luld": {"term": "LULD (limit-up/limit-down)", "def": "A cap on how far the mark price can move from the last regular-session close while the stock market is shut. It is set by the market's maximum leverage (1 divided by max leverage), so a 10\u00d7 market can show at most \u00b110%."}, "weekend_gap": {"term": "Weekend Gap", "def": "The price change between Friday's close and Monday's open, when US stocks cannot trade. We check whether the Entropy perp priced that gap correctly before the open."}, "predicted": {"term": "Predicted move", "def": "The perp's move from Friday's close to just before Monday's open (09:15 to 09:30 ET). It is the weekend price discovery."}, "actual": {"term": "Actual move", "def": "The move from Friday's close to the first regular-session price on Monday (09:30 to 09:45 ET)."}, "hit_rate": {"term": "Direction hit rate", "def": "Share of weekends where the predicted and actual moves pointed the same way (both up or both down). Moves under 0.1% count as flat and are not scored."}, "abs_err": {"term": "Abs error", "def": "How far off the prediction was, ignoring direction: |predicted \u2212 actual| in percentage points. If predicted is +2.0% and actual is +3.5%, the error is 1.5 pp."}, "pp": {"term": "pp (percentage points)", "def": "The plain difference between two percentages. Going from 2% to 3.5% is 1.5 pp (not 75%)."}, "captured": {"term": "Captured share", "def": "Predicted move divided by actual move, when both pointed the same way. 100% means the perp priced the whole move in advance. 50% means half."}}}</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<script>
+(function(){
+var D=JSON.parse(document.getElementById('pagedata').textContent);
+
+/* ---- glossary popovers: tap, keyboard focus/Enter, hover; Esc closes ---- */
+var tip=document.getElementById('tip'),cur=null,canHover=window.matchMedia('(hover:hover)').matches;
+function place(el){
+  var r=el.getBoundingClientRect(),w=tip.offsetWidth,h=tip.offsetHeight,vw=document.documentElement.clientWidth;
+  var left=Math.max(8,Math.min(r.left,vw-w-8)),top=r.bottom+6;
+  if(top+h>window.innerHeight-8&&r.top-h-6>8)top=r.top-h-6;
+  tip.style.left=left+'px';tip.style.top=top+'px';
+}
+function show(el){
+  var g=D.glossary[el.dataset.term];if(!g)return;
+  hide();
+  tip.innerHTML='';var b=document.createElement('b');b.textContent=g.term;tip.appendChild(b);
+  tip.appendChild(document.createTextNode(g.def));
+  var a=document.createElement('a');a.href='#g-'+el.dataset.term;a.textContent='In the glossary';
+  a.addEventListener('click',function(){var d=document.getElementById('g-'+el.dataset.term);if(d&&d.parentNode.tagName==='DL')d.parentNode.parentNode.open=true;hide()});
+  tip.appendChild(document.createElement('br'));tip.appendChild(a);
+  tip.hidden=false;place(el);el.setAttribute('aria-expanded','true');el.setAttribute('aria-describedby','tip');cur=el;
+}
+function hide(){if(cur){cur.setAttribute('aria-expanded','false');cur.removeAttribute('aria-describedby');cur=null}tip.hidden=true}
+document.addEventListener('click',function(e){
+  var t=e.target.closest&&e.target.closest('.term');
+  if(t){e.preventDefault();(cur===t&&(e.detail===0||!canHover))?hide():show(t);return}
+  if(!tip.contains(e.target))hide();
+});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&cur){var c=cur;hide();c.focus()}});
+document.addEventListener('focusin',function(e){var t=e.target.closest&&e.target.closest('.term');if(t){if(t.matches(':focus-visible'))show(t)}else if(!tip.contains(e.target)){hide()}});
+if(canHover){
+  var ht;
+  document.addEventListener('mouseover',function(e){var t=e.target.closest&&e.target.closest('.term');if(t){clearTimeout(ht);if(cur!==t)show(t)}else if(cur&&tip.contains(e.target)){clearTimeout(ht)}});
+  document.addEventListener('mouseout',function(e){var t=e.target.closest&&e.target.closest('.term');if(t||tip.contains(e.target)){clearTimeout(ht);ht=setTimeout(function(){if(!tip.matches(':hover')&&!(cur&&cur.matches(':hover')))hide()},150)}});
+}
+window.addEventListener('scroll',function(){if(cur)place(cur)},{passive:true});
+window.addEventListener('resize',function(){if(cur)place(cur)});
+
+/* ---- updated N min ago ---- */
+var ago=document.getElementById('ago');
+function tick(){
+  var m=Math.max(0,Math.round((Date.now()/1000-D.updated_ts)/60)),s;
+  if(m<1)s='just now';else if(m<60)s=m+' min ago';else if(m<2880)s=Math.floor(m/60)+' h '+(m%60)+' min ago';else s=Math.floor(m/1440)+' days ago';
+  ago.textContent='Updated '+s;
+}
+tick();setInterval(tick,30000);
+
+/* ---- nav highlight ---- */
+if('IntersectionObserver' in window){
+  var links={};document.querySelectorAll('.snav a').forEach(function(a){links[a.getAttribute('href').slice(1)]=a});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){
+    Object.keys(links).forEach(function(k){links[k].classList.toggle('on',k===e.target.id)})}})},{rootMargin:'-20% 0px -70% 0px'});
+  Object.keys(links).forEach(function(k){var s=document.getElementById(k);if(s)io.observe(s)});
+}
+
+/* ---- market sessions ---- */
+function ymd(p){return p.year+'-'+p.month+'-'+p.day}
+function nyParts(now){
+  var f=new Intl.DateTimeFormat('en-CA',{timeZone:'America/New_York',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',weekday:'short',hour12:false});
+  var o={};f.formatToParts(now).forEach(function(p){o[p.type]=p.value});
+  return {date:ymd(o),wd:o.weekday,min:(+o.hour%24)*60+ +o.minute};
+}
+function usOpen(now){var n=nyParts(now);if(n.wd==='Sat'||n.wd==='Sun'||D.holidays.indexOf(n.date)>=0)return false;
+  var close=D.early.indexOf(n.date)>=0?780:960;return n.min>=570&&n.min<close}
+function hkOpen(now){var f=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Hong_Kong',weekday:'short',hour:'2-digit',minute:'2-digit',hour12:false});
+  var o={};f.formatToParts(now).forEach(function(p){o[p.type]=p.value});
+  if(o.weekday==='Sat'||o.weekday==='Sun')return false;var m=(+o.hour%24)*60+ +o.minute;return (m>=570&&m<720)||(m>=780&&m<960)}
+var now=new Date();
+document.querySelectorAll('#eq tbody tr').forEach(function(tr){
+  var hk=tr.dataset.mkt==='HK',open=hk?hkOpen(now):usOpen(now),c=tr.querySelector('.sess');
+  c.textContent=(hk?'HK ':'US ')+(open?'open':'closed');c.className='sess '+(open?'up':'');
+});
+document.querySelectorAll('.mini').forEach(function(c){
+  var hk=c.dataset.mkt==='HK',open=hk?hkOpen(now):usOpen(now);
+  c.querySelector('.dot').className='dot'+(open?' on':'');
+  c.querySelector('.sess-txt').textContent=open?'Open · '+(hk?'HKEX':'NYSE/Nasdaq')+' session':'Closed · trading 24/7 on Entropy';
+});
+
+/* ---- charts ---- */
+function fmtB(v){if(v==null)return '–';return v>=1000?'$'+(v/1000).toFixed(2)+'T':'$'+Math.round(v)+'B'}
+var boxes=document.querySelectorAll('.chartbox .cv');
+if(!window.Chart){boxes.forEach(function(b){b.innerHTML='<p class="nochart">Chart could not load. The numbers above are unaffected.</p>'});return}
+Chart.defaults.color='#6f675a';Chart.defaults.borderColor='#e2dccb';Chart.defaults.font.family='"IBM Plex Mono",monospace';
+var tipStyle={backgroundColor:'#f3eee3',borderColor:'#b9b09c',borderWidth:1,titleColor:'#191610',bodyColor:'#191610',titleFont:{family:'"IBM Plex Mono",monospace'},bodyFont:{family:'"IBM Plex Mono",monospace'},padding:10,boxPadding:4};
+var col={'io:ANTH':'#b4552d','io:OAI':'#1f6f5c'},H=D.hist,valChart,ratioChart;
+function slice(a,n){return n?a.slice(-n):a}
+function valData(n){
+  var ds=[];
+  D.ids.forEach(function(id){
+    ds.push({label:D.names[id]+' implied',data:slice(H.series[id],n),borderColor:col[id],backgroundColor:col[id],pointRadius:0,pointHoverRadius:4,borderWidth:2,tension:.15});
+    ds.push({label:D.names[id]+' last round',data:slice(H.dates,n).map(function(){return H.last_round_b[id]}),borderColor:col[id],borderDash:[6,5],pointRadius:0,pointHoverRadius:0,borderWidth:1.2});
+  });
+  return {labels:slice(H.dates,n),datasets:ds};
+}
+valChart=new Chart(document.getElementById('valChart'),{type:'line',data:valData(0),
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:true,
+  plugins:{legend:{labels:{boxWidth:12,boxHeight:2}},tooltip:Object.assign({callbacks:{label:function(c){return ' '+c.dataset.label+': '+fmtB(c.parsed.y)}}},tipStyle)},
+  scales:{x:{ticks:{maxTicksLimit:innerWidth<520?4:6,maxRotation:0,callback:function(v){var l=this.getLabelForValue(v);return l?l.slice(5):l}}},y:{ticks:{callback:fmtB}}}}});
+ratioChart=new Chart(document.getElementById('ratioChart'),{type:'line',data:{labels:H.dates,datasets:[{label:'Anthropic ÷ OpenAI',data:H.ratio,borderColor:'#205378',pointRadius:0,pointHoverRadius:4,borderWidth:2,tension:.15}]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:true,
+  plugins:{legend:{display:false},tooltip:Object.assign({callbacks:{label:function(c){return ' '+c.parsed.y.toFixed(2)+'× OpenAI'}}},tipStyle)},
+  scales:{x:{ticks:{maxTicksLimit:innerWidth<520?4:6,maxRotation:0,callback:function(v){var l=this.getLabelForValue(v);return l?l.slice(5):l}}},y:{ticks:{callback:function(v){return v.toFixed(2)+'×'}}}}}});
+document.querySelectorAll('.seg button').forEach(function(b){b.addEventListener('click',function(){
+  var n=+b.dataset.range;
+  document.querySelectorAll('.seg button').forEach(function(x){x.setAttribute('aria-pressed',x===b?'true':'false')});
+  valChart.data=valData(n);valChart.update();
+  ratioChart.data.labels=slice(H.dates,n);ratioChart.data.datasets[0].data=slice(H.ratio,n);ratioChart.update();
+})});
+})();
+</script>
+</body>
+</html>
